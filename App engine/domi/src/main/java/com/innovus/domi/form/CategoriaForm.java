@@ -4,7 +4,7 @@ public class CategoriaForm {
 	
 	 private String NombreCategoria;
 	 
-	 private CategoriaForm(){}
+	 public CategoriaForm(){}
 	 
 	public CategoriaForm(String NombreCategoria){
 		 this.NombreCategoria = NombreCategoria;
