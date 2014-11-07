@@ -7,6 +7,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
+import com.innovus.domi.form.CategoriaForm;
 
 
 @Entity //para decir qe es una tabla
@@ -16,13 +17,45 @@ public class Categoria {
 	 private long idCategoria;	 
 	 
 	 @Index
-	 private String Nombre;
+	 private String NombreCategoria;
 	 
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
 	 
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private long idEmpresa;	 
+	 private long idEmpresa;	
+	 
+	 public Categoria(){}
+
+	 public Categoria(final long idCategoria,final CategoriaForm categoriaForm,final long idEmpresa){
+		 
+		 this.idCategoria=idCategoria;
+		 this.NombreCategoria = categoriaForm.getNombreCategoria();
+		 this.empresaKey=Key.create(Empresa.class,idEmpresa);//para qe empresa sea el padre de categoria
+		 this.idEmpresa = idEmpresa;
+		 
+	 }
+	 
+	 public long getidCategoria(){
+		 return idCategoria;
+	 }
+	 
+	 public String getNombreCategoria(){
+		 return NombreCategoria;
+	 }
+	 
+	 public long getidEmpresa(){
+		 return idEmpresa;
+	 }
+	 
+	 public Key<Empresa> getKeyEmpresa(){
+		 return empresaKey;
+		 
+	 }
+	 
+	 public long getLlaveSegura(){
+		 return Key.create(Empresa.class,idEmpresa).getId();
+	 }
 	 
 }

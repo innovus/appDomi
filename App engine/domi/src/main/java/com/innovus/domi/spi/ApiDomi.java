@@ -13,7 +13,9 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
 import com.innovus.domi.Constants;
+import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Empresa;
+import com.innovus.domi.form.CategoriaForm;
 import com.innovus.domi.form.EmpresaForm;
 
 @Api(
@@ -164,6 +166,36 @@ public class ApiDomi {
 	      });
 	      return empresa;
 	  }
+	  
+	 /* @ApiMethod(name = "creaCategoria", path = "categoria", httpMethod = HttpMethod.POST)
+	  public Categoria creaCategoria(final CategoriaForm categoriaForm,final String keyEmpresa)//me devuelva una categoria
+	       {
+	     
+	      // Allocate Id first, in order to make the transaction idempotent.
+	      
+	      final Key<Categoria> categoriaKey = factory().allocateId(Categoria.class);
+	      final long categoriaId = categoriaKey.getId();
+	      //final Queue queue = QueueFactory.getDefaultQueue();
+	      Key<Empresa> EmpresaKey = Key.create(keyEmpresa);
+	      Empresa empresa = ofy().load().key(EmpresaKey).now();
+	      final long empresaId = empresa.getidEmpresa();
+	      
+	      // Start a transaction.
+	      Categoria categoria = ofy().transact(new Work<Categoria>() {
+	          @Override
+	          public Categoria run() {//inicia comit
+	              // Fetch user's Profile.
+	              //Profile profile = getProfileFromUser(user, userId);
+	              Categoria categoria = new Categoria(categoriaId,  categoriaForm,empresaId);
+	              // Save Conference and Profile.
+	              ofy().save().entities(categoria).now();
+	           
+	              return categoria;
+	          }
+	      });
+	      return categoria;
+	  }
 
+	  */
 
 }
