@@ -2,6 +2,7 @@ package com.innovus.domi.spi;
 
 
 import static com.innovus.domi.service.OfyService.factory;
+
 import static com.innovus.domi.service.OfyService.ofy;
 
 import javax.inject.Named;
@@ -20,6 +21,8 @@ import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.form.CategoriaForm;
 import com.innovus.domi.form.EmpresaForm;
+import java.util.List;
+import com.googlecode.objectify.cmd.Query;
 
 @Api(
         name = "domi",
@@ -198,6 +201,16 @@ public class ApiDomi {
 	      });
 	      return categoria;
 	  }
+	 
+	 @ApiMethod(
+	            name = "consultaEmpresa",
+	            path = "consultaEmpresa",
+	            httpMethod = HttpMethod.POST
+	    )
+	    public List<Empresa> queryConferences() {
+	        Query query = ofy().load().type(Empresa.class).order("nombre");
+	        return query.list();//me retorns en una lista
+	    }
 
 	
 
