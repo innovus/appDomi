@@ -49,6 +49,7 @@ public class Categoria {
 		 return idEmpresa;
 	 }
 	 
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	 public Key<Empresa> getKeyEmpresa(){
 		 return empresaKey;
 		 

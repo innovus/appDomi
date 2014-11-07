@@ -1,7 +1,10 @@
 package com.innovus.domi.spi;
 
+
 import static com.innovus.domi.service.OfyService.factory;
 import static com.innovus.domi.service.OfyService.ofy;
+
+import javax.inject.Named;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -167,8 +170,8 @@ public class ApiDomi {
 	      return empresa;
 	  }
 	  
-	 /* @ApiMethod(name = "creaCategoria", path = "categoria", httpMethod = HttpMethod.POST)
-	  public Categoria creaCategoria(final CategoriaForm categoriaForm,final String keyEmpresa)//me devuelva una categoria
+	 @ApiMethod(name = "creaCategoria", path = "categoria", httpMethod = HttpMethod.POST)
+	  public Categoria creaCategoria(final CategoriaForm categoriaForm,  @Named("keyEmpresa") final Long keyEmpresa)//me devuelva una categoria
 	       {
 	     
 	      // Allocate Id first, in order to make the transaction idempotent.
@@ -176,8 +179,8 @@ public class ApiDomi {
 	      final Key<Categoria> categoriaKey = factory().allocateId(Categoria.class);
 	      final long categoriaId = categoriaKey.getId();
 	      //final Queue queue = QueueFactory.getDefaultQueue();
-	      Key<Empresa> EmpresaKey = Key.create(keyEmpresa);
-	      Empresa empresa = ofy().load().key(EmpresaKey).now();
+	      //Key<Empresa> EmpresaKey = Key.create(keyE;
+	      Empresa empresa = ofy().load().key(Key.create(Empresa.class, keyEmpresa)).now();
 	      final long empresaId = empresa.getidEmpresa();
 	      
 	      // Start a transaction.
@@ -196,6 +199,6 @@ public class ApiDomi {
 	      return categoria;
 	  }
 
-	  */
+	
 
 }

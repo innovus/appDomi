@@ -16,7 +16,7 @@ public class OfyService {
      */
     static {
         //factory().register(AppEngineUser.class);
-      //  factory().register(Conference.class);
+        factory().register(Categoria.class);
         factory().register(Empresa.class);
     }
 
