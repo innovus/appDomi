@@ -8,7 +8,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
-import com.innovus.domi.form.CategoriaForm;
+
 
 
 
@@ -30,13 +30,13 @@ public class Categoria {
 	 
 	 public Categoria(){}
 
-	 public Categoria(final long idCategoria,final CategoriaForm categoriaForm,final long idEmpresa){
+	 public Categoria(final long idCategoria,final String nombre ,final long idEmpresa){
 		// Preconditions.checkNotNull(categoriaForm.getNombreCategoria(), "El nombre es requerido");
 		 this.idCategoria=idCategoria;
-		// this.NombreCategoria = categoriaForm.getNombreCategoria();
+		 this.NombreCategoria = nombre;
 		 this.empresaKey=Key.create(Empresa.class,idEmpresa);//para qe empresa sea el padre de categoria
 		 this.idEmpresa = idEmpresa;
-		 actualizaConCategoria(categoriaForm);
+		 
 		 
 	 }
 	 
@@ -62,13 +62,7 @@ public class Categoria {
 		 return Key.create(Empresa.class,idEmpresa).getId();
 	 }
 	 
-	 public void actualizaConCategoria(CategoriaForm Categoria) {
-	     this.NombreCategoria = Categoria.getNombreCategoria();
-	    
-	         // The initial number of seatsAvailable is the same as maxAttendees.
-	         // However, if there are already some seats allocated, we should subtract that numbers.
-	         
-	 }
+	
 
 	 
 }

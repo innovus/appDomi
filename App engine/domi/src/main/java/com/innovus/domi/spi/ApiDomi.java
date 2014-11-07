@@ -19,7 +19,6 @@ import com.googlecode.objectify.Work;
 import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Empresa;
-import com.innovus.domi.form.CategoriaForm;
 import com.innovus.domi.form.EmpresaForm;
 import java.util.List;
 import com.googlecode.objectify.cmd.Query;
@@ -174,7 +173,7 @@ public class ApiDomi {
 	  }
 	  
 	 @ApiMethod(name = "creaCategoria", path = "categoria", httpMethod = HttpMethod.POST)
-	  public Categoria creaCategoria(final CategoriaForm categoriaForm,  @Named("keyEmpresa") final Long keyEmpresa)//me devuelva una categoria
+	  public Categoria creaCategoria(@Named("nombre")final String nombre,  @Named("keyEmpresa") final Long keyEmpresa)//me devuelva una categoria
 	       {
 	     
 	      // Allocate Id first, in order to make the transaction idempotent.
@@ -192,7 +191,7 @@ public class ApiDomi {
 	          public Categoria run() {//inicia comit
 	              // Fetch user's Profile.
 	              //Profile profile = getProfileFromUser(user, userId);
-	              Categoria categoria = new Categoria(categoriaId,  categoriaForm,empresaId);
+	              Categoria categoria = new Categoria(categoriaId,  nombre,empresaId);
 	              // Save Conference and Profile.
 	              ofy().save().entities(categoria).now();
 	           
