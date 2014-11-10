@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.2'
+    }
+}
+
+repositories {
+    maven {
+        url 'http://google-api-client-libraries.appspot.com/mavenrepo'
+    }
+    mavenCentral()
+    mavenLocal()
+}
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.innovus.doomi"
+        minSdkVersion 10
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.google.android.gms:play-services:4.0.30'
+    // Add the Google API client library.
+    compile('com.google.api-client:google-api-client:1.17.0-rc') {
+        // Exclude artifacts that the Android SDK/Runtime provides.
+        exclude(group: 'xpp3', module: 'xpp3')
+        exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
+        exclude(group: 'junit', module: 'junit')
+        exclude(group: 'com.google.android', module: 'android')
+
+    }
+    compile('com.google.api-client:google-api-client-android:1.17.0-rc') {
+        // Exclude play services, since we're not using this yet.
+        exclude(group: 'com.google.android.google-play-services', module: 'google-play-services')
+    }
+    // Android extensions for Google HTTP Client.
+    compile('com.google.http-client:google-http-client-android:1.17.0-rc') {
+        exclude(group: 'com.google.android', module: 'android')
+    }
+    // This is used by the Google HTTP client library.
+    compile 'com.google.guava:guava:14.0.+'
+    compile files('libs/domi-v1-1.19.0-SNAPSHOT.jar')
+}
