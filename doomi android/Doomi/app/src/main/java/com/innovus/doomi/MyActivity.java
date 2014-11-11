@@ -15,6 +15,19 @@ import android.os.Build;
 
 public class MyActivity extends ActionBarActivity {
 
+    private static final String LOG_TAG = "MainActivity";
+
+    /**
+     * Activity result indicating a return from the Google account selection intent.
+     */
+    private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
+
+    private AuthorizationCheckTask mAuthTask;
+    private String mEmailAccount;
+
+    private EmpresaListFragment mEmpresaListFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
