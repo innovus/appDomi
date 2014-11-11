@@ -39,7 +39,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:20.0.0'
-    compile 'com.google.android.gms:play-services:4.0.30'
+    compile 'com.google.android.gms:play-services:6.1.71'
     // Add the Google API client library.
     compile('com.google.api-client:google-api-client:1.17.0-rc') {
         // Exclude artifacts that the Android SDK/Runtime provides.
