@@ -38,6 +38,9 @@ public class MyActivity extends ActionBarActivity {
                     .commit();
         }
     }
+    public void getEmpresas(View v) {
+        new EndpointsAsyncTask(this).execute();
+    }
 
 
     @Override
