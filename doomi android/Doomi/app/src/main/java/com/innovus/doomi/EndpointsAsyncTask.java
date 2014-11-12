@@ -23,14 +23,20 @@ public class EndpointsAsyncTask  extends AsyncTask<Void, Void, List<Empresa>>{
     private static com.appspot.domi_app.domi.Domi myApiService = null;
     private Context context;
 
+    public static void build(Context context) {
+        myApiService = buildServiceHandler(context);
+    }
+
         EndpointsAsyncTask(Context context) {
             this.context = context;
         }
 
         @Override
         protected List<Empresa> doInBackground(Void... params) {
+            myApiService = buildServiceHandler(context);
             if(myApiService == null) { // Only do this once
-                Domi.Builder builder = new Domi.Builder(AndroidHttp.newCompatibleTransport(),
+                //Domi.Builder builde1 = this.buildServiceHandler(context);
+              /*  Domi.Builder builder = new Domi.Builder(AndroidHttp.newCompatibleTransport(),
                         new AndroidJsonFactory(), null)
 // options for running against local devappserver
 // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -43,8 +49,9 @@ public class EndpointsAsyncTask  extends AsyncTask<Void, Void, List<Empresa>>{
                             }
                         });
 // end options for devappserver
+*/
 
-                myApiService = builder.build();
+
             }
 
             try {
@@ -56,15 +63,17 @@ public class EndpointsAsyncTask  extends AsyncTask<Void, Void, List<Empresa>>{
 
         @Override
         protected void onPostExecute(List<Empresa> result) {
+            String mostrar = "";
             for (Empresa q : result) {
-                Toast.makeText(context, q.getNombre() + " : " + q.getDescripcion(), Toast.LENGTH_LONG).show();
+                mostrar = " +" + q.getNombre()+ " - " + " "+ q.getDescripcion() +" ";
+                Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
             }
         }
     public static Domi buildServiceHandler(
-            Context context, String email) {
+            Context context) {
         GoogleAccountCredential credential = GoogleAccountCredential.usingAudience(
                 context, AppConstants.AUDIENCE);
-        credential.setSelectedAccountName(email);
+       // credential.setSelectedAccountName(email);
 
         Domi.Builder builder
                 = new Domi.Builder(

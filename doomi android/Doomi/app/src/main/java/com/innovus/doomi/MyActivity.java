@@ -22,10 +22,7 @@ public class MyActivity extends ActionBarActivity {
      */
     private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
 
-    private AuthorizationCheckTask mAuthTask;
-    private String mEmailAccount;
 
-    private EmpresaListFragment mEmpresaListFragment;
 
 
     @Override
