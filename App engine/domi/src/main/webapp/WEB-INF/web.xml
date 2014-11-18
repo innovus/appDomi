@@ -4,7 +4,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.innovus.domi.spi.Greetings</param-value>
+            <param-value>com.innovus.domi.spi.ApiDomi</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

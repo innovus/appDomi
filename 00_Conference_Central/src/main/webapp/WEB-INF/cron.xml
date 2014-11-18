@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/crons/set_announcement</url>
+    <description>consulta los anuncios cada 2 horas</description>
+    <schedule>every 12 hours</schedule>
+  </cron>
+  
+</cronentries>
