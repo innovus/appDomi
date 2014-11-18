@@ -206,7 +206,7 @@ public class ApiDomi {
 	            path = "consultaEmpresa",
 	            httpMethod = HttpMethod.POST
 	    )
-	    public List<Empresa> queryConferences() {
+	    public List<Empresa> consultaEmpresa() {
 	        Query query = ofy().load().type(Empresa.class).order("nombre");
 	        return query.list();//me retorns en una lista
 	    }
