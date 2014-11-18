@@ -33,6 +33,7 @@ public class MyActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        new EndpointsAsyncTask(this).execute();
     }
     public void getEmpresas(View v) {
         new EndpointsAsyncTask(this).execute();
