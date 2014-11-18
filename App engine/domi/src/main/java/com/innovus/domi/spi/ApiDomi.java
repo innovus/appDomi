@@ -204,7 +204,7 @@ public class ApiDomi {
 	 @ApiMethod(
 	            name = "consultaEmpresa",
 	            path = "consultaEmpresa",
-	            httpMethod = HttpMethod.POST
+	            httpMethod = HttpMethod.GET
 	    )
 	    public List<Empresa> consultaEmpresa() {
 	        Query query = ofy().load().type(Empresa.class).order("nombre");
