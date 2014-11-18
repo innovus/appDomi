@@ -59,5 +59,5 @@ dependencies {
     }
     // This is used by the Google HTTP client library.
     compile 'com.google.guava:guava:14.0.+'
-    compile files('libs/domi-v1-1.19.0-SNAPSHOT.jar')
+   compile files('libs/domi-v1-1.19.0-SNAPSHOT.jar')
 }
