@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Doomi</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Bienvenido a Doomi,Aqui lo encontraras todo</string>
     <string name="action_settings">Settings</string>
 
 </resources>
