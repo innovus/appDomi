@@ -102,13 +102,13 @@ public class EndpointsAsyncTask  extends AsyncTask<Void, Void, List<Empresa>>{
             Context context) {
         GoogleAccountCredential credential = GoogleAccountCredential.usingAudience(
                 context, AppConstants.AUDIENCE);
-       // credential.setSelectedAccountName(email);
+       credential.setSelectedAccountName("204916157214-1hho3fgafmt30l9kt7rljls1qttbeb3n@developer.gserviceaccount.com");
 
         Domi.Builder builder
                 = new Domi.Builder(
                 AppConstants.HTTP_TRANSPORT,
                 AppConstants.JSON_FACTORY, credential);
-       // builder.setApplicationName("doomi");
+        builder.setApplicationName("domi-app");
         return builder.build();
     }
 }
