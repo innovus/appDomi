@@ -5,6 +5,7 @@ import com.appspot.domi_app.domi.Domi;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Pair;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appspot.domi_app.domi.model.EmpresaCollection;
@@ -63,7 +64,7 @@ public class EndpointsAsyncTask  extends AsyncTask<Void, Void, List<Empresa>>{
 
 
             if(myApiService == null) { // Only do this once
-                myApiService = buildServiceHandler(context);
+                myApiService = buildServiceHandler();
 
 
             }
@@ -89,26 +90,27 @@ public class EndpointsAsyncTask  extends AsyncTask<Void, Void, List<Empresa>>{
 
         @Override
         protected void onPostExecute(List<Empresa> result) {
-            String mostrar = "hola";
 
-            mostrar = result.get(0).getNombre();
-            /*for (Empresa q : result) {
-                mostrar = " +" + q.getNombre()+ " - " + " "+ q.getDescripcion() +" ";
-                Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
-            }*/
+            String mostrar = "";
+
+           // mostrar = result.get(0).getNombre();
+            for (Empresa q : result) {
+                mostrar += " +" + q.getNombre()+ " - " + " "+ q.getDescripcion() +" ";
+
+                //Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
+            }
             Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
         }
-    public static Domi buildServiceHandler(
-            Context context) {
-        GoogleAccountCredential credential = GoogleAccountCredential.usingAudience(
-                context, AppConstants.AUDIENCE);
-       credential.setSelectedAccountName("204916157214-1hho3fgafmt30l9kt7rljls1qttbeb3n@developer.gserviceaccount.com");
+    public static Domi buildServiceHandler() {
+       // GoogleAccountCredential credential = GoogleAccountCredential.usingAudience(
+         //       context, AppConstants.AUDIENCE);
+       //credential.setSelectedAccountName("204916157214-1hho3fgafmt30l9kt7rljls1qttbeb3n@developer.gserviceaccount.com");
 
         Domi.Builder builder
                 = new Domi.Builder(
                 AppConstants.HTTP_TRANSPORT,
-                AppConstants.JSON_FACTORY, credential);
-        builder.setApplicationName("domi-app");
+                AppConstants.JSON_FACTORY, null);
+        //builder.setApplicationName("domi-app");
         return builder.build();
     }
 }

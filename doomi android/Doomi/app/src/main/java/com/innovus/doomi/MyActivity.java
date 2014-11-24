@@ -1,8 +1,10 @@
 package com.innovus.doomi;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 //import com.appspot.domi_app.domi.Domi
 import android.os.Build;
+import android.widget.TextView;
 
+import com.appspot.domi_app.domi.Domi;
+import com.appspot.domi_app.domi.model.Empresa;
+import com.appspot.domi_app.domi.model.EmpresaCollection;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 
 public class MyActivity extends ActionBarActivity {
@@ -21,8 +31,6 @@ public class MyActivity extends ActionBarActivity {
      * Activity result indicating a return from the Google account selection intent.
      */
     private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
-
-
 
 
     @Override
@@ -36,8 +44,10 @@ public class MyActivity extends ActionBarActivity {
         }
         new EndpointsAsyncTask(this).execute();
     }
+
     public void getEmpresas(View v) {
-        new EndpointsAsyncTask(this).execute();
+       // new EndpointsAsyncTask(this).execute();
+        new HttpRequestTask().execute();
     }
 
 
@@ -70,9 +80,75 @@ public class MyActivity extends ActionBarActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
             return rootView;
         }
+    }
+
+    public static Domi buildServiceHandler() {
+        // GoogleAccountCredential credential = GoogleAccountCredential.usingAudience(
+        //       context, AppConstants.AUDIENCE);
+        //credential.setSelectedAccountName("204916157214-1hho3fgafmt30l9kt7rljls1qttbeb3n@developer.gserviceaccount.com");
+
+        Domi.Builder builder
+                = new Domi.Builder(
+                AppConstants.HTTP_TRANSPORT,
+                AppConstants.JSON_FACTORY, null);
+        //builder.setApplicationName("domi-app");
+        return builder.build();
+    }
+
+
+    private class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
+
+
+        private com.appspot.domi_app.domi.Domi myApiService = null;
+
+        @Override
+        protected List<Empresa> doInBackground(Void... params) {
+            if (myApiService == null) { // Only do this once
+                myApiService = buildServiceHandler();
+
+
+            }
+            // Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
+
+            try {
+                Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
+
+                EmpresaCollection empresaCollection = queryEmpresas.execute();
+                if (empresaCollection != null && empresaCollection.getItems() != null) {
+                    List<Empresa> empresas = empresaCollection.getItems();
+                    return empresas;
+
+
+                }
+                return Collections.EMPTY_LIST;
+                // return myApiService.consultaEmpresa().execute().getItems();
+
+            } catch (IOException e) {
+                return Collections.EMPTY_LIST;
+            }
+
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Empresa> result) {
+            TextView greetingIdText = (TextView) findViewById(R.id.prueba);
+
+            String mostrar = "";
+
+            // mostrar = result.get(0).getNombre();
+            for (Empresa q : result) {
+                mostrar += " +" + q.getNombre() + " - " + " " + q.getDescripcion() + " ";
+
+                //Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
+            }
+            greetingIdText.setText(mostrar);
+
+        }
+
     }
 }
