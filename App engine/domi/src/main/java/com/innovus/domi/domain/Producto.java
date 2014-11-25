@@ -73,16 +73,5 @@ public class Producto {
 	 public long getLlaveSegura(){
 		 return Key.create(Categoria.class,idCategoria).getId();
 	 }
-     
-     
-	 
-	 
-	 
-	 
-	
-	 
-	 
-	 
-	 
 
 }
