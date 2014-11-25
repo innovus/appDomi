@@ -12,13 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 //import com.appspot.domi_app.domi.Domi
 import android.os.Build;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appspot.domi_app.domi.Domi;
 import com.appspot.domi_app.domi.model.Empresa;
 import com.appspot.domi_app.domi.model.EmpresaCollection;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +30,7 @@ import java.util.List;
 public class MyActivity extends ActionBarActivity {
 
     private static final String LOG_TAG = "MainActivity";
+    public static final ArrayList<String> empresasA = new ArrayList<String>();
 
     /**
      * Activity result indicating a return from the Google account selection intent.
@@ -36,7 +41,9 @@ public class MyActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new HttpRequestTask().execute();
         setContentView(R.layout.activity_my);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -75,13 +82,21 @@ public class MyActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        private ArrayAdapter<String> mEmpresasAdapter;
         public PlaceholderFragment() {
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
+            //List<String> empresas = new ArrayList<String>();
+            mEmpresasAdapter = new ArrayAdapter<String>(getActivity(),R.layout.list_item_empresa,R.id.list_item_empresa_textview,empresasA);
+
+
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
+            ListView listView = (ListView) rootView.findViewById(R.id.listViewEmpresas);
+            listView.setAdapter(mEmpresasAdapter);
             return rootView;
         }
     }
@@ -95,6 +110,7 @@ public class MyActivity extends ActionBarActivity {
                 = new Domi.Builder(
                 AppConstants.HTTP_TRANSPORT,
                 AppConstants.JSON_FACTORY, null);
+        
         //builder.setApplicationName("domi-app");
         return builder.build();
     }
@@ -136,17 +152,19 @@ public class MyActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(List<Empresa> result) {
-            TextView greetingIdText = (TextView) findViewById(R.id.prueba);
+           // TextView greetingIdText = (TextView) findViewById(R.id.prueba);
 
             String mostrar = "";
 
             // mostrar = result.get(0).getNombre();
             for (Empresa q : result) {
+                empresasA.add(q.getNombre());
                 mostrar += " +" + q.getNombre() + " - " + " " + q.getDescripcion() + " ";
 
                 //Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
             }
-            greetingIdText.setText(mostrar);
+            Toast.makeText(getApplicationContext(), mostrar, Toast.LENGTH_LONG).show();
+           // greetingIdText.setText(mostrar);
 
         }
 
