@@ -30,7 +30,7 @@
     <form action="javascript:void(0);">
         <h2>Get Greeting</h2>
         <div><span class="label">Greeting ID: </span><input id="id" /></div>
-        <div><input id="getGreeting" type="submit" class="btn btn-small" value="Submit"></div>
+        <div><input id="getGreeting" type="submit" class="btn btn-small" value="8"></div>
     </form>
     
     <form action="javascript:void(0);">
@@ -52,7 +52,9 @@
 
     <script type="text/javascript">
         function init() {
-            google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
+           // google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
+           google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+        	//gapi.client.load('helloworld', 'v1','http://localhost:8080/_ah/api');
         }
     </script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>

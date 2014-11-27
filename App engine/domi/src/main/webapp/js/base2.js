@@ -19,12 +19,15 @@ google.devrel.samples = google.devrel.samples || {};
 /** hello namespace for this sample. */
 google.devrel.samples.hello = google.devrel.samples.hello || {};
 
+
+
 /**
  * Client ID of the application (from the APIs Console).
  * @type {string}
  */
 google.devrel.samples.hello.CLIENT_ID =
-    '207871756954-ea8oo1enldn0f50krf8ql1v6rhcig21t.apps.googleusercontent.com';
+    '204916157214-1hho3fgafmt30l9kt7rljls1qttbeb3n.apps.googleusercontent.com';
+
 
 /**
  * Scopes used by the application.
@@ -135,6 +138,23 @@ google.devrel.samples.hello.multiplyGreeting = function(
     });
 };
 
+function listQuotes() {
+    gapi.client.domi.consultaEmpresa().execute(function(resp) {
+            //if (!resp.code) {
+                    resp.items = resp.items || [];
+                    var result = "";
+                   for (var i=0;i<resp.items.length;i++) {
+                            //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad;
+                    }
+                    document.getElementById('listQuotesResult').innerHTML = result;
+           // }
+    	//var result = "<br>hola<br> ";
+    	//document.getElementById('listQuotesResult').innerHTML = result;
+    	
+    });
+}
+
 /**
  * Greets the current user via the API.
  */
@@ -149,6 +169,7 @@ google.devrel.samples.hello.authedGreeting = function(id) {
  * Enables the button callbacks in the UI.
  */
 google.devrel.samples.hello.enableButtons = function() {
+	
   document.getElementById('getGreeting').onclick = function() {
     google.devrel.samples.hello.getGreeting(
         document.getElementById('id').value);
@@ -171,6 +192,11 @@ google.devrel.samples.hello.enableButtons = function() {
   document.getElementById('signinButton').onclick = function() {
     google.devrel.samples.hello.auth();
   }
+  
+  document.getElementById('listQuote').onclick = function() {
+      listQuotes();
+    }
+  
 };
 
 /**
@@ -182,16 +208,14 @@ google.devrel.samples.hello.init = function(apiRoot) {
   // when they have completed.
   var apisToLoad;
   var callback = function() {
-   // if (--apisToLoad == 0) {
+    if (--apisToLoad == 0) {
       google.devrel.samples.hello.enableButtons();
       google.devrel.samples.hello.signin(true,
           google.devrel.samples.hello.userAuthed);
-   // }
+    }
   }
 
   apisToLoad = 1; // must match number of calls to gapi.client.load()
-  gapi.client.load('helloworld', 'v1', callback, apiRoot);
-  //gapi.client.load('oauth2', 'v2', callback);
- // gapi.client.load('helloworld', 'v1', 'http://localhost:8080/_ah/api',apiRoot);
-  
+  gapi.client.load('domi', 'v1', callback, apiRoot);
+ // gapi.client.load('oauth2', 'v2', callback);
 };

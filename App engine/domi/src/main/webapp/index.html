@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello Endpoints!</title>
+    <title>Hello domi!</title>
     <script type="text/javascript" src="/js/base.js"></script>
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
@@ -16,7 +16,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Hello Endpoints!</a>
+            <a class="brand" href="#">Hello domi innovus!</a>
             <div class="nav-collapse collapse pull-right">
                 <a href="javascript:void(0);" class="btn" id="signinButton">Sign in</a>
             </div>
@@ -49,10 +49,19 @@
         <h2>Authenticated Greeting</h2>
         <div><input id="authedGreeting" type="submit" class="btn btn-small" disabled value="Submit"></div>
     </form>
+    
+     <form action="javascript:void(0);">
+        <h2>Lista Empresa</h2>
+        <div><input id="listQuote" type="submit" value="List empr3iesa"></div>
+    </form>
+    <div id="listQuotesResult"></div>
 
     <script type="text/javascript">
         function init() {
-            google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
+            //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
+           //google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+           google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
+        	 // gapi.client.load('domi', 'v1', 'http://localhost:8080/_ah/api');
         }
     </script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>

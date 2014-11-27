@@ -26,7 +26,7 @@ public class Greetings {
   public static ArrayList<HelloGreeting> greetings = new ArrayList<HelloGreeting>();
 
   static {
-    greetings.add(new HelloGreeting("hello world!"));
+    greetings.add(new HelloGreeting("america!"));
     greetings.add(new HelloGreeting("goodbye world!"));
   }
 

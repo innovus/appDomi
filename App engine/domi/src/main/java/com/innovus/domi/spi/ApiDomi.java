@@ -147,8 +147,7 @@ public class ApiDomi {
 	  public Empresa createConference(final EmpresaForm empresaForm)
 	       {
 	     
-	      // Allocate Id first, in order to make the transaction idempotent.
-	      
+	            
 	      final Key<Empresa> empresaKey = factory().allocateId(Empresa.class);
 	      final long empresaId = empresaKey.getId();
 	      //final Queue queue = QueueFactory.getDefaultQueue();
