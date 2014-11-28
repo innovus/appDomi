@@ -76,6 +76,31 @@ function listQuotes() {
     });
 }
 
+function crearEmpresa(){
+	
+		
+   var nomEmpresa = document.getElementById('txtnomEmpresa').value;
+   var desEmpresa = document.getElementById('txtdesEmpresa').value;
+   var ciudEmpresa = document.getElementById('txtciudEmpresa').value;
+   var timeEmpresa = document.getElementById('txttimeEmpresa').value;
+   var requestData = {};
+   requestData.nombre = nomEmpresa;
+   requestData.descripcion = desEmpresa;
+   requestData.ciudad = ciudEmpresa;
+   requestData.tiempoMinimo = timeEmpresa;
+		
+   gapi.client.domi.createEmpresa(requestData).execute(function(resp) {
+    	
+    	 if (!resp.code) {
+            
+             console.log(resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre );
+         }
+		
+		//document.getElementById('respuesta').innerHTML = nomEmpresa;
+		
+	});
+}
+
 /**
  * Enables the button callbacks in the UI.
  */
@@ -85,6 +110,9 @@ google.devrel.samples.hello.enableButtons = function() {
 	  
 	  document.getElementById('listQuote').onclick = function() {
 	      listQuotes();
+	    }
+	  document.getElementById('btnNomEmpresa').onclick = function() {
+	      crearEmpresa();
 	    }
 	  
 	};
