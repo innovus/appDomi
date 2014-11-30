@@ -2,8 +2,10 @@ package com.innovus.domi.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -28,11 +30,12 @@ public class Empresa {
 	
 	 private String descripcion;
 	    
-	    /**
+	 /*   /**
 	     *claves de las conferencias que la empresa registra.
-	     */
-	 private List<String> keysCategorias = new ArrayList<>(0);
+	     *
+	* private List<String> keysCategorias = new ArrayList<>(0);
 	    
+	*/
 	    /*falta el horario
 	     * 
 	     * */
@@ -55,6 +58,8 @@ public class Empresa {
 	   	 this.idEmpresa = idEmpresa;
 	   	 actualizaConEmpresaForm( empresaForm);
 	 }
+	 
+	 // aqui empiesas los get normales para obtener cualquier dato
 	    
 	 public  long getidEmpresa (){
 	   	return idEmpresa;
@@ -68,9 +73,10 @@ public class Empresa {
 	   	 return descripcion;
 	 }
 	     
-	 public List<String> getKeysCategorias() {
+	/* public List<String> getKeysCategorias() {
 	     return ImmutableList.copyOf(keysCategorias);
-	 }
+	 }*/
+	 
 	     
 	 public  long getTiempoMinimo (){
 	  	 return tiempoMinimo;
@@ -79,10 +85,18 @@ public class Empresa {
 	 public String getCiudad(){
 	   	 return ciudad;
 	 }
-	    
-	 public void addKeyCategoria(String keyCategoria) {
+	 
+	 // este obtendra la cadena de la llave de la empresa para que pueda pasar atraves de formularios
+	/* public String getWebsafeKey(){
+		 return Key.create(Empresa.class,idEmpresa);
+				 
+	 }
+	 */
+	 
+	/* public void addKeyCategoria(String keyCategoria) {
 	     keysCategorias.add(keyCategoria);
 	 }
+	 */
 	     
 	     //enlazar la empresa con la empresa form
 	     
@@ -96,5 +110,7 @@ public class Empresa {
 	         // However, if there are already some seats allocated, we should subtract that numbers.
 	         
 	 }
+	 
+	 
 
 }

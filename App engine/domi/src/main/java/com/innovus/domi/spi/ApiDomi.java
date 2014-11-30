@@ -1,8 +1,8 @@
 package com.innovus.domi.spi;
 
 
-import static com.innovus.domi.service.OfyService.factory;
 
+import static com.innovus.domi.service.OfyService.factory;
 import static com.innovus.domi.service.OfyService.ofy;
 
 import javax.inject.Named;
@@ -14,13 +14,17 @@ import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.ForbiddenException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
+
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
 import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.form.EmpresaForm;
+
 import java.util.List;
+
 import com.googlecode.objectify.cmd.Query;
 
 @Api(
@@ -208,6 +212,29 @@ public class ApiDomi {
 	    public List<Empresa> consultaEmpresa() {
 	        Query query = ofy().load().type(Empresa.class).order("nombre");
 	        return query.list();//me retorns en una lista
+	    }
+	 
+	 /**
+	     * Retorna una  lista de Caterogorias segun el restaurante q se mande
+	     * In order to receive the websafeConferenceKey via the JSON params, uses a POST method.
+	     *
+	     * @param usa la clave deun restaurante para obtener sus categorias
+	     * @return una lista de categorias queel restaurante creo
+	     * @throws UnauthorizedException when the user is not signed in.
+	     */
+	   @ApiMethod(
+	            name = "getCategoriasXEmpresa",
+	            path = "getCategoriasXEmpresa",
+	            httpMethod = HttpMethod.POST
+	    )
+	    public List<Categoria> getCategoriasXEmpresa(@Named("empresaId") final long empresaId)  {
+		/*   Query query = ofy().load().type(Categoria.class);
+	        return query.list();//me retorns en una lista
+	     */ 
+	        return ofy().load().type(Categoria.class)
+	                .ancestor(Key.create(Empresa.class, empresaId))
+	                .order("NombreCategoria").list();
+	                
 	    }
 
 	

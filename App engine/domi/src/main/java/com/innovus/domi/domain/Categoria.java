@@ -2,7 +2,6 @@ package com.innovus.domi.domain;
 
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
-
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -62,7 +61,9 @@ public class Categoria {
 		 return Key.create(Empresa.class,idEmpresa).getId();
 	 }
 	 
-	
-
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	    public Long getIdEmpresa() {
+	        return idEmpresa;
+	    }
 	 
 }
