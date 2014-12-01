@@ -1,7 +1,11 @@
 package com.innovus.domi.domain;
 
+
+import static com.innovus.domi.service.OfyService.ofy;
+
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -64,6 +68,21 @@ public class Categoria {
 	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	    public Long getIdEmpresa() {
 	        return idEmpresa;
+	    }
+	 
+	 /**
+	     * Obtiene el nombre de la empresa y lo muestra al obtener en le metodo rest
+	     *
+	     * 
+	     */
+	    public String getEmpresaPropietaria() {
+	        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
+	        Empresa organizer = ofy().load().key(getKeyEmpresa()).now();
+	        if (organizer == null) {
+	            return "";
+	        } else {
+	            return organizer.getNombre();
+	        }
 	    }
 	 
 }
