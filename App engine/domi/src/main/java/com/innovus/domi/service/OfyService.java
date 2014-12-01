@@ -18,6 +18,7 @@ public class OfyService {
         //factory().register(AppEngineUser.class);
         factory().register(Categoria.class);
         factory().register(Empresa.class);
+        factory().register(Producto.class);
     }
 
     /**

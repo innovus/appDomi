@@ -21,7 +21,9 @@ import com.googlecode.objectify.Work;
 import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Empresa;
+import com.innovus.domi.domain.Producto;
 import com.innovus.domi.form.EmpresaForm;
+import com.innovus.domi.form.ProductoForm;
 
 import java.util.List;
 
@@ -236,6 +238,36 @@ public class ApiDomi {
 	                .order("NombreCategoria").list();
 	                
 	    }
+	   
+	   @ApiMethod(name = "crearProductos", path = "productos", httpMethod = HttpMethod.POST)
+		  public Producto crearProductos( @Named("keyCategoria") final long keyCategoria,final  ProductoForm productoForm)//me devuelva un producto
+		       {
+		     
+		      // Allocate Id first, in order to make the transaction idempotent.
+		      
+		      final Key<Producto> productoKey = factory().allocateId(Producto.class);
+		      final long productoId = productoKey.getId();
+		      //final Queue queue = QueueFactory.getDefaultQueue();
+		      //Key<Empresa> EmpresaKey = Key.create(keyE;
+		      Categoria categoria = ofy().load().key(Key.create(Categoria.class, keyCategoria)).now();
+		      final long categoriaId = categoria.getidCategoria();
+		      
+		      // Start a transaction.
+		      Producto producto = ofy().transact(new Work<Producto>() {
+		          @Override
+		          public Producto run() {//inicia comit
+		              // Fetch user's Profile.
+		              //Profile profile = getProfileFromUser(user, userId);
+		              Producto producto = new Producto(productoId, categoriaId,productoForm);
+		              // Save Conference and Profile.
+		              ofy().save().entities(producto).now();
+		           
+		              return producto;
+		          }
+		      });
+		      return producto;
+		  }
+		 
 
 	
 
