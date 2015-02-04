@@ -2,6 +2,10 @@ package com.innovus.domi.form;
 
 
 
+
+
+
+
 public class EmpresaForm {
 	   
 	    private String nombre;
@@ -25,14 +29,17 @@ public class EmpresaForm {
 	     */
 	    private String ciudad;
 	    
+	    private String grupos;
+	    
 	    private EmpresaForm(){
 	    }
 
-	    private EmpresaForm(String nombre, String descripcion, int tiempoMinimo, String ciudad){
+	    private EmpresaForm(String nombre, String descripcion, int tiempoMinimo, String ciudad, String grupos){
 	    	 this.nombre = nombre;
 	         this.descripcion = descripcion;
 	         this.tiempoMinimo = tiempoMinimo;
 	         this.ciudad = ciudad;
+	         this.grupos = grupos;
 	         
 	    }
 	    
@@ -51,6 +58,11 @@ public class EmpresaForm {
 	     public String getCiudad(){
 	    	 return ciudad;
 	     }
+	     
+	     public String getGrupo() {
+	         return grupos;
+	     }
+	   
 
 	    
 }

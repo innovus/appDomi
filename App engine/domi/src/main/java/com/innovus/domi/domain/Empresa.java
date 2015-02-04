@@ -12,6 +12,7 @@ import com.googlecode.objectify.annotation.Index;
 import com.innovus.domi.form.EmpresaForm;
 
 
+
 @Entity
 public class Empresa {
 	
@@ -48,6 +49,8 @@ public class Empresa {
 	     */
 	 @Index
 	 private String ciudad;
+	 
+	 private String  grupos;
 	    
 	 private Empresa (){}
 	    
@@ -84,6 +87,10 @@ public class Empresa {
 	     
 	 public String getCiudad(){
 	   	 return ciudad;
+	 }
+	 
+	 public String getGrupo(){
+	   	 return grupos;
 	 }
 	 
 	 // este obtendra la cadena de la llave de la empresa para que pueda pasar atraves de formularios

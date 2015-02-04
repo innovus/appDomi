@@ -66,7 +66,7 @@ function listQuotes() {
                     var result = "";
                    for (var i=0;i<resp.items.length;i++) {
                             //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
-                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad +"<br>";
+                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +"<br>";
                     }
                     document.getElementById('listQuotesResult').innerHTML = result;
            }
@@ -111,9 +111,10 @@ google.devrel.samples.hello.enableButtons = function() {
 	  document.getElementById('listQuote').onclick = function() {
 	      listQuotes();
 	    }
-	  document.getElementById('btnNomEmpresa').onclick = function() {
+	  document.getElementById('btnCrearEmpresa').onclick = function() {
 	      crearEmpresa();
 	    }
+	 
 	  
 	};
 /**
