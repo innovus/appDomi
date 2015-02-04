@@ -66,7 +66,7 @@ function listQuotes() {
                     var result = "";
                    for (var i=0;i<resp.items.length;i++) {
                             //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
-                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +"<br>";
+                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +" "+resp.items[i].grupos +" <br>";
                     }
                     document.getElementById('listQuotesResult').innerHTML = result;
            }
@@ -83,17 +83,22 @@ function crearEmpresa(){
    var desEmpresa = document.getElementById('txtdesEmpresa').value;
    var ciudEmpresa = document.getElementById('txtciudEmpresa').value;
    var timeEmpresa = document.getElementById('txttimeEmpresa').value;
+   // Obtenemos el valor por el id
+   var grupoEmpresa = document.getElementById("idGrupo").value;
+   grupoEmpresa ="restaurantes papa";
    var requestData = {};
    requestData.nombre = nomEmpresa;
    requestData.descripcion = desEmpresa;
    requestData.ciudad = ciudEmpresa;
    requestData.tiempoMinimo = timeEmpresa;
+   requestData.grupos = grupoEmpresa;
+   
 		
    gapi.client.domi.createEmpresa(requestData).execute(function(resp) {
     	
     	 if (!resp.code) {
             
-             console.log(resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre );
+             console.log(resp.grupos +":"+ resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre );
          }
 		
 		//document.getElementById('respuesta').innerHTML = nomEmpresa;
