@@ -240,7 +240,7 @@ public class ApiDomi {
 	    }
 	   
 	   @ApiMethod(name = "crearProductos", path = "productos", httpMethod = HttpMethod.POST)
-		  public Producto crearProductos( @Named("keyCategoria") final long keyCategoria,final  ProductoForm productoForm)//me devuelva un producto
+		  public Producto crearProductos( @Named("keyCategoria") final Long keyCategoria,final  ProductoForm productoForm)//me devuelva un producto
 		       {
 		     
 		      // Allocate Id first, in order to make the transaction idempotent.

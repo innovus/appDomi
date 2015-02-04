@@ -25,12 +25,12 @@
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>1.9.4</version>
+            <version>${appengine.target.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-endpoints</artifactId>
-            <version>1.9.4</version>
+            <version>${appengine.target.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -70,13 +70,13 @@
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
-            <version>1.9.4</version>
+            <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-stubs</artifactId>
-            <version>1.9.4</version>
+            <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -117,7 +117,7 @@
             <plugin>
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.9.4</version>
+                <version>${appengine.target.version}</version>
                 <configuration>
                     <enableJarClasses>false</enableJarClasses>
                 </configuration>
