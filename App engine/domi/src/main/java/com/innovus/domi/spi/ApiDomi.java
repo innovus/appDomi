@@ -260,7 +260,7 @@ public class ApiDomi {
 		              //Profile profile = getProfileFromUser(user, userId);
 		              Producto producto = new Producto(productoId, categoriaId,productoForm);
 		              // Save Conference and Profile.
-		              ofy().save().entities(producto).now();
+		              ofy().save().entity(producto).now();
 		           
 		              return producto;
 		          }
