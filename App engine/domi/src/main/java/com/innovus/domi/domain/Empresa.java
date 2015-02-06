@@ -51,6 +51,8 @@ public class Empresa {
 	 private String ciudad;
 	 
 	 private String  grupos;
+	 
+	 private int valorMinimoPedido;
 	    
 	 private Empresa (){}
 	    
@@ -58,7 +60,8 @@ public class Empresa {
 	  	 Preconditions.checkNotNull(empresaForm.getNombre(), "El nombre es requerido");
 	   	 Preconditions.checkNotNull(empresaForm.getCiudad(), "La ciudad es requerida");
 	   	 Preconditions.checkNotNull(empresaForm.getTiempoMinimo(), "El tiempo minimo es requerido");
-	   	 Preconditions.checkNotNull(empresaForm.getGrupo(), "el grupo es requerido");
+	   	// Preconditions.checkNotNull(empresaForm.getGrupo(), "el grupo es requerido");
+	   	Preconditions.checkNotNull(empresaForm.getValorMinimoPedido(), "El valor minimo es requerido");
 	   	 this.idEmpresa = idEmpresa;
 	   	 actualizaConEmpresaForm( empresaForm);
 	 }
@@ -90,8 +93,12 @@ public class Empresa {
 	   	 return ciudad;
 	 }
 	 
-	 public String getGrupo(){
+	public String getGrupo(){
 	   	 return grupos;
+	 }
+	 
+	 public long getValorMinimoPedido(){
+		 return valorMinimoPedido;
 	 }
 	 
 	 // este obtendra la cadena de la llave de la empresa para que pueda pasar atraves de formularios
@@ -113,8 +120,8 @@ public class Empresa {
 	     this.descripcion = empresaForm.getDescripcion();
 	     this.ciudad = empresaForm.getCiudad();
 	     this.tiempoMinimo = empresaForm.getTiempoMinimo();
-	     this.grupos = empresaForm.getGrupo();
-	     
+	     this.grupos = empresaForm.getGrupos();
+	     this.valorMinimoPedido = empresaForm.getValorMinimoPedido();
 	         
 	         // The initial number of seatsAvailable is the same as maxAttendees.
 	         // However, if there are already some seats allocated, we should subtract that numbers.

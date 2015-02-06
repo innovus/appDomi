@@ -33,18 +33,21 @@
         <div><span class="label">Descripción Empresa: </span><input id="txtdesEmpresa" /></div>
         <div><span class="label">Ciudad Empresa: </span><input id="txtciudEmpresa" /></div>
         <div><span class="label">Correo Electronico: </span><input id="txtcorreoEmpresa" /></div>
-        <div><span class="label">Tiempo Minomo: </span><input id="txttimeEmpresa" /></div>
-        <div><input id="btnCrearEmpresa" type="submit" class="btn btn-small" value="Enviar"></div>
-        <br>
-        <br>
+        <div><span class="label">Tiempo Minimo: </span><input id="txttimeEmpresa" /></div>
+        <div><span class="label">Valor Minimo Pedido: </span><input id="txtvalorMinimoPedido" /></div>
+        
         <select id="idGrupo" name="categoria" size="1">
         	<option value=""></option>
         	<option value="Restaurante">Restaurante</option>
         	<option value="Talleres">Talleres</option>
         	<option value="Drogeria">Drogeria</option>
         	<option value="Drogeria">carniceria</option>
-        	<option value="Drogeria">servicio de compañia</option>
+        	<option value="Drogeria">servicio de compañias</option>
         </select>
+        <div><input id="btnCrearEmpresa" type="submit" class="btn btn-small" value="Enviar"></div>
+        <br>
+        <br>
+        
     </form>
      <div id="respuesta"></div>
     
@@ -59,7 +62,7 @@
     <script type="text/javascript">
         function init() {
             //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
-           //google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+           // google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
              google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
         	 
         }

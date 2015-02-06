@@ -66,7 +66,7 @@ function listQuotes() {
                     var result = "";
                    for (var i=0;i<resp.items.length;i++) {
                             //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
-                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +" "+resp.items[i].grupos +" <br>";
+                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +" "+resp.items[i].grupos +" "+resp.items[i].valorMinimoPedido +" <br>";
                     }
                     document.getElementById('listQuotesResult').innerHTML = result;
            }
@@ -79,26 +79,29 @@ function listQuotes() {
 function crearEmpresa(){
 	
 		
-   var nomEmpresa = document.getElementById('txtnomEmpresa').value;
+   var nomEmpresa = document.getElementById('idGrupo').value;
    var desEmpresa = document.getElementById('txtdesEmpresa').value;
    var ciudEmpresa = document.getElementById('txtciudEmpresa').value;
    var timeEmpresa = document.getElementById('txttimeEmpresa').value;
    // Obtenemos el valor por el id
-   var grupoEmpresa = document.getElementById("idGrupo").value;
-   grupoEmpresa ="restaurantes papa";
+  // var grupoEmpresa = document.getElementById("idGrupo").value;
+  var grupoEmpresa = document.getElementById('txtciudEmpresa').value;
+  var valorminPedido =  document.getElementById('txtvalorMinimoPedido').value;
    var requestData = {};
    requestData.nombre = nomEmpresa;
    requestData.descripcion = desEmpresa;
    requestData.ciudad = ciudEmpresa;
    requestData.tiempoMinimo = timeEmpresa;
    requestData.grupos = grupoEmpresa;
+   requestData.valorMinimoPedido = valorminPedido;
    
 		
    gapi.client.domi.createEmpresa(requestData).execute(function(resp) {
     	
     	 if (!resp.code) {
             
-             console.log(resp.grupos +":"+ resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre );
+            // console.log( resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+             console.log( resp.nombre + ":" + resp.descripcion + ":" + resp.ciudad + ":" + resp.tiempoMinimo +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
          }
 		
 		//document.getElementById('respuesta').innerHTML = nomEmpresa;
@@ -118,7 +121,7 @@ google.devrel.samples.hello.enableButtons = function() {
 	    }
 	  document.getElementById('btnCrearEmpresa').onclick = function() {
 	      crearEmpresa();
-	    }
+	    } 
 	 
 	  
 	};

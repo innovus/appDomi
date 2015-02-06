@@ -31,15 +31,18 @@ public class EmpresaForm {
 	    
 	    private String grupos;
 	    
+	    private int valorMinimoPedido;
+	    
 	    private EmpresaForm(){
 	    }
 
-	    private EmpresaForm(String nombre, String descripcion, int tiempoMinimo, String ciudad, String grupos){
+	    private EmpresaForm(String nombre, String descripcion, int tiempoMinimo, String ciudad, String grupos, int valorMinimoPedido){
 	    	 this.nombre = nombre;
 	         this.descripcion = descripcion;
 	         this.tiempoMinimo = tiempoMinimo;
 	         this.ciudad = ciudad;
 	         this.grupos = grupos;
+	         this.valorMinimoPedido = valorMinimoPedido;
 	         
 	    }
 	    
@@ -51,7 +54,7 @@ public class EmpresaForm {
 	    	 return descripcion;
 	     }
 	      
-	     public  int getTiempoMinimo (){
+	     public  int getTiempoMinimo(){
 	    	 return tiempoMinimo;
 	    	 }
 	     
@@ -59,8 +62,12 @@ public class EmpresaForm {
 	    	 return ciudad;
 	     }
 	     
-	     public String getGrupo() {
+	     public String getGrupos() {
 	         return grupos;
+	     }
+	     
+	     public int getValorMinimoPedido(){
+	    	 return valorMinimoPedido;
 	     }
 	   
 
