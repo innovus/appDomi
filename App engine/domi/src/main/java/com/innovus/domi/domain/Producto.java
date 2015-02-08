@@ -23,6 +23,9 @@ public class Producto {
 	 private Key<Categoria> categoriaKey;
 	 
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private Key<Empresa> empresaKey;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private long idCategoria;	
 	 
 	 @Index
@@ -35,13 +38,16 @@ public class Producto {
 	 
 	 public Producto(){}
 	 
-	 public Producto(final long idProducto,final long idCategoria,final ProductoForm objetoProducto){
+	 public Producto(final long idProducto,final long idCategoria,final long idEmpresa,final ProductoForm objetoProducto){
 		 //Preconditions.checkNotNull(objetoProducto.getNombreProducto(), "El nombre es requerido");
 	   	 //Preconditions.checkNotNull(objetoProducto.getDescripcionProducto(), "La descripcion es requerida");
 	   	 //Preconditions.checkNotNull(objetoProducto.getPrecioProducto(), "El precio es requerido");
 		 
 		 this.idProducto=idProducto;
-		 this.categoriaKey=Key.create(Categoria.class,idCategoria);;
+		 this.empresaKey=Key.create(Empresa.class,idEmpresa);
+		 this.categoriaKey=Key.create(empresaKey,Categoria.class,idCategoria);
+
+		 
 		 actualizaConProductoForm(objetoProducto);
 		 
 	 }
