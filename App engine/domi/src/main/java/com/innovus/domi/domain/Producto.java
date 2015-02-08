@@ -36,9 +36,9 @@ public class Producto {
 	 public Producto(){}
 	 
 	 public Producto(final long idProducto,final long idCategoria,final ProductoForm objetoProducto){
-		 Preconditions.checkNotNull(objetoProducto.getNombreProducto(), "El nombre es requerido");
-	   	 Preconditions.checkNotNull(objetoProducto.getDescripcionProducto(), "La descripcion es requerida");
-	   	 Preconditions.checkNotNull(objetoProducto.getPrecioProducto(), "El precio es requerido");
+		 //Preconditions.checkNotNull(objetoProducto.getNombreProducto(), "El nombre es requerido");
+	   	 //Preconditions.checkNotNull(objetoProducto.getDescripcionProducto(), "La descripcion es requerida");
+	   	 //Preconditions.checkNotNull(objetoProducto.getPrecioProducto(), "El precio es requerido");
 		 
 		 this.idProducto=idProducto;
 		 this.categoriaKey=Key.create(Categoria.class,idCategoria);;

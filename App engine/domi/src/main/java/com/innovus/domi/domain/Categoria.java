@@ -24,6 +24,7 @@ public class Categoria {
 	 @Index
 	 private String NombreCategoria;
 	 
+	 @Index
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
