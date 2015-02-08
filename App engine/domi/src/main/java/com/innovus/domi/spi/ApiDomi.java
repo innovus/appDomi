@@ -15,13 +15,15 @@ import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.ForbiddenException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
-
+import com.google.protos.cloud.sql.Client;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
 import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Categoria;
+import com.innovus.domi.domain.Cliente;
 import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.domain.Producto;
+import com.innovus.domi.form.ClienteForm;
 import com.innovus.domi.form.EmpresaForm;
 import com.innovus.domi.form.ProductoForm;
 
@@ -150,6 +152,22 @@ public class ApiDomi {
 	   * @return A newly created Conference Object.
 	   * @throws UnauthorizedException when the user is not signed in.
 	   */
+	  @ApiMethod(name="createCliente",path="cliente",httpMethod=HttpMethod.POST)
+	  public Cliente createCliente(final ClienteForm clienteForm){
+		  
+		  final Key<Cliente> clienteKey=factory().allocateId(Cliente.class);
+		  final long clienteId=clienteKey.getId();
+		  Cliente cliente =ofy().transact(new Work<Cliente>(){
+			  @Override
+	          public Cliente run(){
+				  Cliente cliente = new Cliente(clienteId,clienteForm);
+				  ofy().save().entities(cliente).now();
+				  return cliente;
+			  }  
+		  });
+		  return cliente;
+	  }
+	    
 	  @ApiMethod(name = "createEmpresa", path = "empresa", httpMethod = HttpMethod.POST)
 	  public Empresa createConference(final EmpresaForm empresaForm)
 	       {

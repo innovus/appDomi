@@ -1,11 +1,5 @@
 package com.innovus.domi.form;
 
-
-
-
-
-
-
 public class EmpresaForm {
 	   
 	    private String nombre;
