@@ -92,9 +92,11 @@ public class Producto {
 	    }
 	 
 	 
-	 public long getLlaveSegura(){
-		 return Key.create(Categoria.class,idCategoria).getId();
+	/* public long getLlaveSegura(){
+		 
+		 //return Key.create(Categoria.class,idCategoria).getId();
 	 }
+	 */
 	 
 	 public String getCategoriaPropietaria() {
 	        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();

@@ -274,6 +274,7 @@ public class ApiDomi {
 		      final Key<Producto> productoKey = factory().allocateId(keyCat, Producto.class);
 		      final long productoId = productoKey.getId();
 		      final long categoriaId = categoria.getidCategoria();
+		      final long empresaId = empresa.getidEmpresa();
 		      
 		      // Start a transaction.
 		      Producto producto = ofy().transact(new Work<Producto>() {
@@ -281,7 +282,7 @@ public class ApiDomi {
 		          public Producto run() {//inicia comit
 		              // Fetch user's Profile.
 		              //Profile profile = getProfileFromUser(user, userId);
-		              Producto producto = new Producto(productoId, categoriaId,productoForm);
+		              Producto producto = new Producto(productoId, categoriaId,empresaId,productoForm);
 		              // Save Conference and Profile.
 		              ofy().save().entity(producto).now();
 		           
