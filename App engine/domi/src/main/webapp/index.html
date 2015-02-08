@@ -29,15 +29,15 @@
 
     <form action="javascript:void(0);">
         <h2>Crear Empresa</h2>
-        <div><span class="label">Nombre Empresa: </span><input id="txtnomEmpresa" /></div>
+        <div><span class="label">Nombre Empresas: </span><input id="txtnomEmpresa" /></div>
+        <div><span class="label">Contraseña: </span><input id="txtpassEmpresa" type="password"/></div>        
         <div><span class="label">Descripción Empresa: </span><input id="txtdesEmpresa" /></div>
         <div><span class="label">Ciudad Empresa: </span><input id="txtciudEmpresa" /></div>
         <div><span class="label">Correo Electronico: </span><input id="txtcorreoEmpresa" /></div>
         <div><span class="label">Tiempo Minimo: </span><input id="txttimeEmpresa" /></div>
-        <div><span class="label">Valor Minimo Pedido: </span><input id="txtvalorMinimoPedido" /></div>
+        <div><span class="label">Valor Minimo Pedidos: </span><input id="txtvalorMinimoPedido" /></div>
         
-        <select id="idGrupo" name="categoria" size="1">
-        	<option value=""></option>
+        <select id="idGrupo" name="categoria" >        	
         	<option value="Restaurante">Restaurante</option>
         	<option value="Talleres">Talleres</option>
         	<option value="Drogeria">Drogeria</option>
@@ -47,6 +47,10 @@
         <div><input id="btnCrearEmpresa" type="submit" class="btn btn-small" value="Enviar"></div>
         <br>
         <br>
+        <h2>Crear Categorias</h2>
+        <div><span class="label">Nombre Categoria: </span><input id="txtnomCategoria" /></div>
+        
+        <h2>Crear Productos</h2>
         
     </form>
      <div id="respuesta"></div>
@@ -62,8 +66,8 @@
     <script type="text/javascript">
         function init() {
             //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
-           // google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
-             google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
+              google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+            // google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
         	 
         }
     </script>

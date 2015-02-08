@@ -79,16 +79,18 @@ function listQuotes() {
 function crearEmpresa(){
 	
 		
-   var nomEmpresa = document.getElementById('idGrupo').value;
+   var nomEmpresa = document.getElementById('txtnomEmpresa').value;
+   var passwordEmpresa = document.getElementById('txtpassEmpresa').value;
    var desEmpresa = document.getElementById('txtdesEmpresa').value;
    var ciudEmpresa = document.getElementById('txtciudEmpresa').value;
    var timeEmpresa = document.getElementById('txttimeEmpresa').value;
    // Obtenemos el valor por el id
   // var grupoEmpresa = document.getElementById("idGrupo").value;
-  var grupoEmpresa = document.getElementById('txtciudEmpresa').value;
+  var grupoEmpresa = document.getElementById('idGrupo').value;
   var valorminPedido =  document.getElementById('txtvalorMinimoPedido').value;
    var requestData = {};
    requestData.nombre = nomEmpresa;
+   requestData.passEmpresa = passwordEmpresa;   
    requestData.descripcion = desEmpresa;
    requestData.ciudad = ciudEmpresa;
    requestData.tiempoMinimo = timeEmpresa;
@@ -101,7 +103,7 @@ function crearEmpresa(){
     	 if (!resp.code) {
             
             // console.log( resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
-             console.log( resp.nombre + ":" + resp.descripcion + ":" + resp.ciudad + ":" + resp.tiempoMinimo +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+             console.log( resp.nombre + ":" + resp.passEmpresa + ":" + ":" + resp.descripcion + ":" + resp.ciudad + ":" + resp.tiempoMinimo +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
          }
 		
 		//document.getElementById('respuesta').innerHTML = nomEmpresa;

@@ -1,5 +1,6 @@
 package com.innovus.domi.domain;
 
+import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class Empresa {
 	 @Index
 	 private String nombre;
 
+	 private String passEmpresa;
 	    /**
 	     * The description de la empresa
 	     */
@@ -75,6 +77,10 @@ public class Empresa {
 	 public String getNombre(){
 	   	 return nombre;
 	 }
+	 
+	 public String getpassEmpresa(){
+		 return passEmpresa;
+	 }
 	     
 	 public String getDescripcion(){
 	   	 return descripcion;
@@ -93,7 +99,7 @@ public class Empresa {
 	   	 return ciudad;
 	 }
 	 
-	public String getGrupo(){
+	public String getGrupos(){
 	   	 return grupos;
 	 }
 	 
@@ -117,11 +123,13 @@ public class Empresa {
 	     
 	 public void actualizaConEmpresaForm(EmpresaForm empresaForm) {
 	     this.nombre = empresaForm.getNombre();
+	     this.passEmpresa = empresaForm.getpassEmpresa();
 	     this.descripcion = empresaForm.getDescripcion();
 	     this.ciudad = empresaForm.getCiudad();
 	     this.tiempoMinimo = empresaForm.getTiempoMinimo();
 	     this.grupos = empresaForm.getGrupos();
 	     this.valorMinimoPedido = empresaForm.getValorMinimoPedido();
+	     
 	         
 	         // The initial number of seatsAvailable is the same as maxAttendees.
 	         // However, if there are already some seats allocated, we should subtract that numbers.

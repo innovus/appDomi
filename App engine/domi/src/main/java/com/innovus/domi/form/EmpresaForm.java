@@ -9,6 +9,8 @@ package com.innovus.domi.form;
 public class EmpresaForm {
 	   
 	    private String nombre;
+	    
+	    private String passEmpresa;
 
 	    /**
 	     * The description de la empresa
@@ -36,8 +38,9 @@ public class EmpresaForm {
 	    private EmpresaForm(){
 	    }
 
-	    private EmpresaForm(String nombre, String descripcion, int tiempoMinimo, String ciudad, String grupos, int valorMinimoPedido){
+	    private EmpresaForm(String nombre,String passEmpresa, String descripcion, int tiempoMinimo, String ciudad, String grupos, int valorMinimoPedido){
 	    	 this.nombre = nombre;
+	    	 this.passEmpresa = passEmpresa;
 	         this.descripcion = descripcion;
 	         this.tiempoMinimo = tiempoMinimo;
 	         this.ciudad = ciudad;
@@ -48,6 +51,10 @@ public class EmpresaForm {
 	    
 	     public String getNombre(){
 	    	 return nombre;
+	     }
+	     
+	     public String getpassEmpresa(){
+	    	 return passEmpresa;
 	     }
 	     
 	     public String getDescripcion(){

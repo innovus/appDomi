@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Usuario Empresa</title>
+</head>
+<body>
+<h3>Registro Usuario</h3>
+<br>
+<h5>
+ <span>Al registrarse se le enviará un mail de confirmación para poder activar su cuenta en el sistema</span>
+</h5>
+<div><span class="label"> <b> * </b>Nombre: </span><input id="txtnomPersona" /></div>
+<div><span class="label"> <b> * </b>Primer apellido: </span><input id="txtapellidoPaterno" /></div>
+<div><span class="label"> <b>  </b>Segundo apellido: </span><input id="txtapellidoMaterno" /></div>
+<div><span class="label"> <b> * </b>Correo electrónico: </span><input id="txtCorreoCliente" /></div>
+<p class="help-block"> Este dato será su usuario para ingresar al Portal.</p>
+<div><span class="label"> <b> * </b>Contraseña: </span><input id="Usuario_password" /></div>
+<p class="help-block"> La contraseña debe tener una longitud de entre 8 y 16 caracteres. Deberá incluir letras minúsculas, al menos una letra mayúscula y un número.</p>
+<div><span class="label"> <b> * </b>Confirmar contraseña: </span><input id="registroUsuario_confirmacion" /></div>
+<div><span class="label"> <b> * </b>Pregunta para recuperar contraseña: </span>
+<select name="registroUsuario.pregunta" id="registroUsuario_pregunta" class="form-control">
+    <option value="¿Cuál es el nombre de tu tío/tía favorito?">¿Cuál es el nombre de tu tío/tía favorito?</option>
+    <option value="¿Cuál es el nombre de tu primo/prima mayor?">¿Cuál es el nombre de tu primo/prima mayor?</option>
+    <option value="¿Cuál es el apodo de tu hijo/hija menor?">¿Cuál es el apodo de tu hijo/hija menor?</option>
+    <option value="¿Cuál es el apodo de tu hijo/hija mayor?">¿Cuál es el apodo de tu hijo/hija mayor?</option>
+    <option value="¿Cuál es el nombre de tu sobrino/sobrina mayor?">¿Cuál es el nombre de tu sobrino/sobrina mayor?</option>
+    <option value="¿Dónde pasaste tu luna de miel?">¿Dónde pasaste tu luna de miel?</option>
+    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+    <option value="¿Quién es tu actor/actriz favorito(a)?">¿Quién es tu actor/actriz favorito(a)?</option>
+    <option value="¿Quién fué tu mejor primer amigo(a)?">¿Quién fué tu mejor primer amigo(a)?</option>
+    <option value="¿Cuál era tu comida favorita en tu niñez?">¿Cuál era tu comida favorita en tu niñez?</option>
+    <option value="¿Cómo se llama tu mascota?">¿Cómo se llama tu mascota?</option>
+    <option value="¿Quién es tu cantante favorito(a)?">¿Quién es tu cantante favorito(a)?</option>
+    <option value="¿Cuál es el libro que más te gusta?">¿Cuál es el libro que más te gusta?</option>
+    <option value="¿Cuál es el nombre de tu equipo de deporte favorito?">¿Cuál es el nombre de tu equipo de deporte favorito?</option>
+    <option value="¿De qué marca era tu primera bicicleta?">¿De qué marca era tu primera bicicleta?</option>
+    <option value="¿Dónde nació tu papá?">¿Dónde nació tu papá?</option>
+    <option value="¿Cuál es tu personaje de película favorito?">¿Cuál es tu personaje de película favorito?</option>
+    <option value="¿De qué marca era tu primer coche?">¿De qué marca era tu primer coche?</option>
+    <option value="¿De qué marca era tu primer moto?">¿De qué marca era tu primer moto?</option>
+    <option value="¿Dónde nació tu mamá?">¿Dónde nació tu mamá?</option>
+</select>
+<div><span class="label"> <b> * </b>Respuesta: </span>
+<input type="text" name="registroUsuario.respuesta" size="40" maxlength="50" value="" id="registroUsuario_respuesta" class="form-control">
+
+<div class="control-group" colspan="3">
+							<center>
+								<table>
+									<tbody><tr class="panel panel-default">
+										<td class="panel-body"><div id="recaptcha_widget" class=" recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio">
+<table width="100%">
+	<tbody><tr>
+		<td><span class="recaptcha_only_if_incorrect_sol">Digito incorrectamente, favor de intentarlo nuevamente</span></td>
+	</tr>
+	<tr>
+		<td>
+		<div id="recaptcha_image" style="width: 300px; height: 57px;"><img id="recaptcha_challenge_image" alt="Pista de imagen reCAPTCHA" height="57" width="300" src="https://www.google.com/recaptcha/api/image?c=03AHJ_VutLXnay0eZ0Bi9aIoFmz8YV4cGanCzFkeAF37HyzKJDgA_5S1rA87DcabPH6qGL6yYJE-qdF3MK22Jm93b7tetJ_x1a79pEInuEltmsAMIW6mnrkldJzfn8WdD7eMHhb8gBNBydSKuWUSr_21bY6Cu8aw5T2uZPsy4sUV7Q-Hnkm27wiNQ&amp;th=,s0L9AAQeEhId-ABmd0QkWvHfWrJG0dxcsn7-XVu1NojR2JTYewsqAOJ6RoaAlP15UCa84ZBOle9u5mDVWpvS0iN5Z4W8TjbSC8u2Ex6kAWc9b3R6aI0HH84FqAgN4sIzUJmXkuiTUe9R4tpSH86CwjIX2AAf2Ixmp4L1HP4ln0Z_-hgQDfr3UN052OxqxOsZ4_fbiw"></div>
+		</td>
+	</tr>
+	<tr>
+		<td><span class="recaptcha_only_if_image">Digite las palabras que se muestran en la imagen:</span><span class="recaptcha_only_if_audio">Digite las palabras que se muestran en la imagen:</span></td>
+	</tr>
+	<tr>
+		<td><span id="recaptcha_challenge_field_holder" style="display: none;"><input type="hidden" name="recaptcha_challenge_field" id="recaptcha_challenge_field" value="03AHJ_VutLXnay0eZ0Bi9aIoFmz8YV4cGanCzFkeAF37HyzKJDgA_5S1rA87DcabPH6qGL6yYJE-qdF3MK22Jm93b7tetJ_x1a79pEInuEltmsAMIW6mnrkldJzfn8WdD7eMHhb8gBNBydSKuWUSr_21bY6Cu8aw5T2uZPsy4sUV7Q-Hnkm27wiNQ"></span><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" autocomplete="off"></td>
+	</tr>
+	<tr>
+		<td><a href="javascript:Recaptcha.reload()">Obtener otro CAPTCHA</a></td>
+	</tr>
+	<tr>
+		<td>
+		<div class="recaptcha_only_if_image"><a href='javascript:Recaptcha.switch_type("audio")'>Obtener un CAPTCHA auditivo</a></div>
+		<div class="recaptcha_only_if_audio"><a href='javascript:Recaptcha.switch_type("image")'>Obtener un CAPTCHA visual</a></div>
+		</td>
+	</tr>
+	<tr>
+		<td><a href="javascript:Recaptcha.showhelp()">Ayuda</a></td>
+	</tr>
+</tbody></table>
+</div>
+<script type="text/javascript">
+var RecaptchaOptions = {theme: 'custom',lang: 'es',custom_theme_widget: 'recaptcha_widget'};</script>
+
+<script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LcHowkAAAAAALz5wp7w9CuTcm99twYrQaCdtwu-&amp;lang=es"></script><script type="text/javascript" src="https://www.google.com/recaptcha/api/js/recaptcha.js"></script></td>
+									</tr>
+								</tbody></table>
+							</center>
+						</div>
+</body>
+</html>
