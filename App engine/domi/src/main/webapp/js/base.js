@@ -75,6 +75,60 @@ function listQuotes() {
     	
     });
 }
+function listaClientes(){
+	gapi.client.domi.consultaCliente().execute(function(resp){
+		 if (!resp.code) {
+             resp.items = resp.items || [];
+             var result = "";
+            for (var i=0;i<resp.items.length;i++) {
+                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+         	   result =  result+ resp.items[i].apellidoPaterno +"  "+resp.items[i].nomCliente+" "+resp.items[i].apellidoMaterno+" "+resp.items[i].correoCliente +" "+resp.items[i].passwordCliente +" "+resp.items[i].preguntaCliente +" <br>";
+             }
+             document.getElementById('listQuotesResult').innerHTML = result;
+    }
+	});
+}
+
+function crearCliente(){
+ var nomCliente = document.getElementById('txtnomCliente').value;
+ var apellidoPaterno = document.getElementById('txtapellidoPaterno').value;
+ var apellidoMaterno = document.getElementById('txtapellidoMaterno').value;
+ var correoCliente = document.getElementById('txtCorreoCliente').value;
+ var passwordCliente = document.getElementById('Usuario_password').value;
+ var preguntaCliente = document.getElementById('registroCliente_pregunta').value;
+ var respuestaCliente = document.getElementById('registroUsuario_respuesta').value;
+ 
+ var requestData = {};
+ requestData.nomCliente = nomCliente;
+ requestData.apellidoPaterno = apellidoPaterno;
+ requestData.apellidoMaterno = apellidoMaterno;
+ requestData.correoCliente = correoCliente;
+ requestData.passwordCliente = passwordCliente;
+ requestData.preguntaCliente = preguntaCliente;
+ requestData.respuestaCliente = respuestaCliente;
+ 
+ gapi.client.domi.createCliente(requestData).execute(function(resp){
+	 
+	 if (!resp.code) {
+		 console.log( resp.nomCliente + ":" + resp.apellidoPaterno + ":" + ":" + resp.apellidoMaterno + ":" + resp.correoCliente + ":" + resp.passwordCliente +":" + resp.preguntaCliente + ":" + resp.respuestaCliente  );
+		 
+	 }
+ });
+ 
+ /*gapi.client.domi.createEmpresa(requestData).execute(function(resp) {
+    	
+    	 if (!resp.code) {
+            
+            // console.log( resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+             console.log( resp.nombre + ":" + resp.passEmpresa + ":" + ":" + resp.descripcion + ":" + resp.ciudad + ":" + resp.tiempoMinimo +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+         }
+		
+		//document.getElementById('respuesta').innerHTML = nomEmpresa;
+		
+	});*/
+ 
+ 
+}
 
 function crearEmpresa(){
 	
@@ -120,6 +174,13 @@ google.devrel.samples.hello.enableButtons = function() {
 	  
 	  document.getElementById('listQuote').onclick = function() {
 	      listQuotes();
+	    }
+	  document.getElementById('btnConsultarCliente').onclick = function() {
+		  listaClientes();
+	    }
+	  
+	  document.getElementById('btnCrearCliente').onclick = function() {
+		  crearCliente();
 	    }
 	  document.getElementById('btnCrearEmpresa').onclick = function() {
 	      crearEmpresa();

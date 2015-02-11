@@ -23,11 +23,8 @@ public class Cliente {
 	private Cliente(){}
 	
 	public Cliente(final long idCliente, final ClienteForm clienteForm){
-		/*
-		 *  Preconditions.checkNotNull(empresaForm.getNombre(), "El nombre es requerido");
-	   	 Preconditions.checkNotNull(empresaForm.getCiudad(), "La ciudad es requerida");
-		 * */
-		// Preconditions.checkNotNull(clienteForm.getNombreCliente(),"El nombre es requerido");
+		
+		// Preconditions.checkNotNull(clienteForm.getNomCliente(),"El nombre es requerido");
 		 //Preconditions.checkNotNull(clienteForm.getApellidoMaterno(),"El primer apellido es requerido");
 		 //Preconditions.checkNotNull(clienteForm.getCorreoCliente(),"El correo es requerido");
 		 
@@ -38,7 +35,7 @@ public class Cliente {
 	public long getIdCliente(){		
 		return idCliente;
 	}	
-	public String getNombreCliente(){
+	public String getNomCliente(){
 		return nomCliente;
 	}
 	public String getApellidoPaterno(){

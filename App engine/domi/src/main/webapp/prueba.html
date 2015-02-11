@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<script type="text/javascript" src="/js/base.js"></script>
-<title>Usuario Empresa</title>
+    <title>Hello domi!</title>
+    <script type="text/javascript" src="/js/base.js"></script>
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h3>Registro Usuario</h3>
-<br>
-<h5>
- <span>Al registrarse se le enviará un mail de confirmación para poder activar su cuenta en el sistema</span>
-</h5>
-<div><span class="label"> <b> * </b>Nombre: </span><input id="txtnomCliente" /></div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Domi Innovus!</a>
+            <div class="nav-collapse collapse pull-right">
+                <a href="javascript:void(0);" class="btn" id="signinButton">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div id="outputLog"></div>
+
+    <form action="javascript:void(0);">
+        <h2>Registro Usuario</h2>
+        <div><span class="label"> <b> * </b>Nombre: </span><input id="txtnomCliente" /></div>
 <div><span class="label"> <b> * </b>Primer apellido: </span><input id="txtapellidoPaterno" /></div>
 <div><span class="label"> <b>  </b>Segundo apellido: </span><input id="txtapellidoMaterno" /></div>
 <div><span class="label"> <b> * </b>Correo electrónico: </span><input id="txtCorreoCliente" /></div>
@@ -20,7 +38,8 @@
 <p class="help-block"> La contraseña debe tener una longitud de entre 8 y 16 caracteres. Deberá incluir letras minúsculas, al menos una letra mayúscula y un número.</p>
 <div><span class="label"> <b> * </b>Confirmar contraseña: </span><input id="registroUsuario_confirmacion" /></div>
 <div><span class="label"> <b> * </b>Pregunta para recuperar contraseña: </span></div>
-<select name="registroUsuario.pregunta" id="registroCliente_pregunta" class="form-control">
+        
+       <select name="registroUsuario.pregunta" id="registroCliente_pregunta" class="form-control">
     <option value="¿Cuál es el nombre de tu tío/tía favorito?">¿Cuál es el nombre de tu tío/tía favorito?</option>
     <option value="¿Cuál es el nombre de tu primo/prima mayor?">¿Cuál es el nombre de tu primo/prima mayor?</option>
     <option value="¿Cuál es el apodo de tu hijo/hija menor?">¿Cuál es el apodo de tu hijo/hija menor?</option>
@@ -45,19 +64,22 @@
 <div><span class="label"> <b> * </b>Respuesta: </span></div>
 <input type="text" name="registroUsuario.respuesta" size="40" maxlength="50" value="" id="registroUsuario_respuesta" class="form-control">
 
-<br>
-<div><input id="btnCrearCliente" type="submit" class="btn btn-small" value="Aceptar"></div>
-<div><input id="btnConsultarCliente" type="submit" class="btn btn-small" value="Consultar Cliente"></div>
-
- <div id="respuesta"></div>
+        <div><input id="btnCrearCliente" type="submit" class="btn btn-small" value="Enviar"></div>
+        <br>
+        <br>
+       
+        
+    </form>
+     <div id="respuesta"></div>
     
   
     
      <form action="javascript:void(0);">
-        <h2>Lista Empresa</h2>
-        <div><input id="btnConsultarCliente" type="submit" value="Listar Empresa"></div>
+        <h2>Lista Clientes</h2>
+        <div><input id="listQuote" type="submit" value="Listar Empresa"></div>
+        <div><input id="btnConsultarCliente" type="submit" class="btn btn-small" value="Consultar Cliente"></div>
     </form>
-    <div id="listar"></div>
+    <div id="listQuotesResult"></div>
 
     <script type="text/javascript">
         function init() {
@@ -68,6 +90,6 @@
         }
     </script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
-
+</div>
 </body>
 </html>
