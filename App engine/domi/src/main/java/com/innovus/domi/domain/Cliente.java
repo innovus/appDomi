@@ -61,7 +61,7 @@ public class Cliente {
 	}
 	
 	public void ActualizaconClienteForm(ClienteForm clienteForm){
-		this.nomCliente=clienteForm.getNombreCliente();
+		this.nomCliente=clienteForm.getNomCliente();
 		this.apellidoPaterno=clienteForm.getApellidoPaterno();
 		this.apellidoMaterno=clienteForm.getApellidoMaterno();
 		this.correoCliente=clienteForm.getCorreoCliente();

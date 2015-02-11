@@ -22,7 +22,7 @@ public class ClienteForm {
 		this.respuestaCliente=respuestaCliente;
 	}
 	
-	public String getNombreCliente(){
+	public String getNomCliente(){
 		return nomCliente;
 	}
 	public String getApellidoPaterno(){
