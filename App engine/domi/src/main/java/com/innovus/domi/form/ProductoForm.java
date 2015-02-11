@@ -2,33 +2,30 @@ package com.innovus.domi.form;
 
 public class ProductoForm {
 	
-	private String NombreProducto;
-	private String DescripcionProducto;
-	private int PrecioProducto;
+	private String nombreProducto;
+	private String descripcionProducto;
+	private int precioProducto;
 	
 	public ProductoForm(){}
 	
 	public ProductoForm(String nombreProducto,String descripcionProducto,int precioProducto){
 		
-		this.NombreProducto =nombreProducto;
-		this.DescripcionProducto =descripcionProducto;
-		this.PrecioProducto =precioProducto;	
+		this.nombreProducto =nombreProducto;
+		this.descripcionProducto =descripcionProducto;
+		this.precioProducto =precioProducto;	
 		
 	}
 	
 	public String getNombreProducto(){
-		return NombreProducto;
+		return nombreProducto;
 	}
 	
 	public String getDescripcionProducto(){
-		return DescripcionProducto;
+		return descripcionProducto;
 	}
 	
 	public int getPrecioProducto(){
-		return PrecioProducto;
+		return precioProducto;
 	}
 	
-	
-	
-
 }

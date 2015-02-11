@@ -26,15 +26,18 @@ public class Producto {
 	 private Key<Empresa> empresaKey;
 	 
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private long idCategoria;	
+	 private long idCategoria;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private long idEmpresa;
 	 
 	 @Index
-	 private String NombreProducto;
+	 private String nombreProducto;
 	 
 	 
-	 private String DescripcionProducto;
+	 private String descripcionProducto;
 	 
-	 private int PrecioProducto;
+	 private int precioProducto;
 	 
 	 public Producto(){}
 	 
@@ -44,6 +47,8 @@ public class Producto {
 	   	 //Preconditions.checkNotNull(objetoProducto.getPrecioProducto(), "El precio es requerido");
 		 
 		 this.idProducto=idProducto;
+		 this.idCategoria = idCategoria;
+		 this.idEmpresa = idEmpresa;
 		 this.empresaKey=Key.create(Empresa.class,idEmpresa);
 		 this.categoriaKey=Key.create(empresaKey,Categoria.class,idCategoria);
 
@@ -59,25 +64,25 @@ public class Producto {
 	 
      public String getNombreProducto(){
 		 
-		 return NombreProducto;
+		 return nombreProducto;
 	 }
      
      public String getDescripcionProducto(){
 		 
-		 return DescripcionProducto;
+		 return descripcionProducto;
 	 }
      
      public int getPrecioProducto(){
     	 
-    	 return PrecioProducto;
+    	 return precioProducto;
      }
      
      //actualiza el producto con el formulario delproducto
      public void actualizaConProductoForm(ProductoForm productoForm) {
-	     this.NombreProducto = productoForm.getNombreProducto();
-	     this.DescripcionProducto = productoForm.getDescripcionProducto();
+	     this.nombreProducto = productoForm.getNombreProducto();
+	     this.descripcionProducto = productoForm.getDescripcionProducto();
 	  
-	     this.PrecioProducto = productoForm.getPrecioProducto();
+	     this.precioProducto = productoForm.getPrecioProducto();
 	       
 	 }
      
@@ -87,9 +92,18 @@ public class Producto {
 		 
 	 }
      @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	    public Long getIdCategoria() {
-	        return idCategoria;
-	    }
+     public Long getIdCategoria() {
+    	 return idCategoria;
+    	 }
+     @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public Key<Empresa> getKeyEmpresa(){
+		 return empresaKey;
+		 
+	 }
+     @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+     public Long getIdEmpresa() {
+    	 return idEmpresa;
+    	 }
 	 
 	 
 	/* public long getLlaveSegura(){
