@@ -1,6 +1,6 @@
 package com.innovus.domi.domain;
 
-import java.net.PasswordAuthentication;
+
 import java.util.ArrayList;
 import java.util.List;
 

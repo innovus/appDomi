@@ -1,5 +1,7 @@
 package com.innovus.domi.domain;
 
+
+import com.google.common.base.Preconditions;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -18,8 +20,17 @@ public class Cliente {
 	private String passwordCliente;
 	private String preguntaCliente;
 	private String respuestaCliente;
+	private Cliente(){}
 	
 	public Cliente(final long idCliente, final ClienteForm clienteForm){
+		/*
+		 *  Preconditions.checkNotNull(empresaForm.getNombre(), "El nombre es requerido");
+	   	 Preconditions.checkNotNull(empresaForm.getCiudad(), "La ciudad es requerida");
+		 * */
+		// Preconditions.checkNotNull(clienteForm.getNombreCliente(),"El nombre es requerido");
+		 //Preconditions.checkNotNull(clienteForm.getApellidoMaterno(),"El primer apellido es requerido");
+		 //Preconditions.checkNotNull(clienteForm.getCorreoCliente(),"El correo es requerido");
+		 
 		this.idCliente=idCliente;
 		ActualizaconClienteForm(clienteForm);
 	}

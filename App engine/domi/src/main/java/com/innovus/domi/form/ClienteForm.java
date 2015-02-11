@@ -10,8 +10,10 @@ public class ClienteForm {
 	private String preguntaCliente;
 	private String respuestaCliente;
 	
-	private ClienteForm(String nomClienet,String apellidoPaterno,String apellidoMaterno,String correoCliente,String passwordCliente,String preguntaCliente,String respuestaCliente){
-		this.nomCliente=nomClienet;
+	private ClienteForm(){}
+	
+	private ClienteForm(String nomCliente,String apellidoPaterno,String apellidoMaterno,String correoCliente,String passwordCliente,String preguntaCliente,String respuestaCliente){
+		this.nomCliente=nomCliente;
 		this.apellidoPaterno=apellidoPaterno;
 		this.apellidoMaterno=apellidoMaterno;
 		this.correoCliente=correoCliente;

@@ -302,36 +302,8 @@ public class ApiDomi {
 		   
 		   Categoria categoria = ofy().load().key(keyCat).now();
 		    
-		  
-		 //  Categoria categoria = ofy().load().key(Key.create( Categoria.class, keyCategoria,keyEmpresa)).now();
-		   
-		   //final long empresaId = categoria.getidCategoria();
-		      
-		 //  Categoria th = ofy().load().type(Categoria.class).ancestor(Empresa.class).i .now();
 		
-		   
-	/*
-		   List<Categoria> result = new ArrayList<>(0);
-		  // Query<Categoria> q = ofy().load().type(Car.class).filter("vin >", "123456789");
-		   Query<Categoria> categoriaIterable = ofy().load().type(Empresa.class).filter("Key =", keyCategoria);
-		   for (Categoria categoria : categoriaIterable) {
-	            organizersKeyList.add(Key.create(Profile.class, conference.getOrganizerUserId()));
-	            result.add(conference);
-	        }
-		  
-     
-		
-		   Query query = ofy().load().type(Empresa.class).filter("Key =", keyCategoria);
-	        return query.list();//me retorns en una lista
-		   // Allocate Id first, in order to make the transaction idempotent.
-      
-		   //final Key<Producto> productoKey = factory().allocateId(Producto.class);
-		   //final long productoId = productoKey.getId();
-		   //final Queue queue = QueueFactory.getDefaultQueue();
-		   //Key<Empresa> EmpresaKey = Key.create(keyE;
-		   Categoria categoria = ofy().load().key(Key.create(Categoria.class, keyCategoria)).now();
-		   //long categoriaId = categoria.getidCategoria();
-*/
+
 		  return categoria;
        }
  
