@@ -1,15 +1,19 @@
 package com.innovus.domi.domain;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
+
+import static com.innovus.domi.service.OfyService.ofy;
+
+import com.google.api.server.spi.config.AnnotationBoolean;
+import com.google.api.server.spi.config.ApiResourceProperty;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Parent;
 import com.innovus.domi.form.EmpresaForm;
 
 
@@ -19,10 +23,14 @@ public class Empresa {
 	
 	 @Id
 	 private long idEmpresa;
+	 
+	 @Parent
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private Key<Cliente> clienteKey;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private long idCliente;
 
-	    /**
-	     * Nombre de la empresa
-	     */
 	 @Index
 	 private String nombre;
 
@@ -33,17 +41,7 @@ public class Empresa {
 	
 	 private String descripcion;
 	    
-	 /*   /**
-	     *claves de las conferencias que la empresa registra.
-	     *
-	* private List<String> keysCategorias = new ArrayList<>(0);
-	    
-	*/
-	    /*falta el horario
-	     * 
-	     * */
-	    //el tiempo minimo sera en minutos 
-	    
+	 
 	 private int tiempoMinimo ;
 	    
 	    /**
@@ -58,14 +56,16 @@ public class Empresa {
 	    
 	 private Empresa (){}
 	    
-	 public Empresa(final long idEmpresa, final EmpresaForm empresaForm) {
+	 public Empresa(final long idCliente, final long idEmpresa, final EmpresaForm empresaForm) {
 	  	 Preconditions.checkNotNull(empresaForm.getNombre(), "El nombre es requerido");
 	   	 Preconditions.checkNotNull(empresaForm.getCiudad(), "La ciudad es requerida");
 	   	 Preconditions.checkNotNull(empresaForm.getTiempoMinimo(), "El tiempo minimo es requerido");
 	   	// Preconditions.checkNotNull(empresaForm.getGrupo(), "el grupo es requerido");
 	   	Preconditions.checkNotNull(empresaForm.getValorMinimoPedido(), "El valor minimo es requerido");
 	   	 this.idEmpresa = idEmpresa;
+	   	 this.idCliente = idCliente;
 	   	 actualizaConEmpresaForm( empresaForm);
+	   	this.clienteKey=Key.create(Cliente.class,idCliente);
 	 }
 	 
 	 // aqui empiesas los get normales para obtener cualquier dato
@@ -107,17 +107,34 @@ public class Empresa {
 		 return valorMinimoPedido;
 	 }
 	 
-	 // este obtendra la cadena de la llave de la empresa para que pueda pasar atraves de formularios
-	/* public String getWebsafeKey(){
-		 return Key.create(Empresa.class,idEmpresa);
-				 
-	 }
-	 */
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public long getIdCliente(){
+		 return idCliente;
 	 
-	/* public void addKeyCategoria(String keyCategoria) {
-	     keysCategorias.add(keyCategoria);
 	 }
-	 */
+	 
+	 
+	 
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public Key<Cliente> getclienteKey(){
+		 return clienteKey;
+		 
+	 }
+	 
+	 public String getWebsafeKey(){
+		 return Key.create(clienteKey, Empresa.class,idEmpresa).getString();
+	 }
+	 
+	 public String getClienteNombreCliente() {
+	        Cliente Cliente = ofy().load().key(Key.create(Cliente.class, idCliente)).now();
+	        if (Cliente == null) {
+	            return String.valueOf( idCliente);
+	        } else {
+	            return Cliente.getNombreCliente();
+	        }
+	    }
+	 
+	 // este obtendra la cadena de la llave de la empresa para que pueda pasar atraves de form
 	     
 	     //enlazar la empresa con la empresa form
 	     

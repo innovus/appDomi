@@ -101,48 +101,7 @@ public class ApiDomi {
 	      }
 	  }
 
-	  /*
-	  @ApiMethod(
-	          name = "updateEmpresa",
-	          path = "empresa/{websafeConferenceKey}",
-	          httpMethod = HttpMethod.PUT
-	  )
-	  public Empresa updateEmpresa(final User user, final EmpresaForm empresaForm,
-	                                     @Named("websafeEmpresaKey")
-	                                     final String websafeEmpresaKey)
-	          throws UnauthorizedException, NotFoundException, ForbiddenException, ConflictException {
-	      // If not signed in, throw a 401 error.
-		  
-		  //final String userId = getUserId(user);
-	      // Update the conference with the conferenceForm sent from the client.
-	      // Need a transaction because we need to safely preserve the number of allocated seats.
-	      TxResult<Empresa> result = ofy().transact(new Work<TxResult<Empresa>>() {
-	          @Override
-	          public TxResult<Empresa> run() {
-	              // If there is no Conference with the id, throw a 404 error.
-	              Key<Empresa> empresaKey = Key.create(Empresa);
-	              Empresa conference = ofy().load().key(conferenceKey).now();
-	              if (conference == null) {
-	                  return new TxResult<>(
-	                          new NotFoundException("No Conference found with the key: "
-	                                  + websafeConferenceKey));
-	              }
-	              // If the user is not the owner, throw a 403 error.
-	              Profile profile = ofy().load().key(Key.create(Profile.class, userId)).now();
-	              if (profile == null ||
-	                      !conference.getOrganizerUserId().equals(userId)) {
-	                  return new TxResult<>(
-	                          new ForbiddenException("Only the owner can update the conference."));
-	              }
-	              conference.updateWithConferenceForm(conferenceForm);
-	              ofy().save().entity(conference).now();
-	              return new TxResult<>(conference);
-	          }
-	      });
-	      // NotFoundException or ForbiddenException is actually thrown here.
-	      return result.getResult();
-	  }
-	  */
+
 	  
 	  /**
 	   * Creates a new Conference object and stores it to the datastore.
@@ -168,14 +127,23 @@ public class ApiDomi {
 		  return cliente;
 	  }
 	    
-	  @ApiMethod(name = "createEmpresa", path = "empresa", httpMethod = HttpMethod.POST)
-	  public Empresa createConference(final EmpresaForm empresaForm)
+	  @ApiMethod(name = "createEmpresa", path = "cliente/{keyCliente}/empresa", httpMethod = HttpMethod.POST)
+	  public Empresa createConference( @Named("keyCliente") final long keyCliente, final EmpresaForm empresaForm)
 	       {
+		  
+		  
 	     
 	            
-	      final Key<Empresa> empresaKey = factory().allocateId(Empresa.class);
-	      final long empresaId = empresaKey.getId();
+	   
 	      //final Queue queue = QueueFactory.getDefaultQueue();
+	      
+	      Cliente cliente = ofy().load().key(Key.create(Cliente.class, keyCliente)).now();
+	      final long clienteId = cliente.getIdCliente();
+	      
+	      Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);
+	      final Key<Empresa> empresaKey = factory().allocateId(keyCli, Empresa.class);
+	      final long empresaId = empresaKey.getId();
+	      
 	      
 	      // Start a transaction.
 	      Empresa empresa = ofy().transact(new Work<Empresa>() {
@@ -183,7 +151,7 @@ public class ApiDomi {
 	          public Empresa run() {
 	              // Fetch user's Profile.
 	              //Profile profile = getProfileFromUser(user, userId);
-	              Empresa empresa = new Empresa(empresaId,  empresaForm);
+	              Empresa empresa = new Empresa(clienteId, empresaId,  empresaForm);
 	              // Save Conference and Profile.
 	              ofy().save().entities(empresa).now();
 	           /*   queue.add(ofy().getTransaction(),
@@ -226,14 +194,46 @@ public class ApiDomi {
 	  }
 	 
 	 @ApiMethod(
-	            name = "consultaEmpresa",
-	            path = "consultaEmpresa",
+	            name = "consultaEmpresas",
+	            path = "consultaEmpresas",
 	            httpMethod = HttpMethod.GET
 	    )
 	    public List<Empresa> consultaEmpresa() {
 	        Query query = ofy().load().type(Empresa.class).order("nombre");
 	        return query.list();//me retorns en una lista
 	    }
+	 
+	 @ApiMethod(name = "consultaClienteID", path = "cliente/{keyCliente}", httpMethod = HttpMethod.POST)
+	  public Cliente consutaCLienteID( @Named("keyCliente") final Long keyCliente)//me devuelva un producto
+	       {
+	     
+	  
+	   Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);
+	   //Key<Categoria> keyCat =Key.create(keyEmp,Categoria.class,keyCategoria);
+	   
+	   
+	   Cliente cliente = ofy().load().key(keyCli).now();
+	 
+	      // Allocate Id first, in order to make the transaction idempotent.
+	     
+	      return cliente;
+	  }
+  
+	 
+	 @ApiMethod(
+	            name = "getEmpresaXCliente",
+	            path = "cliente/{keyCliente}/empresaxCliente",
+	            httpMethod = HttpMethod.POST
+	    )
+	    public List<Empresa> getEmpresaXCliente(@Named("keyCliente") final long keyCliente)  {
+		
+		 Cliente parent =  ofy().load().key(Key.create(Cliente.class, keyCliente)).now();
+		
+		 return ofy().load().type(Empresa.class).ancestor(parent).list();
+		 
+	                
+	    }
+
 	 
 	 /**
 	     * Retorna una  lista de Caterogorias segun el restaurante q se mande
