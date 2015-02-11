@@ -233,6 +233,11 @@ public class ApiDomi {
 		 
 	                
 	    }
+	 @ApiMethod(name = "consultaCliente", path = "consultaCliente", httpMethod = HttpMethod.GET)
+	 public List<Cliente> consultaCliente() {
+	        Query query = ofy().load().type(Cliente.class).order("nomCliente");
+	        return query.list();//me retorns en una lista
+	    }
 
 	 
 	 /**

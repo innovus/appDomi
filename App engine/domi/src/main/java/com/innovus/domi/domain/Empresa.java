@@ -130,7 +130,7 @@ public class Empresa {
 	        if (Cliente == null) {
 	            return String.valueOf( idCliente);
 	        } else {
-	            return Cliente.getNombreCliente();
+	            return Cliente.getNomCliente();
 	        }
 	    }
 	 
