@@ -38,8 +38,7 @@ public class Producto {
 	 @Index
 	 private String nombreProducto;
 	 
-	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private String websafeCategoriaKey;
+	
 	 
 	 
 	 private String descripcionProducto;
@@ -59,7 +58,7 @@ public class Producto {
 		 /*this.idEmpresa = idEmpresa;
 		 this.empresaKey=Key.create(Empresa.class,idEmpresa);
 		 */
-		 this.websafeCategoriaKey = websafeCategoriaKey;
+
 		 this.categoriaKey=Key.create(websafeCategoriaKey);
 		 Categoria categoria = ofy().load().key(categoriaKey).now();
 		 this.idCategoria = categoria.getidCategoria();
@@ -108,14 +107,12 @@ public class Producto {
     	 }
      
      public String getWebsafeKey(){
-		 return Key.create(categoriaKey).getString();
+    	 return Key.create(categoriaKey, Producto.class,idProducto).getString();
+		 
 	 }
      
-     @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-     public String getWebsafeCategoriaKey() {
-    	 return websafeCategoriaKey;
-    	 }
      
+    
     /* @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	 public Key<Empresa> getKeyEmpresa(){
 		 return empresaKey;

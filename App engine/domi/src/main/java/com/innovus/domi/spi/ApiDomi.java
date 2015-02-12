@@ -15,7 +15,6 @@ import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.ForbiddenException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
-import com.google.protos.cloud.sql.Client;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
 import com.innovus.domi.Constants;
@@ -111,7 +110,7 @@ public class ApiDomi {
 	   * @return A newly created Conference Object.
 	   * @throws UnauthorizedException when the user is not signed in.
 	   */
-	  @ApiMethod(name="createCliente",path="cliente",httpMethod=HttpMethod.POST)
+	  @ApiMethod(name="crearCliente",path="cliente",httpMethod=HttpMethod.POST)
 	  public Cliente createCliente(final ClienteForm clienteForm){
 		  
 		  final Key<Cliente> clienteKey=factory().allocateId(Cliente.class);
@@ -127,37 +126,26 @@ public class ApiDomi {
 		  return cliente;
 	  }
 	    
-	  @ApiMethod(name = "createEmpresa", path = "cliente/{keyCliente}/empresa", httpMethod = HttpMethod.POST)
+	  @ApiMethod(name = "crearEmpresa", path = "empresa", httpMethod = HttpMethod.POST)
 	  public Empresa createConference( @Named("keyCliente") final long keyCliente, final EmpresaForm empresaForm)
-	       {
-		  
-		  
-	     
-	            
-	   
-	      //final Queue queue = QueueFactory.getDefaultQueue();
-	      
-	      Cliente cliente = ofy().load().key(Key.create(Cliente.class, keyCliente)).now();
-	      final long clienteId = cliente.getIdCliente();
-	      
-	      Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);
+	  {
+		  Cliente cliente = ofy().load().key(Key.create(Cliente.class, keyCliente)).now(); // carga el cliente con el id del cliente
+	      final long clienteId = cliente.getIdCliente(); // obtiene el idcliente
+	      Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);// crea la clave cliente
 	      final Key<Empresa> empresaKey = factory().allocateId(keyCli, Empresa.class);
-	      final long empresaId = empresaKey.getId();
+	      final long empresaId = empresaKey.getId();//se saca el id de la empresa q se va a crear
+	      ;
 	      
 	      
-	      // Start a transaction.
+	      // Start a transaction. 
 	      Empresa empresa = ofy().transact(new Work<Empresa>() {
 	          @Override
 	          public Empresa run() {
-	              // Fetch user's Profile.
-	              //Profile profile = getProfileFromUser(user, userId);
+	              
 	              Empresa empresa = new Empresa(clienteId, empresaId,  empresaForm);
-	              // Save Conference and Profile.
+	              
 	              ofy().save().entities(empresa).now();
-	           /*   queue.add(ofy().getTransaction(),
-	                      TaskOptions.Builder.withUrl("/tasks/send_confirmation_email")
-	                      .param("email", profile.getMainEmail())
-	                      .param("conferenceInfo", conference.toString()));*/
+	          
 	              return empresa;
 	          }
 	      });
@@ -166,13 +154,8 @@ public class ApiDomi {
 	  
 	 @ApiMethod(name = "creaCategoria", path = "cliente/{keyCliente}/empresa/{keyEmpresa}/categoria", httpMethod = HttpMethod.POST)
 	  public Categoria creaCategoria(  @Named("keyCliente") final Long keyCliente, @Named("nombre")final String nombre,  @Named("keyEmpresa") final Long keyEmpresa)//me devuelva una categoria
-	       {
-	     
-	      // Allocate Id first, in order to make the transaction idempotent.
-		  
+	  {
 		 
-		
-	      //final Queue queue = QueueFactory.getDefaultQueue();
 	      Key<Cliente> keyCli = Key.create(Cliente.class, keyCliente);
 	      Cliente cliente = ofy().load().key(keyCli).now();
 	      final long clienteId = cliente.getIdCliente();
@@ -235,30 +218,43 @@ public class ApiDomi {
 	  }
 	 
 	 
+	 
+	 
 	 @ApiMethod(
 	            name = "consultaEmpresas",
 	            path = "consultaEmpresas",
 	            httpMethod = HttpMethod.GET
 	    )
-	    public List<Empresa> consultaEmpresa() {
+	    public List<Empresa> consultaEmpresas() {
 	        Query query = ofy().load().type(Empresa.class).order("nombre");
 	        return query.list();//me retorns en una lista
 	    }
+	 @ApiMethod(
+	            name = "consultaProductos",
+	            path = "consultaProductos",
+	            httpMethod = HttpMethod.GET
+	    )
+	    public List<Producto> consultaProductos() {
+	        Query query = ofy().load().type(Producto.class).order("nombreProducto");
+	        return query.list();//me retorns en una lista
+	    }
+	 @ApiMethod(
+	            name = "consultaCategorias",
+	            path = "consultaCategorias",
+	            httpMethod = HttpMethod.GET
+	    )
+	    public List<Categoria> consultaCategorias() {
+	        Query query = ofy().load().type(Categoria.class).order("nombreCategoria");
+	        return query.list();//me retorns en una lista
+	    }
+	 
 	 
 	 @ApiMethod(name = "consultaClienteID", path = "cliente/{keyCliente}", httpMethod = HttpMethod.POST)
 	  public Cliente consutaCLienteID( @Named("keyCliente") final Long keyCliente)//me devuelva un producto
-	       {
-	     
-	  
-	   Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);
-	   //Key<Categoria> keyCat =Key.create(keyEmp,Categoria.class,keyCategoria);
-	   
-	   
-	   Cliente cliente = ofy().load().key(keyCli).now();
-	 
-	      // Allocate Id first, in order to make the transaction idempotent.
-	     
-	      return cliente;
+	  {
+		 Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);
+		 Cliente cliente = ofy().load().key(keyCli).now();
+		 return cliente;
 	  }
   
 	 
@@ -268,14 +264,12 @@ public class ApiDomi {
 	            httpMethod = HttpMethod.POST
 	    )
 	    public List<Empresa> getEmpresaXCliente(@Named("keyCliente") final long keyCliente)  {
-		
 		 Cliente parent =  ofy().load().key(Key.create(Cliente.class, keyCliente)).now();
-		
 		 return ofy().load().type(Empresa.class).ancestor(parent).list();
 		 
 	                
 	    }
-	 @ApiMethod(name = "consultaCliente", path = "consultaCliente", httpMethod = HttpMethod.GET)
+	 @ApiMethod(name = "consultaClientes", path = "consultaClientes", httpMethod = HttpMethod.GET)
 	 public List<Cliente> consultaCliente() {
 	        Query query = ofy().load().type(Cliente.class).order("nomCliente");
 	        return query.list();//me retorns en una lista
@@ -303,26 +297,54 @@ public class ApiDomi {
 	                
 	    }
 	   
+	   @ApiMethod(
+	            name = "getProductosXEmpresa",
+	            path = "getProductosXEmpresa",
+	            httpMethod = HttpMethod.POST
+	    )
+	    public List<Producto> getProductosXEmpresa(@Named("webSafeEmpresaKey") final String webSafeEmpresaKey)  {
+		   
+		   List<Categoria>  categorias = ofy().load().type(Categoria.class).ancestor(Key.create(webSafeEmpresaKey)).list();
+		
+		   List<Producto> Productos = new ArrayList<Producto>();
+		   for(int i=0; i< categorias.size(); i++){
+			   Categoria categoria= categorias.get(i);
+			   
+			   List<Producto> aux=ofy().load().type(Producto.class).ancestor(categoria).list();
+			   for(int j=0; j< aux.size(); j++){
+				   Producto producto = aux.get(j);
+				   Productos.add(producto);
+				   
+			   }
+			   
+		   }
+
+		   return Productos;
+		  
+	                
+	    }
+	   
+	   @ApiMethod(
+	            name = "getProductosXCtegoria",
+	            path = "getProductosXCategoria",
+	            httpMethod = HttpMethod.POST
+	    )
+	    public List<Producto> getProductosXCategoria(@Named("webSafeCategoriaKey") final String webSafeCategoriaKey)  {
+		
+		   
+	        return ofy().load().type(Producto.class)
+	                .ancestor(Key.create(webSafeCategoriaKey))
+	                .list();
+	                
+	    }
+	   
 	   @ApiMethod(name = "crearProductos", path = "productos", httpMethod = HttpMethod.POST)
 		  public Producto crearProductos( @Named("websafeKeyCategoria") final String websafeKeyCategoria,  final ProductoForm productoForm)//me devuelva un producto
 		       {
 		   Key<Categoria> keyCat = Key.create(websafeKeyCategoria);
 		   final Key<Producto> productoKey = factory().allocateId(keyCat,Producto.class);
 		   final long productoId = productoKey.getId();
-		  // Key<Categoria> keyCat = Key.create(websafeKeyCategoria);
-		      /*final Categoria categoria = ofy().load().key(keyCat).now();
-		      final long categoriaId = categoria.getidCategoria();
-		      final long clienteId = categoria.getidCliente();
-		      final long empresaId = categoria.getIdEmpresa();
-		      
-		      
-		      
-		      final Key<Producto> productoKey = factory().allocateId(keyCat,Producto.class);
-		      final long productoId = productoKey.getId();
-		      
-		     */
-		  // Producto producto = new Producto (websafeKeyCategoria, productoForm);
-		      
+		  
 		   
 		      // Start a transaction.
 		      Producto producto = ofy().transact(new Work<Producto>() {
@@ -338,55 +360,6 @@ public class ApiDomi {
 		          }
 		      });
 		      return producto;
-		      
-		   
-		     
-		/*
-		   Empresa empresa = ofy().load().key(Key.create(Empresa.class,keyEmpresa)).now();
-		   Key <Empresa> keyEmp = Key.create(Empresa.class,keyEmpresa);
-		   Key<Categoria> keyCat =Key.create(keyEmp,Categoria.class,keyCategoria);
-		   
-		   
-		   Categoria categoria = ofy().load().key(keyCat).now();
-		 
-		      // Allocate Id first, in order to make the transaction idempotent.
-		      
-		      final Key<Producto> productoKey = factory().allocateId(keyCat, Producto.class);
-		      final long productoId = productoKey.getId();
-		      final long categoriaId = categoria.getidCategoria();
-		      final long empresaId = empresa.getidEmpresa();
-		      
-		      // Start a transaction.
-		      Producto producto = ofy().transact(new Work<Producto>() {
-		          @Override
-		          public Producto run() {//inicia comit
-		              // Fetch user's Profile.
-		              //Profile profile = getProfileFromUser(user, userId);
-		              Producto producto = new Producto(productoId, categoriaId,empresaId,productoForm);
-		              // Save Conference and Profile.
-		              ofy().save().entity(producto).now();
-		           
-		              return producto;
-		          }
-		      });
-		      return producto;
-		      */
 		  }
-	   
-	   @ApiMethod(name = "prueba", path = "prueba", httpMethod = HttpMethod.POST)
-	   public Categoria Prueba( @Named("keyCategoria") final Long keyCategoria,  @Named("keyEmpresa")final Long keyEmpresa)//me devuelva un producto
-       {
-		   Empresa empresa = ofy().load().key(Key.create(Empresa.class,keyEmpresa)).now();
-		   Key <Empresa> keyEmp = Key.create(Empresa.class,keyEmpresa);
-		   Key<Categoria> keyCat =Key.create(keyEmp,Categoria.class,keyCategoria);
-		   
-		   
-		   Categoria categoria = ofy().load().key(keyCat).now();
-		    
-		
-
-		  return categoria;
-       }
- 
 
 }
