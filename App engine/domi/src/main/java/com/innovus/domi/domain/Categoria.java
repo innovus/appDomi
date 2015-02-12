@@ -5,7 +5,6 @@ import static com.innovus.domi.service.OfyService.ofy;
 
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
-
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -22,23 +21,31 @@ public class Categoria {
 	 private long idCategoria;	 
 	 
 	 @Index
-	 private String NombreCategoria;
+	 private String nombreCategoria;
 	 
-	 @Index
+
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
 	 
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private long idEmpresa;	
+	 private Key<Cliente> clienteKey;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private long idEmpresa;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private long idCliente;
 	 
 	 public Categoria(){}
 
-	 public Categoria(final long idCategoria,final String nombre ,final long idEmpresa){
+	 public Categoria(final long idCategoria,final long idCliente,final String nombreCategoria ,final long idEmpresa){
 		// Preconditions.checkNotNull(categoriaForm.getNombreCategoria(), "El nombre es requerido");
+		 this.idCliente=idCliente;
 		 this.idCategoria=idCategoria;
-		 this.NombreCategoria = nombre;
-		 this.empresaKey=Key.create(Empresa.class,idEmpresa);//para qe empresa sea el padre de categoria
+		 this.nombreCategoria = nombreCategoria;
+		 this.clienteKey=Key.create(Cliente.class,idCliente);
+		 this.empresaKey=Key.create(clienteKey,Empresa.class,idEmpresa);//para qe empresa sea el padre de categoria
 		 this.idEmpresa = idEmpresa;
 		 
 		 
@@ -49,21 +56,29 @@ public class Categoria {
 	 }
 	 
 	 public String getNombreCategoria(){
-		 return NombreCategoria;
-	 }
-	 
-	 public long getidEmpresa(){
-		 return idEmpresa;
+		 return nombreCategoria;
 	 }
 	 
 	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	 public Key<Empresa> getKeyEmpresa(){
+	 public long getidCliente(){
+		 return idCliente;
+	 }
+	 
+	 
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public Key<Empresa> getEmpresaKey(){
 		 return empresaKey;
 		 
 	 }
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public Key<Cliente> getClienteKey(){
+		 return clienteKey;
+		 
+	 }
 	 
-	 public long getLlaveSegura(){
-		 return Key.create(Empresa.class,idEmpresa).getId();
+	 public String getWefSafeKey(){
+		 return Key.create(empresaKey, Categoria.class,idCategoria).getString();
+		
 	 }
 	 
 	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
@@ -78,7 +93,7 @@ public class Categoria {
 	     */
 	    public String getEmpresaPropietaria() {
 	        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
-	        Empresa organizer = ofy().load().key(getKeyEmpresa()).now();
+	        Empresa organizer = ofy().load().key(getEmpresaKey()).now();
 	        if (organizer == null) {
 	            return "";
 	        } else {

@@ -22,17 +22,24 @@ public class Producto {
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Categoria> categoriaKey;
 	 
+	/*
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
+	 */
 	 
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private long idCategoria;
 	 
+	 /*
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private long idEmpresa;
+	 */
 	 
 	 @Index
 	 private String nombreProducto;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private String websafeCategoriaKey;
 	 
 	 
 	 private String descripcionProducto;
@@ -41,18 +48,22 @@ public class Producto {
 	 
 	 public Producto(){}
 	 
-	 public Producto(final long idProducto,final long idCategoria,final long idEmpresa,final ProductoForm objetoProducto){
+	 public Producto(final long idProducto,final String websafeCategoriaKey,final ProductoForm objetoProducto){
 		 //Preconditions.checkNotNull(objetoProducto.getNombreProducto(), "El nombre es requerido");
 	   	 //Preconditions.checkNotNull(objetoProducto.getDescripcionProducto(), "La descripcion es requerida");
 	   	 //Preconditions.checkNotNull(objetoProducto.getPrecioProducto(), "El precio es requerido");
 		 
 		 this.idProducto=idProducto;
-		 this.idCategoria = idCategoria;
-		 this.idEmpresa = idEmpresa;
-		 this.empresaKey=Key.create(Empresa.class,idEmpresa);
-		 this.categoriaKey=Key.create(empresaKey,Categoria.class,idCategoria);
-
+		 //this.idCategoria = idCategoria;
 		 
+		 /*this.idEmpresa = idEmpresa;
+		 this.empresaKey=Key.create(Empresa.class,idEmpresa);
+		 */
+		 this.websafeCategoriaKey = websafeCategoriaKey;
+		 this.categoriaKey=Key.create(websafeCategoriaKey);
+		 Categoria categoria = ofy().load().key(categoriaKey).now();
+		 this.idCategoria = categoria.getidCategoria();
+		// Categoria cateogoria = Key.create(categoriaKey, Categoria.class);
 		 actualizaConProductoForm(objetoProducto);
 		 
 	 }
@@ -95,7 +106,17 @@ public class Producto {
      public Long getIdCategoria() {
     	 return idCategoria;
     	 }
+     
+     public String getWebsafeKey(){
+		 return Key.create(categoriaKey).getString();
+	 }
+     
      @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+     public String getWebsafeCategoriaKey() {
+    	 return websafeCategoriaKey;
+    	 }
+     
+    /* @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	 public Key<Empresa> getKeyEmpresa(){
 		 return empresaKey;
 		 
