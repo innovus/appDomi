@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Hello domi!</title>
-    <script type="text/javascript" src="/js/base.js"></script>
+    <script type="text/javascript" src="/js/base2.js"></script>
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
     <link type="text/css" rel="stylesheet" href="/css/style.css">
@@ -29,6 +29,7 @@
 
     <form action="javascript:void(0);">
         <h2>Registro Usuario</h2>
+        <div><span class="label"> <b> * </b>Cedula o Rut: </span><input id="txtcedulaCliente" /></div>
         <div><span class="label"> <b> * </b>Nombre: </span><input id="txtnomCliente" /></div>
 <div><span class="label"> <b> * </b>Primer apellido: </span><input id="txtapellidoPaterno" /></div>
 <div><span class="label"> <b>  </b>Segundo apellido: </span><input id="txtapellidoMaterno" /></div>
@@ -76,16 +77,17 @@
     
      <form action="javascript:void(0);">
         <h2>Lista Clientes</h2>
-        <div><input id="listQuote" type="submit" value="Listar Empresa"></div>
-        <div><input id="btnConsultarCliente" type="submit" class="btn btn-small" value="Consultar Cliente"></div>
+        
+        <div><input id="btnConsultarCliente" type="submit" value="Listar Empresasa"></div>
+        
     </form>
     <div id="listQuotesResult"></div>
 
     <script type="text/javascript">
         function init() {
             //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
-              google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
-            // google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
+            //  google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+             google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
         	 
         }
     </script>

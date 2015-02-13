@@ -60,7 +60,7 @@ google.devrel.samples.hello.print = function(greeting) {
 			};
 
 function listQuotes() {
-    gapi.client.domi.consultaEmpresa().execute(function(resp) {
+    gapi.client.domi.consultaEmpresas().execute(function(resp) {
             if (!resp.code) {
                     resp.items = resp.items || [];
                     var result = "";
@@ -76,7 +76,7 @@ function listQuotes() {
     });
 }
 function listaClientes(){
-	gapi.client.domi.consultaCliente().execute(function(resp){
+	gapi.client.domi.consultaClientes().execute(function(resp){
 		 if (!resp.code) {
              resp.items = resp.items || [];
              var result = "";
@@ -90,6 +90,7 @@ function listaClientes(){
 }
 
 function crearCliente(){
+// var cedulaCliente = document.getElementById('txtcedulaCliente').value;
  var nomCliente = document.getElementById('txtnomCliente').value;
  var apellidoPaterno = document.getElementById('txtapellidoPaterno').value;
  var apellidoMaterno = document.getElementById('txtapellidoMaterno').value;
@@ -99,6 +100,7 @@ function crearCliente(){
  var respuestaCliente = document.getElementById('registroUsuario_respuesta').value;
  
  var requestData = {};
+// requestData.cedulaCliente = cedulaCliente;
  requestData.nomCliente = nomCliente;
  requestData.apellidoPaterno = apellidoPaterno;
  requestData.apellidoMaterno = apellidoMaterno;
@@ -107,7 +109,7 @@ function crearCliente(){
  requestData.preguntaCliente = preguntaCliente;
  requestData.respuestaCliente = respuestaCliente;
  
- gapi.client.domi.createCliente(requestData).execute(function(resp){
+ gapi.client.domi.crearCliente(requestData).execute(function(resp){
 	 
 	 if (!resp.code) {
 		 console.log( resp.nomCliente + ":" + resp.apellidoPaterno + ":" + ":" + resp.apellidoMaterno + ":" + resp.correoCliente + ":" + resp.passwordCliente +":" + resp.preguntaCliente + ":" + resp.respuestaCliente  );
@@ -152,7 +154,7 @@ function crearEmpresa(){
    requestData.valorMinimoPedido = valorminPedido;
    
 		
-   gapi.client.domi.createEmpresa(requestData).execute(function(resp) {
+   gapi.client.domi.crearEmpresa(requestData).execute(function(resp) {
     	
     	 if (!resp.code) {
             

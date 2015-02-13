@@ -13,6 +13,8 @@ public class Cliente {
 	 @Id
 	private long idCliente;
 	 @Index
+	private String cedulaCliente;
+	 @Index
 	private String nomCliente;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
@@ -38,6 +40,9 @@ public class Cliente {
 	public long getIdCliente(){		
 		return idCliente;
 	}	
+	public String getCedulaCliente(){
+		return cedulaCliente;
+	}
 	public String getNomCliente(){
 		return nomCliente;
 	}
@@ -61,6 +66,7 @@ public class Cliente {
 	}
 	
 	public void ActualizaconClienteForm(ClienteForm clienteForm){
+		this.cedulaCliente=clienteForm.getCedulaCliente();
 		this.nomCliente=clienteForm.getNomCliente();
 		this.apellidoPaterno=clienteForm.getApellidoPaterno();
 		this.apellidoMaterno=clienteForm.getApellidoMaterno();

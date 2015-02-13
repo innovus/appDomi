@@ -2,6 +2,7 @@ package com.innovus.domi.form;
 
 public class ClienteForm {
 	
+	private String cedulaCliente;
 	private String nomCliente;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
@@ -12,7 +13,8 @@ public class ClienteForm {
 	
 	private ClienteForm(){}
 	
-	private ClienteForm(String nomCliente,String apellidoPaterno,String apellidoMaterno,String correoCliente,String passwordCliente,String preguntaCliente,String respuestaCliente){
+	private ClienteForm(String cedulaCliente,String nomCliente,String apellidoPaterno,String apellidoMaterno,String correoCliente,String passwordCliente,String preguntaCliente,String respuestaCliente){
+		this.cedulaCliente=cedulaCliente;
 		this.nomCliente=nomCliente;
 		this.apellidoPaterno=apellidoPaterno;
 		this.apellidoMaterno=apellidoMaterno;
@@ -22,6 +24,9 @@ public class ClienteForm {
 		this.respuestaCliente=respuestaCliente;
 	}
 	
+	public String getCedulaCliente(){
+		return cedulaCliente;
+	}
 	public String getNomCliente(){
 		return nomCliente;
 	}
