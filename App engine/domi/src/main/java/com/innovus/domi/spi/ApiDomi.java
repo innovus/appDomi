@@ -127,14 +127,14 @@ public class ApiDomi {
 	  }
 	    
 	  @ApiMethod(name = "crearEmpresa", path = "empresa", httpMethod = HttpMethod.POST)
-	  public Empresa createConference( @Named("keyCliente") final long keyCliente, final EmpresaForm empresaForm)
+	  public Empresa crearEmpresa( @Named("keyCliente") final long keyCliente, final EmpresaForm empresaForm)
 	  {
 		  Cliente cliente = ofy().load().key(Key.create(Cliente.class, keyCliente)).now(); // carga el cliente con el id del cliente
 	      final long clienteId = cliente.getIdCliente(); // obtiene el idcliente
 	      Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);// crea la clave cliente
 	      final Key<Empresa> empresaKey = factory().allocateId(keyCli, Empresa.class);
 	      final long empresaId = empresaKey.getId();//se saca el id de la empresa q se va a crear
-	      ;
+	      
 	      
 	      
 	      // Start a transaction. 

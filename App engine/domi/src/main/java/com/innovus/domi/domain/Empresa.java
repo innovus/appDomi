@@ -50,6 +50,7 @@ public class Empresa {
 	 @Index
 	 private String ciudad;
 	 
+	 @Index
 	 private String  grupos;
 	 
 	 private int valorMinimoPedido;

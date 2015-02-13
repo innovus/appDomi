@@ -16,8 +16,11 @@ public class Cliente {
 	private String nomCliente;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
+	
+	@Index
 	private String correoCliente;
 	private String passwordCliente;
+	
 	private String preguntaCliente;
 	private String respuestaCliente;
 	private Cliente(){}
