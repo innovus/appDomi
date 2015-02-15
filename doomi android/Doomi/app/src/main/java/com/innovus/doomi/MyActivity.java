@@ -4,19 +4,15 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-//import com.appspot.domi_app.domi.Domi
+import com.appspot.domi_app.domi.Domi;
 import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.appspot.domi_app.domi.Domi;
 import com.appspot.domi_app.domi.model.Empresa;
 import com.appspot.domi_app.domi.model.EmpresaCollection;
@@ -49,14 +45,13 @@ public class MyActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-        new EndpointsAsyncTask(this).execute();
+        new HttpRequestTask().execute();
     }
 
     public void getEmpresas(View v) {
        // new EndpointsAsyncTask(this).execute();
         new HttpRequestTask().execute();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,23 +120,19 @@ public class MyActivity extends ActionBarActivity {
         protected List<Empresa> doInBackground(Void... params) {
             if (myApiService == null) { // Only do this once
                 myApiService = buildServiceHandler();
-
-
             }
             // Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
 
             try {
-                Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
+                Domi.ConsultaEmpresas queryEmpresas = myApiService.consultaEmpresas();
 
                 EmpresaCollection empresaCollection = queryEmpresas.execute();
                 if (empresaCollection != null && empresaCollection.getItems() != null) {
                     List<Empresa> empresas = empresaCollection.getItems();
                     return empresas;
-
-
                 }
-                return Collections.EMPTY_LIST;
-                // return myApiService.consultaEmpresa().execute().getItems();
+                //return Collections.EMPTY_LIST;
+                return myApiService.consultaEmpresas().execute().getItems();
 
             } catch (IOException e) {
                 return Collections.EMPTY_LIST;
@@ -154,16 +145,17 @@ public class MyActivity extends ActionBarActivity {
         protected void onPostExecute(List<Empresa> result) {
            // TextView greetingIdText = (TextView) findViewById(R.id.prueba);
 
-            String mostrar = "";
+           // String mostrar = "";
+            empresasA.clear();
 
             // mostrar = result.get(0).getNombre();
             for (Empresa q : result) {
                 empresasA.add(q.getNombre());
-                mostrar += " +" + q.getNombre() + " - " + " " + q.getDescripcion() + " ";
+               // mostrar += " +" + q.getNombre() + " - " + " " + q.getDescripcion() + " ";
 
                 //Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
             }
-            Toast.makeText(getApplicationContext(), mostrar, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), mostrar, Toast.LENGTH_LONG).show();
            // greetingIdText.setText(mostrar);
 
         }

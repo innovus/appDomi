@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
 
@@ -18,6 +18,7 @@ repositories {
 }
 
 android {
+
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
@@ -30,8 +31,11 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
         }
     }
 }
@@ -60,4 +64,5 @@ dependencies {
     // This is used by the Google HTTP client library.
     compile 'com.google.guava:guava:14.0.+'
     compile files('libs/domi-v1-1.19.0-SNAPSHOT.jar')
+    compile files('libs/domi-v1-1.19.1-SNAPSHOT.jar')
 }
