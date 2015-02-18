@@ -2,4 +2,19 @@
 <resources>
     <style name="AppTheme" parent="android:Theme.Material.Light">
     </style>
+<<<<<<< HEAD
+    <color name="primary_dark">#880e4f</color>
+    <color name="primary">#ad1457</color>
+    <color name="accent">#18ffff</color>
+    <color name="text_color">#fefefe</color>
+
+    <color name="fondo">#fff</color>
+||||||| merged common ancestors
+    <color name="primary_dark">#880e4f</color>
+    <color name="primary">#ad1457</color>
+    <color name="accent">#18ffff</color>
+    <color name="text_color">#fefefe</color>
+
+=======
+>>>>>>> origin/master
 </resources>

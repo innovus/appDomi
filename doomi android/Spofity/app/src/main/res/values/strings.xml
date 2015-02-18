@@ -4,5 +4,15 @@
     <string name="app_name">Spofity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
+    <string name="texto_bienvenida">Lo que Quieras en tu Casa</string>
+    <string name="texto_bienvenida_footer">Haz parte de el proyecto de innovus</string>
+    <string name="title_activity_empresas">Empresas</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+||||||| merged common ancestors
+=======
+
+>>>>>>> origin/master
 </resources>

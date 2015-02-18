@@ -1,0 +1,59 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+Conflicts:
+	doomi android/Spofity/app/app.iml
+	doomi android/Spofity/app/build.gradle
+	doomi android/Spofity/app/src/main/java/com/innovus/spofity/MyActivity.java
+	doomi android/Spofity/app/src/main/res/layout/activity_main.xml
+	doomi android/Spofity/app/src/main/res/values-v21/styles.xml
+	doomi android/Spofity/app/src/main/res/values/strings.xml
+	doomi android/Spofity/app/src/main/res/values/styles.xml
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 2 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	new file:   Doomi/W.png
+#	modified:   doomi android/Spofity/.idea/gradle.xml
+#	modified:   doomi android/Spofity/.idea/misc.xml
+#	modified:   doomi android/Spofity/Spofity.iml
+#	modified:   doomi android/Spofity/app/app.iml
+#	modified:   doomi android/Spofity/app/build.gradle
+#	modified:   doomi android/Spofity/app/proguard-rules.pro
+#	modified:   doomi android/Spofity/app/src/main/AndroidManifest.xml
+#	renamed:    doomi android/Spofity/app/src/main/java/com/innovus/spofity/MainActivity.java -> doomi android/Spofity/app/src/main/java/com/innovus/spofity/MyActivity.java
+#	new file:   doomi android/Spofity/app/src/main/res/drawable-hdpi/ic_launcher.png
+#	new file:   doomi android/Spofity/app/src/main/res/drawable-mdpi/ic_launcher.png
+#	new file:   doomi android/Spofity/app/src/main/res/drawable-xhdpi/ic_launcher.png
+#	new file:   doomi android/Spofity/app/src/main/res/drawable-xxhdpi/ic_launcher.png
+#	new file:   doomi android/Spofity/app/src/main/res/layout/activity_my.xml
+#	deleted:    doomi android/Spofity/app/src/main/res/menu/menu_main.xml
+#	new file:   doomi android/Spofity/app/src/main/res/menu/my.xml
+#	deleted:    doomi android/Spofity/app/src/main/res/mipmap-hdpi/ic_launcher.png
+#	deleted:    doomi android/Spofity/app/src/main/res/mipmap-mdpi/ic_launcher.png
+#	deleted:    doomi android/Spofity/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+#	deleted:    doomi android/Spofity/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+#	modified:   doomi android/Spofity/app/src/main/res/values-v21/styles.xml
+#	modified:   doomi android/Spofity/app/src/main/res/values/strings.xml
+#	modified:   doomi android/Spofity/app/src/main/res/values/styles.xml
+#	modified:   doomi android/Spofity/build.gradle
+#	modified:   doomi android/Spofity/gradle.properties
+#	modified:   doomi android/Spofity/gradle/wrapper/gradle-wrapper.properties
+#	modified:   doomi android/sofity/.idea/misc.xml
+#	modified:   doomi android/sofity/app/app.iml
+#	modified:   doomi android/sofity/app/build.gradle
+#	modified:   doomi android/sofity/app/src/main/res/values/styles.xml
+#
+

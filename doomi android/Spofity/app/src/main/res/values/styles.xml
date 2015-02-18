@@ -1,8 +1,53 @@
 <resources>
 
     <!-- Base application theme. -->
+<<<<<<< HEAD
+    <!--style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" -->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:color">#880e4f</item>
+        <item name="android:colorBackground">#880e4f</item>
+
+
+
+
+
+         Customize your theme here.
+    </style> -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:color">#880e4f</item>
+        <item name="android:colorBackground">#880e4f</item>
+
+    </style>
+
+
+    <style name="AppTheme" parent="AppBaseTheme">
+
+||||||| merged common ancestors
+    <!--style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:color">#880e4f</item>
+        <item name="android:colorBackground">#880e4f</item>
+
+
+
+        <!-- Customize your theme here. -->
+=======
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+>>>>>>> origin/master
     </style>
+<<<<<<< HEAD
+    <color name="primary_dark">#880e4f</color>
+    <color name="primary">#ad1457</color>
+    <color name="accent">#18ffff</color>
+    <color name="text_color">#fefefe</color>
+    <color name="fondo">#fff</color>
+||||||| merged common ancestors
+    <color name="primary_dark">#880e4f</color>
+    <color name="primary">#ad1457</color>
+    <color name="accent">#18ffff</color>
+    <color name="text_color">#fefefe</color>
+=======
+>>>>>>> origin/master
 
 </resources>

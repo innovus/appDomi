@@ -6,7 +6,13 @@ android {
 
     defaultConfig {
         applicationId "com.innovus.spofity"
+<<<<<<< HEAD
+        minSdkVersion 14
+||||||| merged common ancestors
+        minSdkVersion 11
+=======
         minSdkVersion 10
+>>>>>>> origin/master
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -20,6 +26,17 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:cardview-v7:+'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.mcxiaoke.volley:library:1.0.+'
+||||||| merged common ancestors
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:21.0.3'
+=======
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.2'
+>>>>>>> origin/master
 }
