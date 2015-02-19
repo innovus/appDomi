@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.appspot.domi_app.domi.model.Empresa;
+import android.widget.ImageView;
+
+import com.innovus.doomi.Pusheen;
 import com.innovus.doomi.R;
 
 
@@ -16,30 +19,42 @@ import java.util.List;
  * Created by Janeth Arcos on 17/02/2015.
  */
 public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHolder> {
-    private List<Empresa> empresas;//dataset
-    private int itemLayout;//es la vista que va a cargar la row_empresas.xml
+  /*  public List<Empresa> empresas;//dataset
+    public int itemLayout;//es la vista que va a cargar la row_empresas.xml
+*/
+  private List<Empresa> empresas;
+    private int itemLayout;
 
-
-    public EmpresasAdapter(List<Empresa> empresas,int itemLayout){
+    public EmpresasAdapter(List<Empresa> data,int itemLayout){
         this.itemLayout = itemLayout;
-        this.empresas = empresas;
+        this.empresas = data;
 
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(itemLayout,parent,false);//infla el itemklayouy el row_empresas
-        return new ViewHolder(v);
+    public EmpresasAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
+        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
+        return viewHolder;
+
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(EmpresasAdapter.ViewHolder holder, int position) {
 
         //lcargo el view con los valores
         Empresa empresa = empresas.get(position);
+        /*
         holder.nombreEmpresa.setText(empresa.getNombre());
         holder.descripcionEmpresa.setText(empresa.getDescripcion());
-        holder.minimosEmpresa.setText("Tiempo Minimo: "+empresa.getTiempoMinimo()+ " Min");
+        holder.minimosEmpresa.setText(empresa.getTiempoMinimo()+ " Min - $" + empresa.getValorMinimoPedido() + " minimo");
+        holder.itemView.setTag(empresa);
+        */
+        holder.nombreEmpresa.setText(empresa.getNombre());
+        holder.descripcionEmpresa.setText(empresa.getDescripcion());
+        holder.minimosEmpresa.setText(empresa.getTiempoMinimo()+ " Min - $" + empresa.getValorMinimoPedido() + " minimo");
+        holder.itemView.setTag(empresa);
     }
 
     @Override
