@@ -6,5 +6,6 @@
     <color name="text_color">#ffb2b2b2</color>
     <color name="texto">#424242</color>
     <color name="fondo">#fff</color>
+    <color name="fondo2">#ffdddddd</color>
 
 </resources>

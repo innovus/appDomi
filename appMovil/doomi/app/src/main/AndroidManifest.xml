@@ -18,14 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.Categorias"
-            android:label="@string/title_activity_categorias"
-            android:parentActivityName=".Principal" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.innovus.doomi.Principal" />
-        </activity>
+
         <activity
             android:name=".Activities.Productos"
             android:label="@string/title_activity_productos"

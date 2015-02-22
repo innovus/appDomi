@@ -4,15 +4,27 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.innovus.doomi.Consumir.ProductosTask;
 import com.innovus.doomi.R;
 
 public class Productos extends ActionBarActivity {
+    public TextView nombreEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
+       // nombreEmpresa = (TextView) this.findViewById(R.id.textView2);
+        nombreEmpresa.setText( getIntent().getStringExtra("llave"));
+
+
+    }
+    public void Prueba(View view){
+        new ProductosTask(this).execute( getIntent().getStringExtra("llave"));
+
     }
 
 

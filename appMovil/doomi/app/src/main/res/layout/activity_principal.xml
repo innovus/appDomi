@@ -3,7 +3,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffdddddd"
+    android:background="@color/fondo2"
     android:id="@+id/main_principal"
     tools:context=".Principal">
 

@@ -7,17 +7,12 @@ import android.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.appspot.domi_app.domi.Domi;
-import com.appspot.domi_app.domi.model.EmpresaCollection;
-import com.innovus.doomi.Consumir.AppConstants;
 import com.innovus.doomi.Consumir.HttpRequestTask;
-import com.innovus.doomi.Pusheen;
+
 import com.innovus.doomi.R;
 import com.appspot.domi_app.domi.model.Empresa;
 import com.innovus.doomi.adapters.EmpresasAdapter;
@@ -54,7 +49,7 @@ public class EmpresaFragment extends Fragment {
         ArrayList <Empresa> pusheenArrayList = new ArrayList<Empresa>();
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new EmpresasAdapter(pusheenArrayList,R.layout.row_empresas));
+        recyclerView.setAdapter(new EmpresasAdapter(pusheenArrayList,R.layout.row_empresas,getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

@@ -3,6 +3,7 @@ package com.innovus.doomi.Consumir;
 import android.app.Activity;
 import android.app.Dialog;
 
+import com.appspot.domi_app.domi.Domi;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -33,5 +34,15 @@ public class AppConstants {
                 dialog.show();
             }
         });
+    }
+    public static Domi buildServiceHandler() {
+
+        Domi.Builder builder
+                = new Domi.Builder(
+                AppConstants.HTTP_TRANSPORT,
+                AppConstants.JSON_FACTORY, null);
+
+        //builder.setApplicationName("domi-app");
+        return builder.build();
     }
 }

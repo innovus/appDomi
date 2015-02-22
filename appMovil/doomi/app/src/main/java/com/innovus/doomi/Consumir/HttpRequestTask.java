@@ -25,17 +25,17 @@ import java.util.List;
 public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
    // private static com.appspot.domi_app.domi.Domi myApiService = null;
    private com.appspot.domi_app.domi.Domi myApiService = null;
-    public String mostrar="";
 
-    public static Activity context;
+
+    private Activity activity;
 
     public static void build(Context context) {
         //myApiService = buildServiceHandler(context);
     }
 
-    public HttpRequestTask(Activity context) {
+    public HttpRequestTask(Activity activity) {
         super();
-        this.context = context;
+        this.activity = activity;
     }
 
 
@@ -45,7 +45,7 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
     @Override
     protected List<Empresa> doInBackground(Void... params) {
         if (myApiService == null) { // Only do this once
-            myApiService = buildServiceHandler();
+            myApiService = AppConstants.buildServiceHandler();
         }
         // Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
 
@@ -55,6 +55,7 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
             EmpresaCollection empresaCollection = queryEmpresas.execute();
             if (empresaCollection != null && empresaCollection.getItems() != null) {
                 List<Empresa> empresas = empresaCollection.getItems();
+
                 return empresas;
             }
             //return Collections.EMPTY_LIST;
@@ -86,24 +87,15 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
 
 
 
-          RecyclerView recyclerView = (RecyclerView)  context.findViewById(R.id.my_recycler_view);
+          RecyclerView recyclerView = (RecyclerView)  activity.findViewById(R.id.my_recycler_view);
             recyclerView.setHasFixedSize(true);//que todo lo optimize
-             recyclerView.setAdapter(new EmpresasAdapter(result, R.layout.row_empresas));
-            recyclerView.setLayoutManager(new LinearLayoutManager (context));//linear x q es lienas o si no tambn grillas
+             recyclerView.setAdapter(new EmpresasAdapter(result, R.layout.row_empresas,activity));
+            recyclerView.setLayoutManager(new LinearLayoutManager (activity));//linear x q es lienas o si no tambn grillas
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
 
     }
-    public static Domi buildServiceHandler() {
 
-        Domi.Builder builder
-                = new Domi.Builder(
-                AppConstants.HTTP_TRANSPORT,
-                AppConstants.JSON_FACTORY, null);
-
-        //builder.setApplicationName("domi-app");
-        return builder.build();
-    }
 
 }
