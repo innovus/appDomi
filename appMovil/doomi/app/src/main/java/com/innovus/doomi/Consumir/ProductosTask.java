@@ -7,6 +7,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.appspot.domi_app.domi.Domi;
@@ -16,6 +18,7 @@ import com.appspot.domi_app.domi.model.Producto;
 import com.appspot.domi_app.domi.model.ProductoCollection;
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.EmpresasAdapter;
+import com.innovus.doomi.adapters.ExpandibleCategoriasAdapter;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -94,6 +97,9 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
 
 
         }
+        ExpandableListView mExpandableList = (ExpandableListView)activity.findViewById(R.id.expandableListView);
+        mExpandableList.setAdapter(new ExpandibleCategoriasAdapter(activity,) {
+        });
 
         // greetingIdText.setText(mostrar);
 

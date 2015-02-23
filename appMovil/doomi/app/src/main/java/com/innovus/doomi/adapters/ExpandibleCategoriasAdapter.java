@@ -2,6 +2,7 @@ package com.innovus.doomi.adapters;
 
 import android.content.Context;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +67,8 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean b, View view, ViewGroup viewGroup) {
-       ViewHolder holder = new ViewHolder();
-        holder.groupPosition = groupPosition;
+        ViewHolder holder = new ViewHolder();
+     //   holder.groupPosition = groupPosition;
 
         if (view == null) {
             view = inflater.inflate(R.layout.exp_lista_categoria, viewGroup,false);
@@ -84,12 +85,38 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int i, int i2, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+    //in this method you must set the text to see the children on the list
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup viewGroup) {
+
+        ViewHolder holder = new ViewHolder();
+        holder.childPosition = childPosition;
+        holder.groupPosition = groupPosition;
+
+        if (view == null) {
+            view = inflater.inflate(R.layout.exp_lista_producto, viewGroup,false);
+        }
+
+        TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
+        textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition).getNombreProducto());
+        //textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
+
+        view.setTag(holder);
+
+        //return the entire view
+        return view;
     }
 
     @Override
     public boolean isChildSelectable(int i, int i2) {
-        return false;
+        return true;
     }
+
+
+    protected class ViewHolder {
+        protected int childPosition;
+        protected int groupPosition;
+        protected Button button;
+    }
+
+
 }

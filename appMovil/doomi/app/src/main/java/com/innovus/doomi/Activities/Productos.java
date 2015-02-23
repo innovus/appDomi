@@ -5,13 +5,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.innovus.doomi.Consumir.ProductosTask;
 import com.innovus.doomi.R;
+import com.innovus.doomi.modelos.Parent;
+
+import java.util.ArrayList;
 
 public class Productos extends ActionBarActivity {
+    private ExpandableListView mExpandableList;
     public TextView nombreEmpresa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,9 @@ public class Productos extends ActionBarActivity {
         setContentView(R.layout.activity_productos);
        // nombreEmpresa = (TextView) this.findViewById(R.id.textView2);
         nombreEmpresa.setText( getIntent().getStringExtra("llave"));
+        mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
+
+        ArrayList<Parent> arrayParents = new ArrayList<Parent>();
 
 
     }
