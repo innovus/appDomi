@@ -21,6 +21,7 @@ public class Cliente {
 	
 	@Index
 	private String correoCliente;
+	private String telefonoCliente;
 	private String passwordCliente;
 	
 	private String preguntaCliente;
@@ -58,6 +59,9 @@ public class Cliente {
 	public String getPasswordCliente(){
 		return passwordCliente;
 	}
+	public String getTelefonoCliente(){
+		return telefonoCliente;
+	}
 	public String getPreguntaCliente(){
 		return preguntaCliente;
 	}
@@ -72,6 +76,7 @@ public class Cliente {
 		this.apellidoMaterno=clienteForm.getApellidoMaterno();
 		this.correoCliente=clienteForm.getCorreoCliente();
 		this.passwordCliente=clienteForm.getPasswordCliente();
+		this.telefonoCliente=clienteForm.getTelefonoCliente();
 		this.preguntaCliente=clienteForm.getPreguntaCliente();
 		this.respuestaCliente=clienteForm.getRespuestaCliente();
 	}

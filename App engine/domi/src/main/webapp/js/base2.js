@@ -77,7 +77,7 @@ function listaClientes(){
              var result = "";
             for (var i=0;i<resp.items.length;i++) {
                      //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
-         	   result =  result+ resp.items[i].apellidoPaterno +"  "+resp.items[i].nomCliente+" "+resp.items[i].apellidoMaterno+" "+resp.items[i].correoCliente +" "+resp.items[i].passwordCliente +" "+resp.items[i].preguntaCliente +" <br>";
+         	   result =  result+ resp.items[i].idCliente +"  "+resp.items[i].nomCliente+" "+resp.items[i].apellidoMaterno+" "+resp.items[i].correoCliente +" "+resp.items[i].passwordCliente +" "+resp.items[i].preguntaCliente +" <br>";
              }
              document.getElementById('listQuotesResult').innerHTML = result;
     }
@@ -91,6 +91,7 @@ function crearCliente(){
  var apellidoMaterno = document.getElementById('txtapellidoMaterno').value;
  var correoCliente = document.getElementById('txtCorreoCliente').value;
  var passwordCliente = document.getElementById('Usuario_password').value;
+ var telefonoCliente = document.getElementById('txtTelefonoCliente').value;
  var preguntaCliente = document.getElementById('registroCliente_pregunta').value;
  var respuestaCliente = document.getElementById('registroUsuario_respuesta').value;
  
@@ -101,13 +102,14 @@ function crearCliente(){
  requestData.apellidoMaterno = apellidoMaterno;
  requestData.correoCliente = correoCliente;
  requestData.passwordCliente = passwordCliente;
+ requestData.telefonoCliente = telefonoCliente;
  requestData.preguntaCliente = preguntaCliente;
  requestData.respuestaCliente = respuestaCliente;
  
  gapi.client.domi.crearCliente(requestData).execute(function(resp){
 	 
 	 if (!resp.code) {
-		 console.log( resp.cedulaCliente +":"+resp.nomCliente + ":" + resp.apellidoPaterno + ":" + ":" + resp.apellidoMaterno + ":" + resp.correoCliente + ":" + resp.passwordCliente +":" + resp.preguntaCliente + ":" + resp.respuestaCliente  );
+		 console.log( resp.cedulaCliente +":"+resp.nomCliente + ":" + resp.apellidoPaterno + ":" + ":" + resp.apellidoMaterno + ":" + resp.correoCliente + ":" + resp.passwordCliente +":" + resp.telefonoCliente +":" + resp.preguntaCliente + ":" + resp.respuestaCliente  );
 		 
 	 }
  });
@@ -137,8 +139,8 @@ function crearEmpresa(){
    var timeEmpresa = document.getElementById('txttimeEmpresa').value;
    // Obtenemos el valor por el id
   // var grupoEmpresa = document.getElementById("idGrupo").value;
-  var grupoEmpresa = document.getElementById('idGrupo').value;
-  var valorminPedido =  document.getElementById('txtvalorMinimoPedido').value;
+   var grupoEmpresa = document.getElementById('idGrupo').value;
+   var valorminPedido =  document.getElementById('txtvalorMinimoPedido').value;
    var requestData = {};
    requestData.nombre = nomEmpresa;
    requestData.passEmpresa = passwordEmpresa;   

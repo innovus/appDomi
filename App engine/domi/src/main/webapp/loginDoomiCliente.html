@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Doomi</title>
+  <script type="text/javascript" src="/js/login.js"></script>
+</head>
+<body>
+
+
+
+<form action="index.html" method="GET" name="f1" id="f1">
+<div><span class="Correo">Correo </span><input id="username" placeholder="alguien@example.com"/></div>
+<div><span class="contaseña">Contraseña </span><input id="password" placeholder="Contraseña"/></div>
+<input id="campo_1" value=" " name="campo" type="hidden" />
+</form>
+
+ 	
+
+ 	
+ 	
+ <form action="javascript:void(0);">
+        <h2>Cliente</h2>
+        <div><input id="post" type="submit" value="Enviar formulario"></div>
+    </form>
+    <div id="listQuotesResult"></div>
+
+    <script type="text/javascript">
+        function init() {
+            //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
+             google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+           // google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
+        	 
+        }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+
+</body>
+</html>

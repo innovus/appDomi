@@ -29,10 +29,64 @@
 
     <form action="javascript:void(0);">
         <h2>Crear Empresa</h2>
+        <div><span class="key"><input id="keyCliente"/></span></div>
         <div><span class="label">Nombre Empresas: </span><input id="txtnomEmpresa" /></div>
         <div><span class="label">Contraseña: </span><input id="txtpassEmpresa" type="password"/></div>        
         <div><span class="label">Descripción Empresa: </span><input id="txtdesEmpresa" /></div>
-        <div><span class="label">Ciudad Empresa: </span><input id="txtciudEmpresa" /></div>
+        <div><span class="label"><b>*</b>Ubicacion</span></div>
+        <select name="state" id="Departamento" class="selectUbicacion">
+               <option value="0">
+                                                    Elige un departamento
+                            </option>
+                <option value="256001">Amazonas</option>
+				<option value="7002">Antioquia</option>
+				<option value="256002">Arauca</option>
+				<option value="7003">Atlántico</option>
+				<option value="7000">Bogotá</option>
+				<option value="7004">Bolivar</option>
+				<option value="7022">Boyacá</option>
+				<option value="7012">Caldas</option>
+				<option value="7021">Caquetá</option>
+				<option value="256003">Casanare</option>
+				<option value="7019">Cauca</option>
+				<option value="7023">Chocó</option>
+				<option value="7014">Cundinamarca</option>
+				<option value="7016">César</option>
+				<option value="7017">Córdoba</option>
+				<option value="256004">Guainía</option>
+				<option value="256005">Guaviare</option>
+				<option value="7011">Huila</option>
+				<option value="7020">La Guajira</option>
+				<option value="7008">Magdalena</option>
+				<option value="7013">Meta</option>
+				<option value="7010">Nariño</option>
+				<option value="7005">Norte de Santander</option>
+				<option value="256006">Putumayo</option>
+				<option value="7015">Quindío</option>
+				<option value="7007">Risaralda</option>
+				<option value="256007">San Andrés y Providencia</option>
+				<option value="7006">Santander</option>
+				<option value="7018">Sucre</option>
+				<option value="7009">Tolima</option>
+				<option value="7001">Valle del Cauca</option>
+				<option value="256008">Vaupés</option>
+				<option value="256009">Vichada</option>
+		</select>
+        <select name="city" id="txtciudEmpresa" class="labels">
+				<option value="0">Selecciona una ciudad</option>
+				<option value="69531">San Juan de Pasto</option>
+				<option value="69533">Ipiales</option>
+				<option value="69567">Nariño</option>
+				<option value="69532">Tumaco</option>
+				<option value="69534">Túquerres</option>
+				<option value="69535">La Unión</option>
+				<option value="69550">Chachagüí</option>
+				<option value="69537">Sandoná</option>
+				<option value="69553">Buesaco</option>
+				<option value="69542">El Tambo</option>
+				<option id="other-city-option" value="-1">Otro</option>
+       </select>
+        <div><span class="label">Añade una dirección: </span><input id="txtciudEmpresas" /></div>
         <div><span class="label">Correo Electronico: </span><input id="txtcorreoEmpresa" /></div>
         <div><span class="label">Tiempo Minimo: </span><input id="txttimeEmpresa" /></div>
         <div><span class="label">Valor Minimo Pedidos: </span><input id="txtvalorMinimoPedido" /></div>
@@ -67,12 +121,13 @@
     <script type="text/javascript">
         function init() {
             //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
-             // google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
-            google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
+             google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+             //google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
         	 
         }
     </script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
 </div>
 </body>
+
 </html>

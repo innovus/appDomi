@@ -66,7 +66,7 @@ function listQuotes() {
                     var result = "";
                    for (var i=0;i<resp.items.length;i++) {
                             //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
-                	   result =  result+ resp.items[i].nombre +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +" "+resp.items[i].grupos +" "+resp.items[i].valorMinimoPedido +" <br>";
+                	   result =  result+ resp.items[i].descripcion +"  "+resp.items[i].descripcion+" "+resp.items[i].ciudad+" "+resp.items[i].tiempoMinimo +" "+resp.items[i].grupos +" "+resp.items[i].valorMinimoPedido +" <br>";
                     }
                     document.getElementById('listQuotesResult').innerHTML = result;
            }
@@ -132,9 +132,63 @@ function crearCliente(){
  
 }
 
+/**
+ * Funcion que captura las variables pasados por GET
+ * http://www.lawebdelprogramador.com/pagina.html?id=10&pos=3
+ * Devuelve un array de clave=>valor
+ */
+function getGET()
+{
+    // capturamos la url
+    var loc = document.location.href;
+    // si existe el interrogante
+    if(loc.indexOf('?')>0)
+    {
+        // cogemos la parte de la url que hay despues del interrogante
+        var getString = loc.split('?')[1];
+        // obtenemos un array con cada clave=valor
+        var GET = getString.split('&');
+        var get = {};
+
+        // recorremos todo el array de valores
+        for(var i = 0, l = GET.length; i < l; i++){
+            var tmp = GET[i].split('=');
+            get[tmp[0]] = unescape(decodeURI(tmp[1]));
+        }
+        return get;
+    }
+}
+
+window.onload = function()
+{
+    // Cogemos los valores pasados por get
+    var valores=getGET();
+    var valorid = "";
+    if(valores)
+    {
+        // hacemos un bucle para pasar por cada indice del array de valores
+        for(var index in valores)
+        {
+           //document.write("<br>clave: "+index+" - valor: "+valores[index]);
+        	valorid = valores[index];
+        	document.getElementById("keyCliente").value =valorid;
+        }
+    }else{
+        // no se ha recibido ningun parametro por GET
+        document.write("<br>No se ha recibido ningún parámetro");
+    }
+	//document.getElementById("keyCliente").value ="57";
+	
+}
+
+
+
+
+
+
 function crearEmpresa(){
 	
-		
+   var keyCliente = document.getElementById('keyCliente').value;		
    var nomEmpresa = document.getElementById('txtnomEmpresa').value;
    var passwordEmpresa = document.getElementById('txtpassEmpresa').value;
    var desEmpresa = document.getElementById('txtdesEmpresa').value;
@@ -145,6 +199,7 @@ function crearEmpresa(){
   var grupoEmpresa = document.getElementById('idGrupo').value;
   var valorminPedido =  document.getElementById('txtvalorMinimoPedido').value;
    var requestData = {};
+   requestData.keyCliente = keyCliente;
    requestData.nombre = nomEmpresa;
    requestData.passEmpresa = passwordEmpresa;   
    requestData.descripcion = desEmpresa;
@@ -159,7 +214,7 @@ function crearEmpresa(){
     	 if (!resp.code) {
             
             // console.log( resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
-             console.log( resp.nombre + ":" + resp.passEmpresa + ":" + ":" + resp.descripcion + ":" + resp.ciudad + ":" + resp.tiempoMinimo +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+             console.log( resp.keyCliente + ":" + resp.nombre + ":" + resp.passEmpresa + ":" + ":" + resp.descripcion + ":" + resp.ciudad + ":" + resp.tiempoMinimo +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
          }
 		
 		//document.getElementById('respuesta').innerHTML = nomEmpresa;
@@ -177,13 +232,7 @@ google.devrel.samples.hello.enableButtons = function() {
 	  document.getElementById('listQuote').onclick = function() {
 	      listQuotes();
 	    }
-	  document.getElementById('btnConsultarCliente').onclick = function() {
-		  listaClientes();
-	    }
-	  
-	  document.getElementById('btnCrearCliente').onclick = function() {
-		  crearCliente();
-	    }
+	
 	  document.getElementById('btnCrearEmpresa').onclick = function() {
 	      crearEmpresa();
 	    } 
