@@ -2,6 +2,7 @@ package com.innovus.doomi.Activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,19 +16,21 @@ import com.innovus.doomi.modelos.Parent;
 import java.util.ArrayList;
 
 public class Productos extends ActionBarActivity {
-    private ExpandableListView mExpandableList;
-    public TextView nombreEmpresa;
+//    private ExpandableListView mExpandableList;
+//    public TextView nombreEmpresa;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
+       Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
+       // toolbar.setTitle("Doomi");
+        setSupportActionBar(toolbar);
+        new ProductosTask(this).execute( getIntent().getStringExtra("llave"));
        // nombreEmpresa = (TextView) this.findViewById(R.id.textView2);
-        nombreEmpresa.setText( getIntent().getStringExtra("llave"));
-        mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
+        //nombreEmpresa.setText( getIntent().getStringExtra("llave"));
 
-        ArrayList<Parent> arrayParents = new ArrayList<Parent>();
 
 
     }

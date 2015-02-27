@@ -9,12 +9,14 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/include" />
+         />
 
     <ExpandableListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/expandableListView"
+        android:cacheColorHint="@color/accent"
+
 
         android:layout_below="@+id/include"
         android:background="@color/fondo"

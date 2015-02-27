@@ -89,36 +89,15 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
   //      new EmpresaFragment.HttpRequestTaska(this).execute();
         //fragments.HttpRequestTaska este = new EmpresaFragment.HttpRequestTaska();
 
+
         if (fragments != null) {
             // If article frag is available, we're in two-pane layout...
 
 
             new HttpRequestTask(this).execute();
             // Call a method in the ArticleFragment to update its content
-            Toast.makeText(this, "entro al if", Toast.LENGTH_LONG).show();
 
-        } else {
-            Toast.makeText(this, "entro al else", Toast.LENGTH_LONG).show();
 
-            // Otherwise, we're in the one-pane layout and must swap frags...
-
-            // Create fragment and give it an argument for the selected article
-           /*
-            ArticleFragment newFragment = new ArticleFragment();
-            Bundle args = new Bundle();
-            args.putInt(ArticleFragment.ARG_POSITION, position);
-            newFragment.setArguments(args);
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack so the user can navigate back
-            transaction.replace(R.id.fragment_container, newFragment);
-            transaction.addToBackStack(null);
-
-            // Commit the transaction
-            transaction.commit();
-            */
         }
 
     }

@@ -8,13 +8,56 @@
     android:gravity="center_vertical">
 
 
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Perro Caliente"
-        android:id="@+id/list_item_text_child"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:layout_marginLeft="5dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="40dp">
+
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Gaseosa"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/texto"
+                android:layout_alignParentTop="true"
+                android:id="@+id/list_item_text_child" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Tiene Pan "
+                android:textColor="@color/text_color"
+
+
+                android:id="@+id/descProducto" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="4">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$12.000"
+                android:id="@+id/txtPrecio" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

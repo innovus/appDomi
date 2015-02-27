@@ -93,6 +93,7 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
 
 
                     i.putExtra("llave", propiedades.getWebsafeKey());
+                    i.putExtra("nombre", propiedades.getNombre());
                     activity.startActivity(i);
 
 

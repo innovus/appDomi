@@ -72,10 +72,12 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
 
         if (view == null) {
             view = inflater.inflate(R.layout.exp_lista_categoria, viewGroup,false);
+
         }
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
+
 
         view.setTag(holder);
 
@@ -96,8 +98,12 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
             view = inflater.inflate(R.layout.exp_lista_producto, viewGroup,false);
         }
 
-        TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
-        textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition).getNombreProducto());
+        TextView producto = (TextView) view.findViewById(R.id.list_item_text_child);
+        producto.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition).getNombreProducto());
+        TextView descripcion = (TextView) view.findViewById(R.id.descProducto);
+        descripcion.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition).getDescripcionProducto());
+        TextView precio = (TextView) view.findViewById(R.id.txtPrecio);
+        precio.setText(" $" + mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto());
         //textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
 
         view.setTag(holder);
@@ -115,7 +121,7 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
     protected class ViewHolder {
         protected int childPosition;
         protected int groupPosition;
-        protected Button button;
+
     }
 
 

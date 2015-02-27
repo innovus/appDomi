@@ -19,8 +19,10 @@ import com.appspot.domi_app.domi.model.ProductoCollection;
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.EmpresasAdapter;
 import com.innovus.doomi.adapters.ExpandibleCategoriasAdapter;
+import com.innovus.doomi.modelos.Parent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,38 +82,50 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
 
     @Override
     protected void onPostExecute(List<Producto> result) {
+        ArrayList<Parent> arrayParents = new ArrayList<Parent>();
+        ArrayList<Producto> arrayChildren = new ArrayList<Producto>();
 
+       /* for (Producto q : result) {
+            Parent parent = new Parent();
+            parent.setTitle(q.getCategoriaPropietaria());
+            arrayChildren = new ArrayList<Producto>();
+            arrayChildren.add(q);
+            parent.setArrayChildren(arrayChildren);
+            arrayParents.add(parent);
+        }
+        */
         // TextView greetingIdText = (TextView) findViewById(R.id.prueba);
-        if(result.size()==0){
-            Toast.makeText(activity, "No ahi productos", Toast.LENGTH_LONG).show();
 
-        }else{
-            for (Producto q : result) {
-                //empresasA.add(q.getNombre());
-                mostrar += "- " + q.getNombreProducto()+", "+ q.getCategoriaPropietaria() ;
-
-                //Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
+        for (Producto q : result) {
+            Boolean repetido = false;
+            int  posicion = 0;
+            for(int j = 0;j< arrayParents.size(); j++){
+                String titulo = arrayParents.get(j).getTitle();
+                String categoria = q.getCategoriaPropietaria();
+                if(titulo.equals(categoria)){
+                    repetido = true;
+                    posicion = j;
+                    j=(arrayParents.size()) + 1;
+                }
             }
-
-            Toast.makeText(activity, mostrar, Toast.LENGTH_LONG).show();
-
+            if(repetido == true){
+                arrayChildren.add(q);
+                arrayParents.get(posicion).setArrayChildren(arrayChildren);
+            }else{
+                Parent parent = new Parent();
+                parent.setTitle(q.getCategoriaPropietaria());
+                arrayChildren = new ArrayList<Producto>();
+                arrayChildren.add(q);
+                parent.setArrayChildren(arrayChildren);
+                arrayParents.add (parent);
+            }
 
         }
         ExpandableListView mExpandableList = (ExpandableListView)activity.findViewById(R.id.expandableListView);
-        mExpandableList.setAdapter(new ExpandibleCategoriasAdapter(activity,) {
-        });
-
-        // greetingIdText.setText(mostrar);
+        mExpandableList.setAdapter(new ExpandibleCategoriasAdapter(activity,arrayParents));
 
 
 
-/*
-        RecyclerView recyclerView = (RecyclerView)  activity.findViewById(R.id.my_recycler_view);
-        recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new EmpresasAdapter(result, R.layout.row_empresas,activity));
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));//linear x q es lienas o si no tambn grillas
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-*/
 
 
     }

@@ -72,20 +72,6 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
 
     @Override
     protected void onPostExecute(List<Empresa> result) {
-        // TextView greetingIdText = (TextView) findViewById(R.id.prueba);
-      /*  for (Empresa q : result) {
-            //empresasA.add(q.getNombre());
-            mostrar += " " + q.getNombre() ;
-
-            //Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();
-        }
-
-        Toast.makeText(context, mostrar, Toast.LENGTH_LONG).show();*/
-
-        // greetingIdText.setText(mostrar);
-
-
-
 
           RecyclerView recyclerView = (RecyclerView)  activity.findViewById(R.id.my_recycler_view);
             recyclerView.setHasFixedSize(true);//que todo lo optimize
