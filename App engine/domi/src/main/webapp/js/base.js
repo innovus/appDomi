@@ -173,12 +173,15 @@ window.onload = function()
         	valorid = valores[index];
         	document.getElementById("keyCliente").value =valorid;
         }
+       // crearCategoria();
+       
     }else{
         // no se ha recibido ningun parametro por GET
         document.write("<br>No se ha recibido ningún parámetro");
     }
 	//document.getElementById("keyCliente").value ="57";
-	
+    crearCategoria();
+    llenarSelect
 }
 
 
@@ -225,6 +228,162 @@ function crearEmpresa(){
 /**
  * Enables the button callbacks in the UI.
  */
+
+function crearCategoria(){
+	 document.getElementById("txtwebsafeKey").value =" ";
+	 var nombreCategoria = document.getElementById('txtnomCategoria').value;
+	 var keyCliente = document.getElementById('keyCliente').value;
+	 var requestData = {};
+	 requestData.keyCliente = keyCliente;
+	 gapi.client.domi.getEmpresaXCliente(requestData).execute(function(resp){
+		 if (!resp.code) {
+             resp.items = resp.items || [];
+             var result = "";
+            for (var i=0;i<resp.items.length;i++) {
+                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+         	   result =  result+ resp.items[i].websafeKey ;
+             }
+            
+            document.getElementById("txtwebsafeKey").value =result;
+                 	
+             
+    }
+		 agregarCategoria();	
+	});
+	
+	 
+	 
+	 
+	 
+}
+
+function agregarCategoria(){
+	 var comprobar =document.getElementById("txtwebsafeKey").value;
+	 if(comprobar ==" "){
+		 alert("Aun no as creado tu empresa");
+ 	}
+	 else{
+		 
+		 creacate();
+		 
+		 
+	 }
+}
+function creacate(){
+	 var nombreCategoria = document.getElementById('txtnomCategoria').value;
+	 var websafeKey = document.getElementById('txtwebsafeKey').value;
+	 var requestData = {};
+	 requestData.nombre = nombreCategoria;
+	 requestData.websafeEmpresaKey = websafeKey;
+	 gapi.client.domi.creaCate(requestData).execute(function(resp) {
+	    	
+    	 if (!resp.code) {
+            
+            // console.log( resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+             console.log( resp.nombre + ":" + resp.websafeEmpresaKey );
+         }
+		
+		//document.getElementById('respuesta').innerHTML = nomEmpresa;
+		
+	});
+	 
+}
+
+function crearProducto(){
+	 var lista=document.getElementById("listbox");
+	 var texto = "juan";
+	 for(var i =0;i<10;i++){
+	 lista.options.add(new Option(texto,"ser, estar"));
+	 }
+	 document.getElementById("txtwebsafeKeyCategoria").value =" ";
+	 var nombreProducto = document.getElementById('txtnomProducto').value;
+	 var descripcionProducto = document.getElementById('txtdesProducto').value;
+	 var precioProducto = document.getElementById('txtprecioProducto').value;
+	 
+	 
+	
+}
+function CategoriaXEmpresa(){
+	 document.getElementById("txtwebsafeKey").value =" ";
+	 var keyCliente = document.getElementById('keyCliente').value;
+	 var requestData = {};
+	 requestData.keyCliente = keyCliente;
+	 gapi.client.domi.getEmpresaXCliente(requestData).execute(function(resp){
+		 if (!resp.code) {
+             resp.items = resp.items || [];
+             var result = "";
+            for (var i=0;i<resp.items.length;i++) {
+                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+         	   result =  result+ resp.items[i].websafeKey ;
+             }
+            
+            document.getElementById("txtwebsafeKey").value =result;
+                 	
+             
+    }
+		 comprobarEmpresa();	
+	});
+}
+
+function comprobarEmpresa(){
+	var comprobar =document.getElementById("txtwebsafeKey").value;
+	 if(comprobar ==" "){
+		 alert("Aun no as creado tu empresa");
+	}
+	 else{
+		 
+		 llenarSelect();
+		 
+		 
+	 }
+	
+}
+
+function llenarSelect(){
+	document.getElementById("listbox").options.length = 0;
+	var lista=document.getElementById("listbox");
+	 var webSafeEmpresaKey = document.getElementById('txtwebsafeKey').value;
+	 document.getElementById("txtprecioProducto").value = webSafeEmpresaKey;
+	 var requestData = {};
+	 requestData.webSafeEmpresaKey = webSafeEmpresaKey;
+	 gapi.client.domi.getCategoriasXEmpresa(requestData).execute(function(resp){
+		 if (!resp.code) {
+             resp.items = resp.items || [];
+             var result = "";
+            for (var i=0;i<resp.items.length;i++) {
+                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+         	   result =  result+ resp.items[i].nombreCategoria;
+         	  	 lista.options.add(new Option(result,result));
+         	     result = "";
+             }
+            
+            //document.getElementById("txtwebsafeKeyCategoria").value =result;
+          //  document.getElementById('listQuotesResult').innerHTML = result;   	
+            //var comprobar = document.getElementById('listbox').value;
+        	//rdocument.getElementById("txtwebsafeKeyCategoria").value =comprobar;
+             
+    }
+		crearProducto();	
+	});
+	
+}
+
+function crearProducto(){
+	
+	//var comprovarr = document.getElementById("txtnomProducto").value;
+	 var comprobarr =document.getElementById("txtnomProducto").value;
+	 if(comprobarr ==" "){
+		 alert("Aun no as creado tu empresa");
+ 	}
+	 else{
+		 
+		 alert("vida hp");
+		 
+		 
+	 }
+	
+}
+
 google.devrel.samples.hello.enableButtons = function() {
 	
 	
@@ -236,6 +395,15 @@ google.devrel.samples.hello.enableButtons = function() {
 	  document.getElementById('btnCrearEmpresa').onclick = function() {
 	      crearEmpresa();
 	    } 
+	  
+	  document.getElementById('crearCategoria').onclick = function() {
+		  crearCategoria();
+	    }
+	  document.getElementById('btncrearProducto').onclick = function() {
+		  CategoriaXEmpresa();
+	    }	
+	  
+	  
 	 
 	  
 	};

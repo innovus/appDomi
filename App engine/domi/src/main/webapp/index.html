@@ -29,7 +29,7 @@
 
     <form action="javascript:void(0);">
         <h2>Crear Empresa</h2>
-        <div><span class="key"><input id="keyCliente"/></span></div>
+        <div><span class="key"><input id="keyCliente" type="text"/></span></div>
         <div><span class="label">Nombre Empresas: </span><input id="txtnomEmpresa" /></div>
         <div><span class="label">Contraseña: </span><input id="txtpassEmpresa" type="password"/></div>        
         <div><span class="label">Descripción Empresa: </span><input id="txtdesEmpresa" /></div>
@@ -102,9 +102,22 @@
         <br>
         <br>
         <h2>Crear Categorias</h2>
+         <div><span class="label">websafheKey: </span><input id="txtwebsafeKey" /></div>
         <div><span class="label">Nombre Categoria: </span><input id="txtnomCategoria" /></div>
+        <div><input id="crearCategoria" type="submit" value="Aceptar"></div>
+        <div><input id="btncrearCategoria" type="submit" value="crear categoria"></div>
         
         <h2>Crear Productos</h2>
+        
+         <div id="lista">
+              <select id="listbox" onchange="Seleccionar()">
+              </select>
+        </div>
+        <div><span class="label">websafeKeyCategoria: </span><input id="txtwebsafeKeyCategoria" /></div>    
+        <div><span class="label">Nombre producto: </span><input id="txtnomProducto" /></div>        
+        <div><span class="label">Descripcion producto: </span><input id="txtdesProducto" /></div>        
+        <div><span class="label">Precio producto: </span><input id="txtprecioProducto" /></div>
+        <div><input id="btncrearProducto" type="submit" value="Crear Producto"></div>
         
     </form>
      <div id="respuesta"></div>

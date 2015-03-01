@@ -162,8 +162,16 @@ function crearEmpresa(){
 		//document.getElementById('respuesta').innerHTML = nomEmpresa;
 		
 	});
+   alert("empresa creada");
+   texboxenblanco();
+   
 }
-
+function texboxenblanco(){
+	
+	var a "";
+	return a;
+	
+} 
 /**
  * Enables the button callbacks in the UI.
  */
@@ -176,6 +184,10 @@ google.devrel.samples.hello.enableButtons = function() {
 	  document.getElementById('btnCrearCliente').onclick = function() {
 		  crearCliente();
 	    } 
+	  document.getElementById('irlogin').onclick = function() {
+		  texboxenblanco();
+	    } 
+	  
 	 	  
 	};
 /**
