@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Hello domi!</title>
-    <script type="text/javascript" src="/js/base.js"></script>
+    <script type="text/javascript" src="/js/base2.js"></script>
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
     <link type="text/css" rel="stylesheet" href="/css/style.css">
@@ -18,7 +18,7 @@
             </button>
             <a class="brand" href="#">Domi Innovus!</a>
             <div class="nav-collapse collapse pull-right">
-                <a href="javascript:void(0);" class="btn" id="signinButton">Sign in</a>
+                <a href="javascript:void(0);" class="btn" id="signinButton" onclick="location='loginDoomiCliente.html'">Sign in</a>
             </div>
         </div>
     </div>
@@ -28,96 +28,48 @@
     <div id="outputLog"></div>
 
     <form action="javascript:void(0);">
-        <h2>Crear Empresa</h2>
-        <div><span class="key"><input id="keyCliente" type="text"/></span></div>
-        <div><span class="label">Nombre Empresas: </span><input id="txtnomEmpresa" /></div>
-        <div><span class="label">Contraseña: </span><input id="txtpassEmpresa" type="password"/></div>        
-        <div><span class="label">Descripción Empresa: </span><input id="txtdesEmpresa" /></div>
-        <div><span class="label"><b>*</b>Ubicacion</span></div>
-        <select name="state" id="Departamento" class="selectUbicacion">
-               <option value="0">
-                                                    Elige un departamento
-                            </option>
-                <option value="256001">Amazonas</option>
-				<option value="7002">Antioquia</option>
-				<option value="256002">Arauca</option>
-				<option value="7003">Atlántico</option>
-				<option value="7000">Bogotá</option>
-				<option value="7004">Bolivar</option>
-				<option value="7022">Boyacá</option>
-				<option value="7012">Caldas</option>
-				<option value="7021">Caquetá</option>
-				<option value="256003">Casanare</option>
-				<option value="7019">Cauca</option>
-				<option value="7023">Chocó</option>
-				<option value="7014">Cundinamarca</option>
-				<option value="7016">César</option>
-				<option value="7017">Córdoba</option>
-				<option value="256004">Guainía</option>
-				<option value="256005">Guaviare</option>
-				<option value="7011">Huila</option>
-				<option value="7020">La Guajira</option>
-				<option value="7008">Magdalena</option>
-				<option value="7013">Meta</option>
-				<option value="7010">Nariño</option>
-				<option value="7005">Norte de Santander</option>
-				<option value="256006">Putumayo</option>
-				<option value="7015">Quindío</option>
-				<option value="7007">Risaralda</option>
-				<option value="256007">San Andrés y Providencia</option>
-				<option value="7006">Santander</option>
-				<option value="7018">Sucre</option>
-				<option value="7009">Tolima</option>
-				<option value="7001">Valle del Cauca</option>
-				<option value="256008">Vaupés</option>
-				<option value="256009">Vichada</option>
-		</select>
-        <select name="city" id="txtciudEmpresa" class="labels">
-				<option value="0">Selecciona una ciudad</option>
-				<option value="69531">San Juan de Pasto</option>
-				<option value="69533">Ipiales</option>
-				<option value="69567">Nariño</option>
-				<option value="69532">Tumaco</option>
-				<option value="69534">Túquerres</option>
-				<option value="69535">La Unión</option>
-				<option value="69550">Chachagüí</option>
-				<option value="69537">Sandoná</option>
-				<option value="69553">Buesaco</option>
-				<option value="69542">El Tambo</option>
-				<option id="other-city-option" value="-1">Otro</option>
-       </select>
-        <div><span class="label">Añade una dirección: </span><input id="txtciudEmpresas" /></div>
-        <div><span class="label">Correo Electronico: </span><input id="txtcorreoEmpresa" /></div>
-        <div><span class="label">Tiempo Minimo: </span><input id="txttimeEmpresa" /></div>
-        <div><span class="label">Valor Minimo Pedidos: </span><input id="txtvalorMinimoPedido" /></div>
+        <h2>Registro Usuario</h2>
+        <div><span class="label"> <b> * </b>Cedula o Rut: </span><input id="txtcedulaCliente" /></div>
+        <div><span class="label"> <b> * </b>Nombre: </span><input id="txtnomCliente" /></div>
+<div><span class="label"> <b> * </b>Primer apellido: </span><input id="txtapellidoPaterno" /></div>
+<div><span class="label"> <b>  </b>Segundo apellido: </span><input id="txtapellidoMaterno" /></div>
+<div><span class="label"> <b> * </b>Correo electrónico: </span><input id="txtCorreoCliente" /></div>
+<p class="help-block"> Este dato será su usuario para ingresar al Portal.</p>
+<div><span class="label"> <b> * </b>Contraseña: </span><input id="Usuario_password" /></div>
+<p class="help-block"> La contraseña debe tener una longitud de entre 8 y 16 caracteres. Deberá incluir letras minúsculas, al menos una letra mayúscula y un número.</p>
+<div><span class="label"> <b> * </b>Confirmar contraseña: </span><input id="registroUsuario_confirmacion" /></div>
+<div><span class="label"> <b> * </b>Telefono: </span><input id="txtTelefonoCliente" /></div>
+<div><span class="label"> <b> * </b>Pregunta para recuperar contraseña: </span></div>
         
-        <select id="idGrupo" name="categoria" >        	
-        	<option value="Restaurante">Restaurante</option>
-        	<option value="Talleres">Talleres</option>
-        	<option value="Drogeria">Drogeria</option>
-        	<option value="Drogeria">carniceria</option>
-        	<option value="Drogeria">servicio de compañias</option>
-        </select>
-        <div><input id="btnCrearEmpresa" type="submit" class="btn btn-small" value="Enviar"></div>
+       <select name="registroUsuario.pregunta" id="registroCliente_pregunta" class="form-control">
+    <option value="¿Cuál es el nombre de tu tío/tía favorito?">¿Cuál es el nombre de tu tío/tía favorito?</option>
+    <option value="¿Cuál es el nombre de tu primo/prima mayor?">¿Cuál es el nombre de tu primo/prima mayor?</option>
+    <option value="¿Cuál es el apodo de tu hijo/hija menor?">¿Cuál es el apodo de tu hijo/hija menor?</option>
+    <option value="¿Cuál es el apodo de tu hijo/hija mayor?">¿Cuál es el apodo de tu hijo/hija mayor?</option>
+    <option value="¿Cuál es el nombre de tu sobrino/sobrina mayor?">¿Cuál es el nombre de tu sobrino/sobrina mayor?</option>
+    <option value="¿Dónde pasaste tu luna de miel?">¿Dónde pasaste tu luna de miel?</option>
+    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+    <option value="¿Quién es tu actor/actriz favorito(a)?">¿Quién es tu actor/actriz favorito(a)?</option>
+    <option value="¿Quién fué tu mejor primer amigo(a)?">¿Quién fué tu mejor primer amigo(a)?</option>
+    <option value="¿Cuál era tu comida favorita en tu niñez?">¿Cuál era tu comida favorita en tu niñez?</option>
+    <option value="¿Cómo se llama tu mascota?">¿Cómo se llama tu mascota?</option>
+    <option value="¿Quién es tu cantante favorito(a)?">¿Quién es tu cantante favorito(a)?</option>
+    <option value="¿Cuál es el libro que más te gusta?">¿Cuál es el libro que más te gusta?</option>
+    <option value="¿Cuál es el nombre de tu equipo de deporte favorito?">¿Cuál es el nombre de tu equipo de deporte favorito?</option>
+    <option value="¿De qué marca era tu primera bicicleta?">¿De qué marca era tu primera bicicleta?</option>
+    <option value="¿Dónde nació tu papá?">¿Dónde nació tu papá?</option>
+    <option value="¿Cuál es tu personaje de película favorito?">¿Cuál es tu personaje de película favorito?</option>
+    <option value="¿De qué marca era tu primer coche?">¿De qué marca era tu primer coche?</option>
+    <option value="¿De qué marca era tu primer moto?">¿De qué marca era tu primer moto?</option>
+    <option value="¿Dónde nació tu mamá?">¿Dónde nació tu mamá?</option>
+</select>
+<div><span class="label"> <b> * </b>Respuesta: </span></div>
+<input type="text" name="registroUsuario.respuesta" size="40" maxlength="50" value="" id="registroUsuario_respuesta" class="form-control">
+
+        <div><input id="btnCrearCliente" type="submit" class="btn btn-small" value="Enviar"></div>
         <br>
         <br>
-        <h2>Crear Categorias</h2>
-         <div><span class="label">websafheKey: </span><input id="txtwebsafeKey" /></div>
-        <div><span class="label">Nombre Categoria: </span><input id="txtnomCategoria" /></div>
-        <div><input id="crearCategoria" type="submit" value="Aceptar"></div>
-        <div><input id="btncrearCategoria" type="submit" value="crear categoria"></div>
-        
-        <h2>Crear Productos</h2>
-        
-         <div id="lista">
-              <select id="listbox" onchange="Seleccionar()">
-              </select>
-        </div>
-        <div><span class="label">websafeKeyCategoria: </span><input id="txtwebsafeKeyCategoria" /></div>    
-        <div><span class="label">Nombre producto: </span><input id="txtnomProducto" /></div>        
-        <div><span class="label">Descripcion producto: </span><input id="txtdesProducto" /></div>        
-        <div><span class="label">Precio producto: </span><input id="txtprecioProducto" /></div>
-        <div><input id="btncrearProducto" type="submit" value="Crear Producto"></div>
+       
         
     </form>
      <div id="respuesta"></div>
@@ -125,8 +77,10 @@
   
     
      <form action="javascript:void(0);">
-        <h2>Lista Empresa</h2>
-        <div><input id="listQuote" type="submit" value="Listar Empresasa"></div>
+        <h2>Lista Clientes</h2>
+        
+        <div><input id="btnConsultarCliente" type="submit" value="verificar empresa Empresasa"></div>
+         <div><input id="irlogin" type="submit" value="ir a login" onclick="location='loginDoomiCliente.html'"></div>
        
     </form>
     <div id="listQuotesResult"></div>
@@ -142,5 +96,4 @@
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
 </div>
 </body>
-
 </html>

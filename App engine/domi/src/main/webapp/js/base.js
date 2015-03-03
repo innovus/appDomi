@@ -164,6 +164,7 @@ window.onload = function()
     // Cogemos los valores pasados por get
     var valores=getGET();
     var valorid = "";
+    var keyCliente = "57";
     if(valores)
     {
         // hacemos un bucle para pasar por cada indice del array de valores
@@ -174,14 +175,32 @@ window.onload = function()
         	document.getElementById("keyCliente").value =valorid;
         }
        // crearCategoria();
+        keyCliente = valorid;
+   	 var requestData = {};
+   	 requestData.keyCliente = keyCliente;
+   	 gapi.client.domi.getEmpresaXCliente(requestData).execute(function(resp){
+   		 if (!resp.code) {
+                resp.items = resp.items || [];
+                var result = "";
+               for (var i=0;i<resp.items.length;i++) {
+                        //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+            	   result =  result+ resp.items[i].websafeKey ;
+                }
+               
+               document.getElementById("txtwebsafeKey").value =result;
+                    	
+                
+       }
+   		 	
+   	});
        
     }else{
         // no se ha recibido ningun parametro por GET
         document.write("<br>No se ha recibido ningún parámetro");
     }
 	//document.getElementById("keyCliente").value ="57";
-    crearCategoria();
-    llenarSelect
+    
+   
 }
 
 
@@ -289,16 +308,29 @@ function creacate(){
 	 
 }
 
-function crearProducto(){
-	 var lista=document.getElementById("listbox");
-	 var texto = "juan";
-	 for(var i =0;i<10;i++){
-	 lista.options.add(new Option(texto,"ser, estar"));
-	 }
-	 document.getElementById("txtwebsafeKeyCategoria").value =" ";
+function crearProductos(){
+	
+	 var websafeKeyCategoria = document.getElementById('txtwebsafeKeyCategoria').value;
 	 var nombreProducto = document.getElementById('txtnomProducto').value;
 	 var descripcionProducto = document.getElementById('txtdesProducto').value;
 	 var precioProducto = document.getElementById('txtprecioProducto').value;
+	 var requestData = {};
+	 requestData.websafeKeyCategoria = websafeKeyCategoria;
+	 requestData.nombreProducto = nombreProducto;
+	 requestData.descripcionProducto = descripcionProducto;
+	 requestData.precioProducto = precioProducto;
+	 gapi.client.domi.crearProductos(requestData).execute(function(resp) {
+	    	
+    	 if (!resp.code) {
+            
+            // console.log( resp.ciudad + ":" + resp.descripcion + ":" + resp.tiempoMinimo + ":" + resp.nombre +":" + resp.grupos + ":" + resp.valorMinimoPedido  );
+             console.log( resp.websafeKeyCategoria + ":" + resp.nombreProducto + ":" + resp.descripcionProducto + ":" + resp.precioProducto );
+         }
+		
+		//document.getElementById('respuesta').innerHTML = nomEmpresa;
+		
+	});
+	 
 	 
 	 
 	
@@ -340,47 +372,90 @@ function comprobarEmpresa(){
 }
 
 function llenarSelect(){
-	document.getElementById("listbox").options.length = 0;
-	var lista=document.getElementById("listbox");
-	 var webSafeEmpresaKey = document.getElementById('txtwebsafeKey').value;
-	 document.getElementById("txtprecioProducto").value = webSafeEmpresaKey;
-	 var requestData = {};
-	 requestData.webSafeEmpresaKey = webSafeEmpresaKey;
-	 gapi.client.domi.getCategoriasXEmpresa(requestData).execute(function(resp){
-		 if (!resp.code) {
-             resp.items = resp.items || [];
-             var result = "";
-            for (var i=0;i<resp.items.length;i++) {
-                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
-         	   result =  result+ resp.items[i].nombreCategoria;
-         	  	 lista.options.add(new Option(result,result));
-         	     result = "";
-             }
-            
-            //document.getElementById("txtwebsafeKeyCategoria").value =result;
-          //  document.getElementById('listQuotesResult').innerHTML = result;   	
-            //var comprobar = document.getElementById('listbox').value;
-        	//rdocument.getElementById("txtwebsafeKeyCategoria").value =comprobar;
-             
-    }
-		crearProducto();	
-	});
+	crearProducto();
 	
 }
 
 function crearProducto(){
 	
 	//var comprovarr = document.getElementById("txtnomProducto").value;
-	 var comprobarr =document.getElementById("txtnomProducto").value;
-	 if(comprobarr ==" "){
-		 alert("Aun no as creado tu empresa");
- 	}
+	 var comprobarr = document.getElementById('listbox').value;
+	 document.getElementById('txtwebsafeKeyCategoria').value = comprobarr;
+	 //document.getElementById('txtwebsafeKeys').value.length < 1 
+	 //lista.options[lista.selectedIndex].text
+	 if(document.getElementById('txtwebsafeKeyCategoria').value.length < 1){
+		 alert("aun no has creado categorias");
+		 document.getElementById("listbox").options.length = 0;
+		 document.getElementById('txtwebsafeKeyCategoria').value = " ";
+		 
+		}
 	 else{
 		 
-		 alert("vida hp");
+		 crearProductos();
+		 
 		 
 		 
 	 }
+	
+}
+function seleccionarCategoria(){
+	clave();
+	//selectCategoria();
+	//var comprobarr = document.getElementById('listbox').value;
+	//document.getElementById('txtwebsafeKeyCategoria').value = comprobarr;
+	
+}
+function agrgarclavel(){
+	var comprobarr = document.getElementById('listbox').value;
+	document.getElementById('txtwebsafeKeyCategoria').value = comprobarr;	
+}
+
+function selectCategoria(){
+	document.getElementById("listbox").options.length = 0;
+	var lista=document.getElementById("listbox");
+	 var webSafeEmpresaKey = document.getElementById('txtwebsafeKey').value;
+	 var requestData = {};
+	 requestData.webSafeEmpresaKey = webSafeEmpresaKey;
+	 gapi.client.domi.getCategoriasXEmpresa(requestData).execute(function(resp){
+		 if (!resp.code) {
+             resp.items = resp.items || [];
+             var result = "";
+             var key = "";
+            for (var i=0;i<resp.items.length;i++) {
+                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+         	   result =  result+ resp.items[i].nombreCategoria;
+         	  key =  key+ resp.items[i].wefSafeKey;
+         	   
+         	  	 lista.options.add(new Option(result,key));
+         	  	 result = "";
+         	    key = "";
+             }
+                      
+    }
+		
+		
+	});
+}
+
+function clave(){
+	 var keyCliente = document.getElementById('keyCliente').value;
+	 var requestData = {};
+	 requestData.keyCliente = keyCliente;
+	 gapi.client.domi.getEmpresaXCliente(requestData).execute(function(resp){
+		 if (!resp.code) {
+             resp.items = resp.items || [];
+             var result = "";
+            for (var i=0;i<resp.items.length;i++) {
+                     //result = result+ resp.items[i].message + "..." + "<b>" + resp.items[i].author + "</b>" + "[" + resp.items[i].id + "]" + "<br/>";
+         	   result =  result+ resp.items[i].websafeKey ;
+             }
+            
+            document.getElementById("txtwebsafeKey").value =result;
+                 	
+             
+    }
+		 selectCategoria();	
+	});
 	
 }
 
@@ -402,6 +477,14 @@ google.devrel.samples.hello.enableButtons = function() {
 	  document.getElementById('btncrearProducto').onclick = function() {
 		  CategoriaXEmpresa();
 	    }	
+	  document.getElementById('listbox').onclick = function() {
+		  agrgarclavel();
+	    }	
+	  document.getElementById('btnguardarProducto').onclick = function() {
+		  seleccionarCategoria();
+	    }	
+	  
+	  
 	  
 	  
 	 
