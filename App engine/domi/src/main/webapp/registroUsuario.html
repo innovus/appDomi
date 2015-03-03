@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello domi!</title>
+    <script type="text/javascript" src="/js/baseUsuario.js"></script>
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Domi Innovus!</a>
+            <div class="nav-collapse collapse pull-right">
+                <a href="javascript:void(0);" class="btn" id="signinButton" onclick="location='loginDoomiCliente.html'">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div id="outputLog"></div>
+
+    <form action="javascript:void(0);">
+        <h2>Registro Usuario</h2>
+	        <div><span class="label"> <b> * </b>Nombre de usuario: </span><input id="txtNombreUsuario" /></div>
+			<div><span class="label"> <b> * </b>Correo electrónico: </span><input id="txtCorreoUsuario" /></div>
+			<p class="help-block"> Este dato será su usuario para ingresar al Portal.</p>
+			<div><span class="label"> <b> * </b>Contraseña: </span><input id="txtPasswordUsuario" /></div>
+			<p class="help-block"> La contraseña debe tener una longitud de entre 8 y 16 caracteres. Deberá incluir letras minúsculas, al menos una letra mayúscula y un número.</p>
+			<div><span class="label"> <b> * </b>Confirmar contraseña: </span><input id="txtRepitePasswor" /></div>
+			<div><span class="label"> <b> * </b>Telefono: </span><input id="txtTelefonoUsuario" /></div>
+		
+        
+      
+
+        <div><input id="btnCrearUsuario" type="submit" class="btn btn-small" value="Enviar"></div>
+       
+        
+    </form>
+         
+    <div id="listQuotesResult"></div>
+
+    <script type="text/javascript">
+        function init() {
+            //google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
+             google.devrel.samples.hello.init('http://localhost:8080/_ah/api');
+             //google.devrel.samples.hello.init('https://domi-app.appspot.com/_ah/api');
+        	 
+        }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+</div>
+</body>
+</html>

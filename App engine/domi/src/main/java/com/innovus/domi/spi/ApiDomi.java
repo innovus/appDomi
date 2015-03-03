@@ -22,9 +22,11 @@ import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Cliente;
 import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.domain.Producto;
+import com.innovus.domi.domain.Usuario;
 import com.innovus.domi.form.ClienteForm;
 import com.innovus.domi.form.EmpresaForm;
 import com.innovus.domi.form.ProductoForm;
+import com.innovus.domi.form.UsuarioForm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +112,23 @@ public class ApiDomi {
 	   * @return A newly created Conference Object.
 	   * @throws UnauthorizedException when the user is not signed in.
 	   */
+	  
+	  @ApiMethod(name="crearUsuario",path="usuario",httpMethod=HttpMethod.POST)
+	  public Usuario crearUsuario(final UsuarioForm usuarioForm){
+		  
+		  final Key<Usuario> usuarioKey=factory().allocateId(Usuario.class);
+		  final long usuarioId=usuarioKey.getId();
+		  Usuario usuario =ofy().transact(new Work<Usuario>(){
+			  @Override
+	          public Usuario run(){
+				  Usuario usuario = new Usuario(usuarioId,usuarioForm);
+				  ofy().save().entities(usuario).now();
+				  return usuario;
+			  }  
+		  });
+		  return usuario;
+	  }
+	  
 	  @ApiMethod(name="crearCliente",path="cliente",httpMethod=HttpMethod.POST)
 	  public Cliente createCliente(final ClienteForm clienteForm){
 		  
