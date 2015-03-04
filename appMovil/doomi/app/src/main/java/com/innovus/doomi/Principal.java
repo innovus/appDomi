@@ -86,54 +86,11 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     //hace click en el fragmento y haga esto
     @Override
     public void onButtonClick() {
-  //      new EmpresaFragment.HttpRequestTaska(this).execute();
-        //fragments.HttpRequestTaska este = new EmpresaFragment.HttpRequestTaska();
-
-
         if (fragments != null) {
-            // If article frag is available, we're in two-pane layout...
-
-
             new HttpRequestTask(this).execute();
-            // Call a method in the ArticleFragment to update its content
-
 
         }
 
     }
-
-/*
-    private void setTabs(){
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.addTab(actionBar.newTab().setText("Categorias").setTabListener(this));
-        actionBar.addTab(actionBar.newTab().setText("Empresas").setTabListener(this));
-
-    }
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-        for(Fragment fragment: fragments){//por cada elemento de fragment obten ese fragment
-            fragmentTransaction.hide(fragment);//oculto todo reinico todo
-
-
-        }
-        fragmentTransaction.show(fragments[tab.getPosition()]);//muestreme el fragmento donde yo hice click
-
-
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-*/
-
 
 }

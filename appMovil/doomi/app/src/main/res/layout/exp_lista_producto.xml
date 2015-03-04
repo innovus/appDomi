@@ -55,6 +55,20 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="$12.000"
                 android:id="@+id/txtPrecio" />
+
+            <ImageButton
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:maxHeight="20dp"
+
+                android:id="@+id/imageButton"
+                android:background="#fff"
+                android:src="@mipmap/ic_add_circle_outline_grey600_18dp"
+                android:layout_gravity="right" />
+
+
+
+
         </LinearLayout>
 
 

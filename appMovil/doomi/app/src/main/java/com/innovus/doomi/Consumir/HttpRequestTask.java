@@ -38,10 +38,6 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
         this.activity = activity;
     }
 
-
-
-
-
     @Override
     protected List<Empresa> doInBackground(Void... params) {
         if (myApiService == null) { // Only do this once
@@ -66,8 +62,6 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
             //  Log.e("Error",e);
             return Collections.EMPTY_LIST;
         }
-
-
     }
 
     @Override
@@ -78,10 +72,5 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
              recyclerView.setAdapter(new EmpresasAdapter(result, R.layout.row_empresas,activity));
             recyclerView.setLayoutManager(new LinearLayoutManager (activity));//linear x q es lienas o si no tambn grillas
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
     }
-
-
 }
