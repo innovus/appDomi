@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ public class ProductoPedidos extends ActionBarActivity {
     TextView producto ;
     TextView descripcion;
     TextView precio;
+    EditText etCantidad;
+    EditText etObservacion;
 
     String websafeKey;
     String nombreProducto ;
@@ -26,6 +29,7 @@ public class ProductoPedidos extends ActionBarActivity {
     String precioProducto;
     String cantidad ;
     String observacion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +48,17 @@ public class ProductoPedidos extends ActionBarActivity {
         precioProducto = getIntent().getStringExtra("precio");
 
 
+        //casteo los valores
 
         precio = (TextView) this.findViewById(R.id.txtPrecioP);
         producto = (TextView) this.findViewById(R.id.nomProductoP);
         descripcion = (TextView) this.findViewById(R.id.descProductoP);
+        etCantidad = (EditText) this.findViewById(R.id.etCantidad);
+        etObservacion = (EditText) this.findViewById(R.id.etObservacion);
+
+
+
+        //pongo los valores q traigo en los text
         producto.setText(nombreProducto);
         descripcion.setText(descripcionProducto);
         precio.setText("$" + precioProducto);
@@ -80,6 +91,9 @@ public class ProductoPedidos extends ActionBarActivity {
     public void alta(View v) {
         DbProductos  admin = new DbProductos(this,"administracion", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase();
+        observacion = etObservacion.getText().toString();
+        cantidad = etCantidad.getText().toString();
+
 
         ContentValues registro = new ContentValues();  //es una clase para guardar datos
         registro.put("websafeKey", websafeKey);
@@ -87,8 +101,9 @@ public class ProductoPedidos extends ActionBarActivity {
         registro.put("descripcionProducto", descripcionProducto);
         registro.put("precioProducto", precioProducto);
         registro.put("observacion", observacion);
+
         registro.put("cantidad", cantidad);
-        bd.insert("votantes", null, registro);
+        bd.insert("productos", null, registro);
         bd.close();
 
         Toast.makeText(this, "Se Agrego el producto al carrito",
