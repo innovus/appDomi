@@ -1,5 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondo"
     tools:context="com.innovus.doomi.Activities.ProductoPedidos">
@@ -7,86 +9,149 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/include" />
+        />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="15dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:id="@+id/linearLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Producto"
+            android:id="@+id/textView2" />
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:text="Gaseosa"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/texto"
+            android:layout_alignParentTop="true"
+            android:paddingTop="3dp"
+            android:paddingBottom="15dp"
+            android:id="@+id/nomProductoP" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Descripcion"
+            android:id="@+id/textView3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Tiene Pan "
+            android:paddingTop="3dp"
+            android:paddingBottom="15dp"
+            android:textColor="@color/texto"
+
+
+
+            android:id="@+id/descProductoP" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Precio"
+                android:id="@+id/textView4"
+                android:layout_weight="0.6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Cantidad"
+                android:id="@+id/textView"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="0.4" />
+
+
+
+        </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
-        android:padding="10dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:id="@+id/linearLayout">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            >
-
-            <TextView android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                android:text="Gaseosa"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/texto"
-                android:layout_alignParentTop="true"
-                android:id="@+id/nomProductoP" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Tiene Pan "
-                android:textColor="@color/text_color"
-
-
-                android:id="@+id/descProductoP" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
+        >
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_weight="4">
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="$12.000"
+            android:paddingBottom="10dp"
+            android:paddingTop="6dp"
+            android:id="@+id/txtPrecioP"
+            android:layout_weight="0.5" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="right"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="$12.000"
-                android:id="@+id/txtPrecioP" />
-        </LinearLayout>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="3"
+            android:id="@+id/editText"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:layout_marginRight="70dp"
+            android:layout_weight="0.09" />
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Observacion"
+            android:id="@+id/textView5" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:ems="20"
+            android:id="@+id/editText2"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
     </LinearLayout>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar al Carrito"
+            android:id="@+id/button"
+            android:background="@color/accent"
+            android:textColor="@color/abc_primary_text_disable_only_material_dark"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cantidad"
-        android:padding="10dp"
-        android:id="@+id/textView"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
 
-    <!--
-    <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/numberPicker"
-        android:minWidth="100dip"
-        android:layout_alignTop="@+id/linearLayout"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
-        -->
+
 
 
 </RelativeLayout>

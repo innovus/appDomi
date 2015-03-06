@@ -20,22 +20,25 @@ public class ProductoPedidos extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_producto_pedidos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
-        //String nomResta = getIntent().getStringExtra("nombre");
-        toolbar.setTitle(getIntent().getStringExtra("nombre"));
+        String nomResta = getIntent().getStringExtra("nombre");
+        toolbar.setTitle(nomResta);
+
         setSupportActionBar(toolbar);
+
         precio = (TextView) this.findViewById(R.id.txtPrecioP);
         producto = (TextView) this.findViewById(R.id.nomProductoP);
         descripcion = (TextView) this.findViewById(R.id.descProductoP);
-        producto.setText(getIntent().getStringExtra("nombre")) ;
-        descripcion.setText(getIntent().getStringExtra("descripcion")) ;
-        precio.setText("$" + getIntent().getStringExtra("precio")) ;
-      /*  NumberPicker Np = (NumberPicker) findViewById (R.id.numberPicker);
+        producto.setText(getIntent().getStringExtra("nombre"));
+        descripcion.setText(getIntent().getStringExtra("descripcion"));
+        precio.setText("$" + getIntent().getStringExtra("precio"));
+        /*
+        NumberPicker Np = (NumberPicker) findViewById (R.id.numberPicker);
 
         Np.setMaxValue(100);
         Np.setMinValue(1);
         Np.setFocusable(true);
         Np.setFocusableInTouchMode(true);
-*/
+        */
 
 
 
