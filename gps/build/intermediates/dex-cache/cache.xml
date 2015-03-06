@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\github\gps\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\github\gps\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-07136e1a119463f54bdb0f02e222339b704c761c.jar" />
+    </item>
+    <item
+        jar="C:\github\gps\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\github\gps\app\build\intermediates\pre-dexed\debug\classes-d1659b8f815b40f9c6d08e17333279e76191ee53.jar" />
+    </item>
+    <item
+        jar="C:\Users\jhonf\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\github\gps\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-8ad42ebdf90f0c38f242ac230dce32b4b672b9cb.jar" />
+    </item>
+    <item
+        jar="C:\github\gps\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\github\gps\app\build\intermediates\pre-dexed\debug\classes-5cd50fe154829f23dcfc05d96e770f0087d387a9.jar" />
+    </item>
+
+</items>
