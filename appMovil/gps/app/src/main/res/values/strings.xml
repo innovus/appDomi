@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DOOMI</string>
+    <string name="hello_world">Esta es tu Ubicacion</string>
+    <string name="action_settings">Settings</string>
+    <string name="reminder">Reminder name</string>
+    <string name="done">correcto</string>
+
+
+</resources>
