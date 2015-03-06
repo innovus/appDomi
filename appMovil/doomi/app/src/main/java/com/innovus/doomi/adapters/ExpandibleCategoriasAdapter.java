@@ -118,7 +118,7 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
                 i.putExtra("nombre",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getNombreProducto() );
                 i.putExtra("descripcion",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getDescripcionProducto() );
                 i.putExtra("precio", mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto().toString() );
-                i.putExtra("webSafeKey",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() );
+                i.putExtra("websafeKey",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() );
 
 
                 // i.putExtra("nombre", propiedades.getNombre());

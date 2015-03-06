@@ -127,23 +127,6 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
         final ExpandibleCategoriasAdapter mAdaptador= new ExpandibleCategoriasAdapter (activity,arrayParents,R.layout.exp_lista_categoria,R.layout.exp_lista_producto);
         mExpandableList.setAdapter(mAdaptador);
        // mExpandableList.setOnChildClickListener(this);
-       mExpandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent,
-                                        View v, int groupPosition, int childPosition,
-                                        long id) {
-
-                   Producto alumno =  mAdaptador.getChild(groupPosition, childPosition);
-                    Toast.makeText(activity,  "hbhhjbjjhh - ", Toast.LENGTH_LONG).show();
-                    // Se retorna true para indicar que el evento ya ha sido gestionado.
-                    return false;
-
-
-
-
-            }
-        });
-
 
         //mExpandableList.setAdapter(new ExpandibleCategoriasAdapter(activity,arrayParents));
 

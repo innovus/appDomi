@@ -1,20 +1,31 @@
 package com.innovus.doomi.Activities;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.innovus.doomi.R;
+import com.innovus.doomi.db.DbProductos;
 
 public class ProductoPedidos extends ActionBarActivity {
     TextView producto ;
     TextView descripcion;
     TextView precio;
 
+    String websafeKey;
+    String nombreProducto ;
+    String descripcionProducto ;
+    String precioProducto;
+    String cantidad ;
+    String observacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,26 +36,21 @@ public class ProductoPedidos extends ActionBarActivity {
 
         setSupportActionBar(toolbar);
 
+        //traigo los valores de el otro intent
+
+        websafeKey = getIntent().getStringExtra("websafeKey");
+        nombreProducto = getIntent().getStringExtra("nombre");
+        descripcionProducto = getIntent().getStringExtra("descripcion");
+        precioProducto = getIntent().getStringExtra("precio");
+
+
+
         precio = (TextView) this.findViewById(R.id.txtPrecioP);
         producto = (TextView) this.findViewById(R.id.nomProductoP);
         descripcion = (TextView) this.findViewById(R.id.descProductoP);
-        producto.setText(getIntent().getStringExtra("nombre"));
-        descripcion.setText(getIntent().getStringExtra("descripcion"));
-        precio.setText("$" + getIntent().getStringExtra("precio"));
-        /*
-        NumberPicker Np = (NumberPicker) findViewById (R.id.numberPicker);
-
-        Np.setMaxValue(100);
-        Np.setMinValue(1);
-        Np.setFocusable(true);
-        Np.setFocusableInTouchMode(true);
-        */
-
-
-
-
-
-
+        producto.setText(nombreProducto);
+        descripcion.setText(descripcionProducto);
+        precio.setText("$" + precioProducto);
 
     }
 
@@ -69,5 +75,23 @@ public class ProductoPedidos extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void alta(View v) {
+        DbProductos  admin = new DbProductos(this,"administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        ContentValues registro = new ContentValues();  //es una clase para guardar datos
+        registro.put("websafeKey", websafeKey);
+        registro.put("nombreProducto", nombreProducto);
+        registro.put("descripcionProducto", descripcionProducto);
+        registro.put("precioProducto", precioProducto);
+        registro.put("observacion", observacion);
+        registro.put("cantidad", cantidad);
+        bd.insert("votantes", null, registro);
+        bd.close();
+
+        Toast.makeText(this, "Se Agrego el producto al carrito",
+                Toast.LENGTH_SHORT).show();
     }
 }

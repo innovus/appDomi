@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Producto"
+            android:text="@string/producto"
             android:id="@+id/textView2" />
         <TextView android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Descripcion"
+            android:text="@string/descripcion"
             android:id="@+id/textView3" />
 
         <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Precio"
+                android:text="@string/precio"
                 android:id="@+id/textView4"
                 android:layout_weight="0.6" />
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="3"
-            android:id="@+id/editText"
+            android:id="@+id/etCantidad"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:layout_marginRight="70dp"
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Observacion"
+            android:text="@string/observacion"
             android:id="@+id/textView5" />
 
         <EditText
@@ -131,7 +131,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:ems="20"
-            android:id="@+id/editText2"
+            android:id="@+id/etObservacion"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -141,7 +141,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Agregar al Carrito"
+            android:text="@string/btnaddcarrito"
             android:id="@+id/button"
             android:background="@color/accent"
             android:textColor="@color/abc_primary_text_disable_only_material_dark"
