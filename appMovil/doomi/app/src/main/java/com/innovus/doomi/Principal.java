@@ -2,6 +2,7 @@ package com.innovus.doomi;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.innovus.doomi.Consumir.HttpRequestTask;
+import com.innovus.doomi.db.DbProductos;
 import com.innovus.doomi.fragments.CirculoFragment;
 import com.innovus.doomi.fragments.EmpresaFragment;
 
@@ -23,7 +25,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     private CirculoFragment circulo = new CirculoFragment() ;
 
     /*private Fragment[] fragments = new Fragment[]{
-        new CategoriaFragment(), new EmpresaFragment()
+        new CarritoProductosFragment(), new EmpresaFragment()
         };*/
     //private Fragment fragmento = new EmpresaFragment();
     private static final String LOG_TAG = "MainActivity";
@@ -62,8 +64,15 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         }
         fragmentTransaccion.show(fragments[0]).commit();//muestre el elemento cero  y muestre los cambios q se han hecho
     */
-    }
+        //eliminar base de datos
+        DbProductos admin = new DbProductos(this,"administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
 
+        bd.execSQL("DELETE FROM productos ");
+        admin.close();
+        new HttpRequestTask(this).execute();
+
+    }
 
 
     @Override
@@ -81,6 +90,16 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        DbProductos admin = new DbProductos(this,"administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
+
+        bd.execSQL("DELETE FROM productos ");
+        admin.close();
+        //Nuestro código a ejecutar en este momento
     }
 
     //hace click en el fragmento y haga esto

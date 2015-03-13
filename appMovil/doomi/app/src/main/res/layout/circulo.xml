@@ -9,7 +9,7 @@
         android:id="@+id/pink_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_icon="@drawable/ic_cached_black_36dp"
+        fab:fab_icon="@drawable/ic_action_location_found"
         fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="@color/accent"
         

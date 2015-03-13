@@ -50,9 +50,6 @@ public class EmpresaFragment extends Fragment {
         recyclerView.setAdapter(new EmpresasAdapter(pusheenArrayList,R.layout.row_empresas,getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-        new HttpRequestTask(getActivity()).execute();
-
     }
+
 }

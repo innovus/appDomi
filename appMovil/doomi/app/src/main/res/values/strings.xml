@@ -15,5 +15,14 @@
     <string name="cantidad">Cantidad</string>
     <string name="observacion">Observacion</string>
     <string name="btnaddcarrito">Agregar al Carrito</string>
+    <string name="btnverpedido">Revisa tu Pedido = $0</string>
+    <string name="title_activity_carrito">Carrito</string>
+    <string name="title_activity_editar_pedido">EditarPedido</string>
+    <string name="btn_editar_pedido">Guardar Pedido</string>
+    <string name="btn_confirmar">Confirmar Compra</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

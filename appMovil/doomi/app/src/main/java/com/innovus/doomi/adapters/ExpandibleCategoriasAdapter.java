@@ -125,7 +125,7 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
                 view.getContext().startActivity(i);
 
                 // Intent i = new Inten
-                Toast.makeText(view.getContext(), mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() , Toast.LENGTH_SHORT).show();
+               // Toast.makeText(view.getContext(), mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -148,19 +148,7 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
         int childPosition;
          int groupPosition;
 
-       /* inflater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Intent i = new Inten
-                Intent i = new Intent (activity, Productos.class);
-                i.putExtra("llave", propiedades.getWebsafeKey());
-                i.putExtra("nombre", propiedades.getNombre());
-                activity.startActivity(i);
 
-
-                // Toast.makeText(view.getContext(),"llave de consulta: "+ propiedades.getWebsafeKey(),Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
     }
 

@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-        mi_servicio servicio=new mi_servicio(getApplicationContext());
+       // mi_servicio servicio=new mi_servicio(getApplicationContext());
     }
 
 

@@ -38,6 +38,14 @@
             android:name=".Activities.ProductoPedidos"
             android:label="@string/title_activity_producto_pedidos" >
         </activity>
+        <activity
+            android:name=".Activities.Carrito"
+            android:label="@string/title_activity_carrito" >
+        </activity>
+        <activity
+            android:name=".Activities.EditarPedido"
+            android:label="@string/title_activity_editar_pedido" >
+        </activity>
     </application>
 
 </manifest>

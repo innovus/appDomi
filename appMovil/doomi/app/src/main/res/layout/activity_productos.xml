@@ -19,27 +19,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/expandableListView"
         android:cacheColorHint="@color/accent"
-
-
-
         android:background="@color/fondo"
         android:transcriptMode="alwaysScroll"
+
+
         android:listSelector="@android:color/transparent"/>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnaddcarrito"
-        android:id="@+id/button"
+        android:text="@string/btnverpedido"
+        android:id="@+id/btnPedido"
         android:background="@color/accent"
         android:textColor="@color/abc_primary_text_disable_only_material_dark"
-        android:onClick="alta"
+        android:onClick="OnclickCarrito"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"/>
-
-    
-
 
 
 </RelativeLayout>

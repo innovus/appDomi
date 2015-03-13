@@ -53,21 +53,14 @@ public class CirculoFragment extends Fragment {
             }
         });
         return view;
-
-
-
     }
 
     public void buttonClicked (View view) {
        activityCallback.onButtonClick( );
-
-
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
 }

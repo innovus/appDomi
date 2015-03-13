@@ -1,23 +1,20 @@
 package com.innovus.doomi.Activities;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.innovus.doomi.R;
 import com.innovus.doomi.db.DbProductos;
 
-public class ProductoPedidos extends ActionBarActivity {
+public class EditarPedido extends ActionBarActivity {
     TextView producto ;
     TextView descripcion;
     TextView precio;
@@ -30,50 +27,42 @@ public class ProductoPedidos extends ActionBarActivity {
     String precioProducto;
     String cantidad ;
     String observacion;
-    String nomResta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_producto_pedidos);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
-        nomResta = getIntent().getStringExtra("nombre");
-        toolbar.setTitle(nomResta);
-
-        setSupportActionBar(toolbar);
-
-        //traigo los valores de el otro intent
-
-        websafeKey = getIntent().getStringExtra("websafeKey");
-        nombreProducto = getIntent().getStringExtra("nombre");
-        descripcionProducto = getIntent().getStringExtra("descripcion");
-        precioProducto = getIntent().getStringExtra("precio");
-
+        setContentView(R.layout.activity_editar_pedido);
 
         //casteo los valores
 
-        precio = (TextView) this.findViewById(R.id.txtPrecioP);
-        producto = (TextView) this.findViewById(R.id.nomProductoP);
-        descripcion = (TextView) this.findViewById(R.id.descProductoP);
-        etCantidad = (EditText) this.findViewById(R.id.etCantidad);
-        etObservacion = (EditText) this.findViewById(R.id.etObservacion);
+        precio = (TextView) this.findViewById(R.id.txtPrecioPEditar);
+        producto = (TextView) this.findViewById(R.id.nomProductoPEditar);
+        descripcion = (TextView) this.findViewById(R.id.descProductoPEditar);
+        etCantidad = (EditText) this.findViewById(R.id.etCantidadEditar);
+        etObservacion = (EditText) this.findViewById(R.id.etObservacionEditar);
 
-
+        websafeKey = getIntent().getStringExtra("llave");
+        nombreProducto = getIntent().getStringExtra("producto");
+        descripcionProducto = getIntent().getStringExtra("descripcion");
+        precioProducto = getIntent().getStringExtra("precio");
+        observacion = getIntent().getStringExtra("observacion");
+        cantidad = getIntent().getStringExtra("cantidad");
 
         //pongo los valores q traigo en los text
         producto.setText(nombreProducto);
         descripcion.setText(descripcionProducto);
         precio.setText("$" + precioProducto);
-        etCantidad.setText("1");
-        etCantidad.setSelection(etCantidad.getText().length());
-
+        etCantidad.setText(cantidad);
+        etCantidad.setSelection(etCantidad.getText().length());// para que aparesca el cursor al final
+        etObservacion.setText(observacion);
+        etObservacion.setSelection(etObservacion.getText().length());
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_producto_pedidos, menu);
+        getMenuInflater().inflate(R.menu.menu_editar_pedido, menu);
         return true;
     }
 
@@ -91,23 +80,17 @@ public class ProductoPedidos extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void alta(View v) {
-        DbProductos  admin = new DbProductos(this,"administracion", null, 1);
+    public void onClickActualizar(View v) {
+        DbProductos admin = new DbProductos(this,"administracion", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase();
-        observacion = etObservacion.getText().toString();
-        cantidad = etCantidad.getText().toString();
-
 
         ContentValues registro = new ContentValues();  //es una clase para guardar datos
         registro.put("websafeKey", websafeKey);
-        registro.put("nombreProducto", nombreProducto);
-        registro.put("descripcionProducto", descripcionProducto);
-        registro.put("precioProducto", precioProducto);
         registro.put("observacion", observacion);
-
+        cantidad = etCantidad.getText().toString();
+        observacion = etObservacion.getText().toString();
         registro.put("cantidad", cantidad);
-        bd.insert("productos", null, registro);
+        bd.update("productos", registro, "websafeKey = ?",new String[]{websafeKey});
         bd.close();
 
         Toast.makeText(this, "Se Agrego el producto al carrito",
