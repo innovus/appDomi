@@ -52,12 +52,7 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
 
         //lcargo el view con los valores
         Empresa empresa = empresas.get(position);
-        /*
-        holder.nombreEmpresa.setText(empresa.getNombre());
-        holder.descripcionEmpresa.setText(empresa.getDescripcion());
-        holder.minimosEmpresa.setText(empresa.getTiempoMinimo()+ " Min - $" + empresa.getValorMinimoPedido() + " minimo");
-        holder.itemView.setTag(empresa);
-        */
+
         holder.nombreEmpresa.setText(empresa.getNombre());
         holder.descripcionEmpresa.setText(empresa.getDescripcion());
         holder.minimosEmpresa.setText(empresa.getTiempoMinimo()+ " Min - $" + empresa.getValorMinimoPedido() + " minimo");
@@ -78,11 +73,9 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
 
         public ViewHolder(View itemView){
             super(itemView);
-
             nombreEmpresa = (TextView) itemView.findViewById(R.id.nombre);
             descripcionEmpresa = (TextView) itemView.findViewById(R.id.descripcion);
             minimosEmpresa = (TextView) itemView.findViewById(R.id.minimos);
-
 
             //aqui capturo el click de cada cardview
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +83,6 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
                 public void onClick(View view) {
                    // Intent i = new Inten
                     Intent i = new Intent (activity, Productos.class);
-
-
                     i.putExtra("llave", propiedades.getWebsafeKey());
                     i.putExtra("nombre", propiedades.getNombre());
                     activity.startActivity(i);

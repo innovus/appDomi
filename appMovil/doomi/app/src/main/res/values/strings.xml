@@ -5,6 +5,15 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_categorias">Categorias</string>
     <string name="title_activity_productos">Productos</string>
+    <string name="title_activity_producto_pedido">ProductoPedido</string>
+    <string name="title_activity_producto_pedidos">ProductoPedidos</string>
 
+    <string name="producto">Producto</string>
+
+    <string name="descripcion">Descripcion</string>
+    <string name="precio">Precio</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="observacion">Observacion</string>
+    <string name="btnaddcarrito">Agregar al Carrito</string>
 
 </resources>

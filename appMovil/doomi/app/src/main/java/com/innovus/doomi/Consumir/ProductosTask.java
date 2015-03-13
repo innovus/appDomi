@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import java.util.List;
  * Created by Janeth Arcos on 19/02/2015.
  */
 public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
+
 
     // private static com.appspot.domi_app.domi.Domi myApiService = null;
     private com.appspot.domi_app.domi.Domi myApiService = null;
@@ -81,7 +83,7 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
         }
 
     @Override
-    protected void onPostExecute(List<Producto> result) {
+    protected void onPostExecute(List<Producto> result)  {
         ArrayList<Parent> arrayParents = new ArrayList<Parent>();
         ArrayList<Producto> arrayChildren = new ArrayList<Producto>();
 
@@ -122,13 +124,20 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
 
         }
         ExpandableListView mExpandableList = (ExpandableListView)activity.findViewById(R.id.expandableListView);
-        mExpandableList.setAdapter(new ExpandibleCategoriasAdapter(activity,arrayParents));
+        final ExpandibleCategoriasAdapter mAdaptador= new ExpandibleCategoriasAdapter (activity,arrayParents,R.layout.exp_lista_categoria,R.layout.exp_lista_producto);
+        mExpandableList.setAdapter(mAdaptador);
+       // mExpandableList.setOnChildClickListener(this);
 
-
-
-
+        //mExpandableList.setAdapter(new ExpandibleCategoriasAdapter(activity,arrayParents));
 
     }
+   /* @Override
+    public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
+        Producto alumno = (Producto)new ExpandibleCategoriasAdapter(activity,arrayParents, R.layout.exp_lista_categoria,R.layout.exp_lista_producto).getChild(groupPosition, childPosition);
+        Toast.makeText(activity, alumno.getNombreProducto() + " - ", Toast.LENGTH_SHORT).show();
+        // Se retorna true para indicar que el evento ya ha sido gestionado.
+        return true;
+    }*/
 
 
 

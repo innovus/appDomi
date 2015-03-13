@@ -11,14 +11,19 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="40dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginLeft="40dp">
+
+            >
 
             <TextView android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,6 +60,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="$12.000"
                 android:id="@+id/txtPrecio" />
+
+
         </LinearLayout>
 
 

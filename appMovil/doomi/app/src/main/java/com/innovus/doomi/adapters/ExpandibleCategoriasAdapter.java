@@ -1,21 +1,18 @@
 package com.innovus.doomi.adapters;
 
-import android.content.Context;
-
-import android.support.v7.widget.RecyclerView;
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-
-
+import com.appspot.domi_app.domi.model.Producto;
+import com.innovus.doomi.Activities.ProductoPedidos;
 import com.innovus.doomi.modelos.Parent;
-
 import java.util.ArrayList;
-import android.database.DataSetObserver;
-
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.innovus.doomi.R;
 
 import java.util.ArrayList;
@@ -25,10 +22,15 @@ import java.util.ArrayList;
 public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
     private LayoutInflater inflater;
     private ArrayList<Parent> mParent;
+    private ArrayList<ArrayList<Producto>> mHijos; // Alumnos por grupo.
+    private int itemLayouPadre;
+    private int itemLayoutHijo;
 
-    public ExpandibleCategoriasAdapter(Context context, ArrayList<Parent> parent){
+    public ExpandibleCategoriasAdapter(Activity context, ArrayList<Parent> parent, int itemLayoutPadre, int itemLayoutHijo){
         mParent = parent;
         inflater = LayoutInflater.from(context);
+        this.itemLayoutHijo = itemLayoutHijo;
+        this.itemLayouPadre = itemLayoutPadre;
     }
     @Override
     public int getGroupCount() {
@@ -41,12 +43,12 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getGroup(int i) {
+    public String getGroup(int i) {
         return mParent.get(i).getTitle();
     }
 
     @Override
-    public Object getChild(int i, int i2) {
+    public Producto getChild(int i, int i2) {
         return mParent.get(i).getArrayChildren().get(i2);
     }
 
@@ -62,7 +64,7 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean hasStableIds() {
-        return true;
+        return false;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
      //   holder.groupPosition = groupPosition;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.exp_lista_categoria, viewGroup,false);
+            view = inflater.inflate(itemLayouPadre, viewGroup,false);
 
         }
 
@@ -88,14 +90,14 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
 
     @Override
     //in this method you must set the text to see the children on the list
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup viewGroup) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View view, ViewGroup viewGroup) {
 
         ViewHolder holder = new ViewHolder();
         holder.childPosition = childPosition;
         holder.groupPosition = groupPosition;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.exp_lista_producto, viewGroup,false);
+            view = inflater.inflate(itemLayoutHijo, viewGroup,false);
         }
 
         TextView producto = (TextView) view.findViewById(R.id.list_item_text_child);
@@ -105,6 +107,27 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
         TextView precio = (TextView) view.findViewById(R.id.txtPrecio);
         precio.setText(" $" + mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto());
         //textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String llaveF =  mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey();
+                Intent i = new Intent (view.getContext(), ProductoPedidos.class);
+
+                //pasar variables a la otra actividad
+                i.putExtra("nombre",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getNombreProducto() );
+                i.putExtra("descripcion",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getDescripcionProducto() );
+                i.putExtra("precio", mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto().toString() );
+                i.putExtra("websafeKey",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() );
+
+
+                // i.putExtra("nombre", propiedades.getNombre());
+                view.getContext().startActivity(i);
+
+                // Intent i = new Inten
+                Toast.makeText(view.getContext(), mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() , Toast.LENGTH_SHORT).show();
+            }
+        });
 
         view.setTag(holder);
 
@@ -118,11 +141,29 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
     }
 
 
-    protected class ViewHolder {
-        protected int childPosition;
-        protected int groupPosition;
+ //Intentionally put on comment, if you need on click deactivate it
+
+
+    public static class ViewHolder {
+        int childPosition;
+         int groupPosition;
+
+       /* inflater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Intent i = new Inten
+                Intent i = new Intent (activity, Productos.class);
+                i.putExtra("llave", propiedades.getWebsafeKey());
+                i.putExtra("nombre", propiedades.getNombre());
+                activity.startActivity(i);
+
+
+                // Toast.makeText(view.getContext(),"llave de consulta: "+ propiedades.getWebsafeKey(),Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
     }
+
 
 
 }

@@ -44,8 +44,6 @@ public class EmpresaFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-
-
         ArrayList <Empresa> pusheenArrayList = new ArrayList<Empresa>();
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
@@ -56,15 +54,5 @@ public class EmpresaFragment extends Fragment {
 
         new HttpRequestTask(getActivity()).execute();
 
-
-
-
-
     }
-
-
-
-
-
-
 }

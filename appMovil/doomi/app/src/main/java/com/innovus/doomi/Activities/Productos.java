@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.innovus.doomi.Consumir.ProductosTask;
 import com.innovus.doomi.R;
@@ -25,13 +26,11 @@ public class Productos extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
-       // toolbar.setTitle("Doomi");
+        String nomResta = getIntent().getStringExtra("nombre");
+        toolbar.setTitle(nomResta);
+
         setSupportActionBar(toolbar);
         new ProductosTask(this).execute( getIntent().getStringExtra("llave"));
-       // nombreEmpresa = (TextView) this.findViewById(R.id.textView2);
-        //nombreEmpresa.setText( getIntent().getStringExtra("llave"));
-
-
 
     }
     public void Prueba(View view){
@@ -61,4 +60,5 @@ public class Productos extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

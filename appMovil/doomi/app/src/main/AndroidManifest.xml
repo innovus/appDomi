@@ -18,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.Productos"
             android:label="@string/title_activity_productos"
@@ -26,6 +25,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.innovus.doomi.Principal" />
+        </activity>
+        <activity
+            android:name=".Activities.ProductoPedido"
+            android:label="@string/title_activity_producto_pedido"
+            android:parentActivityName=".Activities.Productos" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.innovus.doomi.Activities.Productos" />
+        </activity>
+        <activity
+            android:name=".Activities.ProductoPedidos"
+            android:label="@string/title_activity_producto_pedidos" >
         </activity>
     </application>
 
