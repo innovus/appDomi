@@ -1,8 +1,5 @@
 package com.innovus.domi.domain;
 
-
-
-
 import static com.innovus.domi.service.OfyService.ofy;
 
 import com.google.api.server.spi.config.AnnotationBoolean;
@@ -61,8 +58,7 @@ public class Empresa {
 	  	 Preconditions.checkNotNull(empresaForm.getNombre(), "El nombre es requerido");
 	   	 Preconditions.checkNotNull(empresaForm.getCiudad(), "La ciudad es requerida");
 	   	 Preconditions.checkNotNull(empresaForm.getTiempoMinimo(), "El tiempo minimo es requerido");
-	   	// Preconditions.checkNotNull(empresaForm.getGrupo(), "el grupo es requerido");
-	   	Preconditions.checkNotNull(empresaForm.getValorMinimoPedido(), "El valor minimo es requerido");
+	    	Preconditions.checkNotNull(empresaForm.getValorMinimoPedido(), "El valor minimo es requerido");
 	   	 this.idEmpresa = idEmpresa;
 	   	 this.idCliente = idCliente;
 	   	 actualizaConEmpresaForm( empresaForm);
