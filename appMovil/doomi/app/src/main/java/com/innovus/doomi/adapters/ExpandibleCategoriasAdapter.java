@@ -2,6 +2,7 @@ package com.innovus.doomi.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Janeth Arcos on 21/02/2015.
  */
-public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
+public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter  {
     private LayoutInflater inflater;
     private ArrayList<Parent> mParent;
     private ArrayList<ArrayList<Producto>> mHijos; // Alumnos por grupo.
@@ -141,17 +142,11 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter {
     }
 
 
- //Intentionally put on comment, if you need on click deactivate it
 
-
+    //Intentionally put on comment, if you need on click deactivate it
     public static class ViewHolder {
         int childPosition;
          int groupPosition;
-
-
-
     }
-
-
 
 }

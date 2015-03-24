@@ -4,35 +4,35 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
-
 import com.innovus.doomi.Consumir.HttpRequestTask;
+import com.innovus.doomi.adapters.MenuSliderAdapter;
 import com.innovus.doomi.db.DbProductos;
 import com.innovus.doomi.fragments.CirculoFragment;
 import com.innovus.doomi.fragments.EmpresaFragment;
+import com.innovus.doomi.Consumir.AppConstants;
 
-
-public class Principal extends ActionBarActivity implements CirculoFragment.ToolbarListener /* extends Activity implements ActionBar.TabListener */
+public class Principal extends ActionBarActivity implements CirculoFragment.ToolbarListener, SearchView.OnQueryTextListener, EmpresaFragment.OnBusquedaListener /* extends Activity implements ActionBar.TabListener */
 {
-
-
     //private EmpresaFragment fragments= new EmpresaFragment();
     private EmpresaFragment fragments = new EmpresaFragment();
     private CirculoFragment circulo = new CirculoFragment() ;
 
-    /*private Fragment[] fragments = new Fragment[]{
-        new CarritoProductosFragment(), new EmpresaFragment()
-        };*/
-    //private Fragment fragmento = new EmpresaFragment();
+
     private static final String LOG_TAG = "MainActivity";
 
-    /**
-     * Activity result indicating a return from the Google account selection intent.
-     */
+
     private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
 
 
@@ -41,15 +41,48 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        //agregmos el toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
         toolbar.setTitle("Doomi");
         setSupportActionBar(toolbar);
-      //  setTabs();//agrego tabs
 
 
-        /*cada elemento que tenemos en el vector fragments lo vamos a añadir a la vista y luego lo ocultamos
+        //aqui creamos el recyclerview para el cajon de menu
 
-         */
+
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
+
+        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
+
+        MenuSliderAdapter mAdapter = new MenuSliderAdapter(AppConstants.menuCajon,AppConstants.ICONS,this);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
+        // And passing the titles,icons,header view name, header view email,
+        // and header view profile picture
+        mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));                 // Setting the layout Manager
+        DrawerLayout Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // Drawer object Assigned to the view
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar,R.string.drawer_open ,R.string.drawer_close){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
+                // open I am not going to put anything here)
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                // Code here will execute once drawer is closed
+            }
+
+
+
+        }; // Drawer Toggle Object Made
+        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
+        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
+
+
+
         FragmentManager manager = getFragmentManager();//llevar fragmnetos a nivel de cofigo
         FragmentTransaction fragmentTransaccion = manager.beginTransaction();//agregar , remover , pasar cosas al fragmento
 
@@ -72,16 +105,27 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         admin.close();
         new HttpRequestTask(this).execute();
 
+        //prueba search
+
+
     }
+
+
+    private SearchView mSearchView;
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_principal, menu);
+        MenuItem searchItem = menu.findItem(R.id.buscar_principal);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchView.setOnQueryTextListener(this);
+
         return true;
     }
 
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -91,6 +135,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
         return super.onOptionsItemSelected(item);
     }
+    */
     @Override
     public void onPause(){
         super.onPause();
@@ -112,4 +157,27 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
     }
 
+    //metodos para escuchar la bsuqueda
+   @Override
+    public boolean onQueryTextSubmit(String s) {
+
+
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        return false;
+     //   return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        fragments.ponerBusqueda(s);
+
+        return false;
+
+        //return true;
+    }
+
+    @Override
+    public void onBusqueda(String cadena) {
+        this.onQueryTextChange(cadena);
+    }
 }

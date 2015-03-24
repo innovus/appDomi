@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,10 @@ public class EditarPedido extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_pedido);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
+
+        toolbar.setTitle("Modificar");
+        setSupportActionBar(toolbar);
 
         //casteo los valores
 
@@ -83,7 +88,6 @@ public class EditarPedido extends ActionBarActivity {
     public void onClickActualizar(View v) {
         DbProductos admin = new DbProductos(this,"administracion", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase();
-
         ContentValues registro = new ContentValues();  //es una clase para guardar datos
         registro.put("websafeKey", websafeKey);
         registro.put("observacion", observacion);
@@ -92,7 +96,6 @@ public class EditarPedido extends ActionBarActivity {
         registro.put("cantidad", cantidad);
         bd.update("productos", registro, "websafeKey = ?",new String[]{websafeKey});
         bd.close();
-
         Toast.makeText(this, "Se Agrego el producto al carrito",
                 Toast.LENGTH_SHORT).show();
 

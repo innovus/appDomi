@@ -20,6 +20,8 @@
         android:id="@+id/expandableListView"
         android:cacheColorHint="@color/accent"
         android:background="@color/fondo"
+        android:paddingTop="@dimen/padding_toolbar"
+
         android:transcriptMode="alwaysScroll"
 
 

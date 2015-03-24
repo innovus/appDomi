@@ -3,4 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".Principal">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+
+    <item
+        android:id="@+id/buscar_principal"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="Buscar"/>
 </menu>

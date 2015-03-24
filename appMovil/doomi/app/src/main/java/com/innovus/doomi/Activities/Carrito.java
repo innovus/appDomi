@@ -3,17 +3,21 @@ package com.innovus.doomi.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.innovus.doomi.R;
 import com.innovus.doomi.fragments.CarritoProductosFragment;
 
-public class Carrito extends ActionBarActivity {
+public class Carrito extends ActionBarActivity implements  SearchView.OnQueryTextListener {
     private String nomResta;
 
     private CarritoProductosFragment fragments = new CarritoProductosFragment();
@@ -25,6 +29,7 @@ public class Carrito extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
         nomResta = getIntent().getStringExtra("nombre");
         toolbar.setTitle(nomResta);
+        setSupportActionBar(toolbar);
 
        // CarritoProductosFragment fragments =(CarritoProductosFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentPedidos);
         CarritoProductosFragment fragments = new CarritoProductosFragment();
@@ -58,4 +63,25 @@ public class Carrito extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        return false;
+
+    }
+    public void onClickConfirmar(View v) {
+
+       // Intent i = new Intent (v.getContext(), pruebaSlider.class);
+
+        //pasar variables a la otra actividad
+
+        //v.getContext().startActivity(i);
+
+    }
 }

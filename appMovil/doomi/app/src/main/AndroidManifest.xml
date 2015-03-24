@@ -46,6 +46,10 @@
             android:name=".Activities.EditarPedido"
             android:label="@string/title_activity_editar_pedido" >
         </activity>
+        <activity
+            android:name=".Activities.pruebaSlider"
+            android:label="@string/title_activity_prueba_slider" >
+        </activity>
     </application>
 
 </manifest>

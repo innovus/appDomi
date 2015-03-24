@@ -18,7 +18,7 @@
         android:id="@+id/btnConfirmarCompra"
         android:background="@color/accent"
         android:textColor="@color/abc_primary_text_disable_only_material_dark"
-        android:onClick="onClickActualizar"
+        android:onClick="onClickConfirmar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

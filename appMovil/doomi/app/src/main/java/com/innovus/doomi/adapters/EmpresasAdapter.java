@@ -11,6 +11,7 @@ import com.appspot.domi_app.domi.model.Empresa;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.common.collect.Constraints;
 import com.innovus.doomi.Activities.Productos;
 import com.innovus.doomi.Principal;
 import com.innovus.doomi.R;
@@ -27,16 +28,49 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
   /*  public List<Empresa> empresas;//dataset
     public int itemLayout;//es la vista que va a cargar la row_empresas.xml
 */
+    //prueba de busqueda
+  //private List<Empresa> visibleObjects;
+
+    //todos los objetos
+  private List<Empresa> allObjects;
+
+    ///los objetos visibles
   private List<Empresa> empresas;
+
     private int itemLayout;
+
+
 
     public EmpresasAdapter(List<Empresa> data,int itemLayout,Activity activity){
         super();
         this.itemLayout = itemLayout;
-        this.empresas = data;
+        //this.empresas = data;
+        //inicaializo todos los objetos
+        this.allObjects = data;
         this.activity = activity;
+        flushFilter();
 
     }
+
+    //iniicializa para que sean visibles todos los objetos
+    public void flushFilter(){
+        empresas=new ArrayList<>();
+        empresas.addAll(allObjects);
+        notifyDataSetChanged();
+    }
+
+
+
+    public void setFilter(String queryText) {
+        empresas = new ArrayList<>();
+        // constraint = constraint.toString().toLowerCase();
+        for (Empresa item: allObjects) {
+            if (item.getNombre().toLowerCase().contains(queryText))
+                empresas.add(item);
+        }
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public EmpresasAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -93,4 +127,6 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
             });
         }
     }
+
+
 }

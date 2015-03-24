@@ -95,5 +95,18 @@ public class CarritoProductosFragment extends Fragment {
         new CarritoDBLocal(getActivity()).execute();
 
     }
+    public void ActualizarFragementoBusqueda(){
+        ArrayList <ProductoDB> pusheenArrayList = new ArrayList<ProductoDB>();
+
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_carrito);
+        recyclerView.setHasFixedSize(true);//que todo lo optimize
+        recyclerView.setAdapter(new CarritoAdapter(this.llenarCarrito(),R.layout.row_pedido_carrito,getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//linear x q es lienas o si no tambn grillas
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        new CarritoDBLocal(getActivity()).execute();
+
+    }
 
 }
