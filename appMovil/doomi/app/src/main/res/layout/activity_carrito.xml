@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/fondo"
     android:id="@+id/main_principal_carrito"
-    tools:context="com.innovus.doomi.Activities.ProductoPedidos">
+    tools:context="com.innovus.doomi.Activities.Carrito">
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:id="@+id/btnConfirmarCompra"
         android:background="@color/accent"
         android:textColor="@color/abc_primary_text_disable_only_material_dark"
-        android:onClick="onClickConfirmar"
+        android:onClick="onClickConfirmarp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

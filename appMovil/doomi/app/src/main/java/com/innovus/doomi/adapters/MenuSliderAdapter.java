@@ -1,7 +1,9 @@
 package com.innovus.doomi.adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.innovus.doomi.Activities.AddDirecciones;
+import com.innovus.doomi.Activities.ListaDirecciones;
 import com.innovus.doomi.R;
 
 
@@ -28,7 +32,7 @@ public class MenuSliderAdapter extends RecyclerView.Adapter<MenuSliderAdapter.Vi
     private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
     Context context;
-           //String Resource for header view email
+
 
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
@@ -70,7 +74,25 @@ public class MenuSliderAdapter extends RecyclerView.Adapter<MenuSliderAdapter.Vi
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(context, "The Item Clicked is: " + getPosition(), Toast.LENGTH_SHORT).show();
+            if (getPosition()==2){
+                Intent i = new Intent (view.getContext(), AddDirecciones.class);
+
+
+
+                view.getContext().startActivity(i);
+            }else  if (getPosition()==3){
+                Intent i = new Intent (view.getContext(), ListaDirecciones.class);
+                i.putExtra("bandera",false);
+
+
+
+                view.getContext().startActivity(i);
+            }
+            else{
+                Toast.makeText(context, "The Item Clicked is: " + getPosition(), Toast.LENGTH_SHORT).show();
+
+
+            }
 
 
         }

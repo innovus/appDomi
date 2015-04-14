@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.innovus.doomi.Activities.AddDirecciones">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="@dimen/padding_toolbar"
+
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="15dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:id="@+id/linearLayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/nombredireccion"
+                android:id="@+id/textView2" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etnombredireccion"
+                android:paddingTop="3dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentTop="true"
+
+                android:hint="@string/etnombre"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/direccion"
+                android:id="@+id/textView3" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etdireccion"
+                android:paddingTop="3dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentTop="true"
+                android:hint="@string/etdireccion"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/barrio"
+                android:id="@+id/textView7" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+
+
+                android:id="@+id/etBarrio"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingTop="3dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentTop="true"
+                android:hint="@string/etbarrio"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/referencia"
+                android:id="@+id/textView6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etreferencia"
+                android:paddingTop="3dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentTop="true"
+                android:hint="@string/etreferencia"
+                />
+
+        </LinearLayout>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/guardar"
+            android:id="@+id/btnGuardarDireccion"
+            android:background="@color/accent"
+            android:textColor="@color/abc_primary_text_disable_only_material_dark"
+            android:onClick="onClickGuardarDir"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

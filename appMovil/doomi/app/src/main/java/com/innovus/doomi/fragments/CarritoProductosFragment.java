@@ -67,13 +67,11 @@ public class CarritoProductosFragment extends Fragment {
                 //total = total + (fila.getInt(0) * fila.getInt(1));
             } while(fila.moveToNext());
 
-
         } else
             Toast.makeText(getActivity(), "No has pedido nada",
                     Toast.LENGTH_SHORT).show();
         bd.close();
         return ListadoProductosDB;
-
     }
 
     @Override

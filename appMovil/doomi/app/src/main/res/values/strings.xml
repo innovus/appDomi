@@ -9,7 +9,15 @@
     <string name="title_activity_producto_pedidos">ProductoPedidos</string>
 
     <string name="producto">Producto</string>
-
+    <string name="nombredireccion">Nombre</string>
+    <string name="direccion">Direccion</string>
+    <string name="barrio">Barrio</string>
+    <string name="referencia">Referencia</string>
+    <string name="guardar">Guardar</string>
+    <string name="etnombre">Mi casa, Mi Trabajo,Casa Abuela</string>
+    <string name="etdireccion">Calle 12a #41a - 74</string>
+    <string name="etbarrio">Altos de la colina</string>
+    <string name="etreferencia">Casa, Apartamento 303,Oficina</string>
     <string name="descripcion">Descripcion</string>
     <string name="precio">Precio</string>
     <string name="cantidad">Cantidad</string>
@@ -19,7 +27,7 @@
     <string name="title_activity_carrito">Carrito</string>
     <string name="title_activity_editar_pedido">EditarPedido</string>
     <string name="btn_editar_pedido">Guardar Pedido</string>
-    <string name="btn_confirmar">Confirmar Compra</string>
+    <string name="btn_confirmar">Confirmar com</string>
     <string name="drawer_open">Abrir navigation drawer</string>
     <string name="drawer_close">Cerrar navigation drawer</string>
 
@@ -36,5 +44,7 @@
         <item >What\'s Hot</item>
     </string-array>
     <string name="title_activity_prueba_slider">pruebaSlider</string>
+    <string name="title_activity_add_direcciones">AddDirecciones</string>
+    <string name="title_activity_direcciones">Direcciones</string>
 
 </resources>
