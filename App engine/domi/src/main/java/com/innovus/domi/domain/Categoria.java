@@ -97,7 +97,7 @@ public class Categoria {
 	        if (organizer == null) {
 	            return "";
 	        } else {
-	            return organizer.getNombre();
+	            return organizer.getNombreEmpresa();
 	        }
 	    }
 	 

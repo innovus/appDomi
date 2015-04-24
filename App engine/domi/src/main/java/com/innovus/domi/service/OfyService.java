@@ -21,7 +21,9 @@ public class OfyService {
         factory().register(Producto.class);
         factory().register(Cliente.class);
         factory().register(Usuario.class);
-        factory().register(Pedido.class);
+        //factory().register(Pedido.class);
+        factory().register(Grupo.class);
+        factory().register(User.class);
         
         
     }

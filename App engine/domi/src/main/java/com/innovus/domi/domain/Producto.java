@@ -38,9 +38,6 @@ public class Producto {
 	 @Index
 	 private String nombreProducto;
 	 
-	
-	 
-	 
 	 private String descripcionProducto;
 	 
 	 private int precioProducto;
@@ -112,24 +109,6 @@ public class Producto {
 	 }
      
      
-    
-    /* @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	 public Key<Empresa> getKeyEmpresa(){
-		 return empresaKey;
-		 
-	 }
-     @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-     public Long getIdEmpresa() {
-    	 return idEmpresa;
-    	 }
-	 
-	 
-	/* public long getLlaveSegura(){
-		 
-		 //return Key.create(Categoria.class,idCategoria).getId();
-	 }
-	 */
-	 
 	 public String getCategoriaPropietaria() {
 	        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
 	       Categoria organizer = ofy().load().key(getKeyCategoria()).now();

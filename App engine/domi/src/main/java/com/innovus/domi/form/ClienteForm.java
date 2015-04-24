@@ -1,57 +1,58 @@
 package com.innovus.domi.form;
 
+import com.google.appengine.api.datastore.Email;
+import com.google.appengine.api.datastore.PhoneNumber;
+
 public class ClienteForm {
 	
 	private String cedulaCliente;
-	private String nomCliente;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
-	private String correoCliente;
+	private String nombresCliente;
+	private String apellidosCliente;
+	private Email correoCliente;
 	private String passwordCliente;
-	private String telefonoCliente;
-	private String preguntaCliente;
-	private String respuestaCliente;
+	private PhoneNumber telefonoCliente;
+	private String pais;
+	private String ciudad;
+
 	
 	private ClienteForm(){}
 	
-	private ClienteForm(String cedulaCliente,String nomCliente,String apellidoPaterno,String apellidoMaterno,String correoCliente,String passwordCliente,String telefonoCliente,String preguntaCliente,String respuestaCliente){
+	private ClienteForm(String cedulaCliente,String nomCliente,String apellidoPaterno,String apellidoMaterno,Email correoCliente,String passwordCliente,PhoneNumber telefonoCliente,String pais,String ciudad){
 		this.cedulaCliente=cedulaCliente;
-		this.nomCliente=nomCliente;
-		this.apellidoPaterno=apellidoPaterno;
-		this.apellidoMaterno=apellidoMaterno;
+		this.nombresCliente=nomCliente;
+		this.apellidosCliente=apellidoPaterno;
+
 		this.correoCliente=correoCliente;
 		this.passwordCliente=passwordCliente;
 		this.telefonoCliente=telefonoCliente;
-		this.preguntaCliente=preguntaCliente;
-		this.respuestaCliente=respuestaCliente;
+		this.pais=pais;
+		this.ciudad=ciudad;
 	}
 	
 	public String getCedulaCliente(){
 		return cedulaCliente;
 	}
-	public String getNomCliente(){
-		return nomCliente;
+	public String getNombresCliente(){
+		return nombresCliente;
 	}
-	public String getApellidoPaterno(){
-		return apellidoPaterno;
+	public String getApellidosCliente(){
+		return apellidosCliente;
 	}
-	public String getApellidoMaterno(){
-		return apellidoMaterno;
-	}
-	public String getCorreoCliente(){
+
+	public Email getCorreoCliente(){
 		return correoCliente;
 	}
 	public String getPasswordCliente(){
 		return passwordCliente;
 	}
-	public String getTelefonoCliente(){
+	public PhoneNumber getTelefonoCliente(){
 		return telefonoCliente;
 	}
-	public String getPreguntaCliente(){
-		return preguntaCliente;
+	public String getPais(){
+		return pais;
 	}
-	public String getRespuestaCliente(){
-		return respuestaCliente;
+	public String getCiudad(){
+		return ciudad;
 	}
 
 }

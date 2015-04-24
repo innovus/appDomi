@@ -53,6 +53,13 @@
             <artifactId>jdo-api</artifactId>
             <version>3.0.1</version>
         </dependency>
+        
+        <!-- google cloud storage Dependencies -->
+        <dependency>
+    		<groupId>com.google.appengine.tools</groupId>
+    		<artifactId>appengine-gcs-client</artifactId>
+    		<version>RELEASE</version>
+		</dependency>
 
         <!-- Test Dependencies -->
         <dependency>
@@ -79,6 +86,7 @@
             <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
 
     <build>

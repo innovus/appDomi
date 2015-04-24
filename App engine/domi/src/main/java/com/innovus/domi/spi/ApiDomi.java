@@ -21,14 +21,16 @@ import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Cliente;
 import com.innovus.domi.domain.Empresa;
+import com.innovus.domi.domain.Grupo;
 import com.innovus.domi.domain.Producto;
-import com.innovus.domi.domain.Usuario;
-import com.innovus.domi.domain.Pedido;
+//import com.innovus.domi.domain.Usuario;
+//import com.innovus.domi.domain.Pedido;
 import com.innovus.domi.form.ClienteForm;
 import com.innovus.domi.form.EmpresaForm;
-import com.innovus.domi.form.PedidoForm;
+//import com.innovus.domi.form.PedidoForm;
 import com.innovus.domi.form.ProductoForm;
-import com.innovus.domi.form.UsuarioForm;
+//import com.innovus.domi.form.UsuarioForm;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +116,7 @@ public class ApiDomi {
 	   * @return A newly created Conference Object.
 	   * @throws UnauthorizedException when the user is not signed in.
 	   */
+	  /*
 	  @ApiMethod(name="crearPedido",path="pedido",httpMethod=HttpMethod.POST)
       public Pedido crearPedido(final PedidoForm pedidoForm){
 		  
@@ -145,9 +148,11 @@ public class ApiDomi {
 		  });
 		  return usuario;
 	  }
+	  */
+	  
 	  
 	  @ApiMethod(name="crearCliente",path="cliente",httpMethod=HttpMethod.POST)
-	  public Cliente createCliente(final ClienteForm clienteForm){
+	  public Cliente crearCliente(final ClienteForm clienteForm){
 		  
 		  final Key<Cliente> clienteKey=factory().allocateId(Cliente.class);
 		  final long clienteId=clienteKey.getId();
@@ -162,31 +167,7 @@ public class ApiDomi {
 		  return cliente;
 	  }
 	    
-	  @ApiMethod(name = "crearEmpresa", path = "empresa", httpMethod = HttpMethod.POST)
-	  public Empresa crearEmpresa( @Named("keyCliente") final long keyCliente, final EmpresaForm empresaForm)
-	  {
-		  Cliente cliente = ofy().load().key(Key.create(Cliente.class, keyCliente)).now(); // carga el cliente con el id del cliente
-	      final long clienteId = cliente.getIdCliente(); // obtiene el idcliente
-	      Key <Cliente> keyCli = Key.create(Cliente.class,keyCliente);// crea la clave cliente
-	      final Key<Empresa> empresaKey = factory().allocateId(keyCli, Empresa.class);
-	      final long empresaId = empresaKey.getId();//se saca el id de la empresa q se va a crear
-	      
-	      
-	      
-	      // Start a transaction. 
-	      Empresa empresa = ofy().transact(new Work<Empresa>() {
-	          @Override
-	          public Empresa run() {
-	              
-	              Empresa empresa = new Empresa(clienteId, empresaId,  empresaForm);
-	              
-	              ofy().save().entities(empresa).now();
-	          
-	              return empresa;
-	          }
-	      });
-	      return empresa;
-	  }
+	  
 	  
 	 @ApiMethod(name = "creaCategoria", path = "cliente/{keyCliente}/empresa/{keyEmpresa}/categoria", httpMethod = HttpMethod.POST)
 	  public Categoria creaCategoria(  @Named("keyCliente") final Long keyCliente, @Named("nombre")final String nombre,  @Named("keyEmpresa") final Long keyEmpresa)//me devuelva una categoria
@@ -262,9 +243,10 @@ public class ApiDomi {
 	            httpMethod = HttpMethod.GET
 	    )
 	    public List<Empresa> consultaEmpresas() {
-	        Query query = ofy().load().type(Empresa.class).order("nombre");
+	        Query query = ofy().load().type(Empresa.class).order("nombreEmpresa");
 	        return query.list();//me retorns en una lista
 	    }
+	 
 	 @ApiMethod(
 	            name = "consultaProductos",
 	            path = "consultaProductos",
@@ -305,11 +287,7 @@ public class ApiDomi {
 		 
 	                
 	    }
-	 @ApiMethod(name = "consultaClientes", path = "consultaClientes", httpMethod = HttpMethod.GET)
-	 public List<Cliente> consultaCliente() {
-	        Query query = ofy().load().type(Cliente.class).order("nomCliente");
-	        return query.list();//me retorns en una lista
-	    }
+	 
 
 	 
 	 /**

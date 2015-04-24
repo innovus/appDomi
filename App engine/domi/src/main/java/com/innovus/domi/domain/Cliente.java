@@ -1,39 +1,50 @@
 package com.innovus.domi.domain;
 
 
-import com.google.common.base.Preconditions;
+import static com.innovus.domi.service.OfyService.factory;
+import static com.innovus.domi.service.OfyService.ofy;
+
+import com.google.api.server.spi.config.AnnotationBoolean;
+import com.google.api.server.spi.config.ApiResourceProperty;
+import com.google.appengine.api.datastore.PhoneNumber;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Work;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.innovus.domi.form.ClienteForm;
 
 @Entity
-public class Cliente {
+public class Cliente  {
 
-	 @Id
+	@Id
 	private long idCliente;
-	 @Index
-	private String cedulaCliente;
-	 @Index
-	private String nomCliente;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
 	
 	@Index
-	private String correoCliente;
-	private String telefonoCliente;
-	private String passwordCliente;
+	private String cedulaCliente;
+	@Index
+	private String nombresCliente;
+	private String apellidosCliente;	
+	private PhoneNumber telefonoCliente;
+	//private String passwordCliente;
 	
-	private String preguntaCliente;
-	private String respuestaCliente;
-	private Cliente(){}
+	 @Parent
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private Key<User> keyUser;
+	
+	private String pais;
+	private String ciudad;
+	private Cliente(){
+
+	}
 	
 	public Cliente(final long idCliente, final ClienteForm clienteForm){
 		
 		// Preconditions.checkNotNull(clienteForm.getNomCliente(),"El nombre es requerido");
 		 //Preconditions.checkNotNull(clienteForm.getApellidoMaterno(),"El primer apellido es requerido");
 		 //Preconditions.checkNotNull(clienteForm.getCorreoCliente(),"El correo es requerido");
-		 
+		
 		this.idCliente=idCliente;
 		ActualizaconClienteForm(clienteForm);
 	}
@@ -44,41 +55,51 @@ public class Cliente {
 	public String getCedulaCliente(){
 		return cedulaCliente;
 	}
-	public String getNomCliente(){
-		return nomCliente;
+	public String getNombresCliente(){
+		return nombresCliente;
 	}
-	public String getApellidoPaterno(){
-		return apellidoPaterno;
+	public String getApellidosCliente(){
+		return apellidosCliente;
 	}
-	public String getApellidoMaterno(){
-		return apellidoMaterno;
-	}
-	public String getCorreoCliente(){
-		return correoCliente;
-	}
-	public String getPasswordCliente(){
-		return passwordCliente;
-	}
-	public String getTelefonoCliente(){
+
+	public PhoneNumber getTelefonoCliente(){
 		return telefonoCliente;
 	}
-	public String getPreguntaCliente(){
-		return preguntaCliente;
+	
+	
+	public String getPais(){
+		return pais;
 	}
-	public String getRespuestaCliente(){
-		return respuestaCliente;
+	public String getCiudad(){
+		return ciudad;
 	}
 	
-	public void ActualizaconClienteForm(ClienteForm clienteForm){
+	 public String getWebsafeKey(){
+		 return Key.create(keyUser, Cliente.class,idCliente).getString();
+	 }
+	 
+	
+	public void ActualizaconClienteForm(final ClienteForm clienteForm){
 		this.cedulaCliente=clienteForm.getCedulaCliente();
-		this.nomCliente=clienteForm.getNomCliente();
-		this.apellidoPaterno=clienteForm.getApellidoPaterno();
-		this.apellidoMaterno=clienteForm.getApellidoMaterno();
-		this.correoCliente=clienteForm.getCorreoCliente();
-		this.passwordCliente=clienteForm.getPasswordCliente();
+		this.nombresCliente=clienteForm.getNombresCliente();
+		this.apellidosCliente=clienteForm.getApellidosCliente();
+
 		this.telefonoCliente=clienteForm.getTelefonoCliente();
-		this.preguntaCliente=clienteForm.getPreguntaCliente();
-		this.respuestaCliente=clienteForm.getRespuestaCliente();
+		this.pais=clienteForm.getPais();
+		this.ciudad=clienteForm.getCiudad();
+		
+		final Key<User> userKey=factory().allocateId(User.class);
+		  final long userId=userKey.getId();
+		  User user =ofy().transact(new Work<User>(){
+			  @Override
+	          public User run(){
+				  User user = new User(userId,clienteForm.getCorreoCliente(),
+						  clienteForm.getPasswordCliente(),false,true);
+				  ofy().save().entities(user).now();
+				 return user;
+			  }  
+		  });
+		  
 	}
 	
 	
