@@ -34,13 +34,16 @@ public class Producto {
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private long idEmpresa;
 	 */
-	 
+	 //FOTOS FALTAN
 	 @Index
 	 private String nombreProducto;
 	 
 	 private String descripcionProducto;
 	 
 	 private int precioProducto;
+	 
+	 private Boolean is_active;
+	 
 	 
 	 public Producto(){}
 	 
@@ -61,6 +64,7 @@ public class Producto {
 		 this.idCategoria = categoria.getidCategoria();
 		// Categoria cateogoria = Key.create(categoriaKey, Categoria.class);
 		 actualizaConProductoForm(objetoProducto);
+		 this.is_active = true;
 		 
 	 }
 	 
@@ -107,6 +111,7 @@ public class Producto {
     	 return Key.create(categoriaKey, Producto.class,idProducto).getString();
 		 
 	 }
+     
      
      
 	 public String getCategoriaPropietaria() {

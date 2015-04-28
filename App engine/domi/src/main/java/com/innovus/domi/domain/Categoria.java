@@ -27,25 +27,19 @@ public class Categoria {
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
-	 
-	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private Key<Cliente> clienteKey;
-	 
+
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private long idEmpresa;
-	 
-	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private long idCliente;
-	 
+
 	 public Categoria(){}
 
-	 public Categoria(final long idCategoria,final long idCliente,final String nombreCategoria ,final long idEmpresa){
+	 public Categoria(final long idCategoria,final String nombreCategoria ,final String websafeKeyEmpresa){
 		// Preconditions.checkNotNull(categoriaForm.getNombreCategoria(), "El nombre es requerido");
-		 this.idCliente=idCliente;
+		
 		 this.idCategoria=idCategoria;
 		 this.nombreCategoria = nombreCategoria;
-		 this.clienteKey=Key.create(Cliente.class,idCliente);
-		 this.empresaKey=Key.create(clienteKey,Empresa.class,idEmpresa);//para qe empresa sea el padre de categoria
+		
+		 this.empresaKey=Key.create(websafeKeyEmpresa);//para qe empresa sea el padre de categoria
 		 this.idEmpresa = idEmpresa;
 		 
 		 
@@ -59,10 +53,7 @@ public class Categoria {
 		 return nombreCategoria;
 	 }
 	 
-	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	 public long getidCliente(){
-		 return idCliente;
-	 }
+	
 	 
 	 
 	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
@@ -70,11 +61,7 @@ public class Categoria {
 		 return empresaKey;
 		 
 	 }
-	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	 public Key<Cliente> getClienteKey(){
-		 return clienteKey;
-		 
-	 }
+	 
 	 
 	 public String getWefSafeKey(){
 		 return Key.create(empresaKey, Categoria.class,idCategoria).getString();

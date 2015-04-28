@@ -130,13 +130,17 @@ public class ApiAdmin {
 		  return grupo;
 	  }
 	  
+	  
 	  //consulta todos los clientes
 	  @ApiMethod(name = "consultaClientes", path = "clientes", httpMethod = HttpMethod.GET)
-		 public List<Cliente> consultaCliente() {
-		        Query query = ofy().load().type(Cliente.class).order("nomCliente");
-		        return query.list();//me retorns en una lista
-		    }
+	  public List<Cliente> consultaCliente() {
+		  Query query = ofy().load().type(Cliente.class).order("nomCliente");
+		  return query.list();//me retorns en una lista	
+	  }
 	  
 	  
+	  
+	  
+	  	  
 
 }
