@@ -40,7 +40,7 @@ public class Producto {
 	 
 	 private String descripcionProducto;
 	 
-	 private int precioProducto;
+	 private float precioProducto;
 	 
 	 private Boolean is_active;
 	 
@@ -83,7 +83,7 @@ public class Producto {
 		 return descripcionProducto;
 	 }
      
-     public int getPrecioProducto(){
+     public float getPrecioProducto(){
     	 
     	 return precioProducto;
      }
@@ -92,7 +92,6 @@ public class Producto {
      public void actualizaConProductoForm(ProductoForm productoForm) {
 	     this.nombreProducto = productoForm.getNombreProducto();
 	     this.descripcionProducto = productoForm.getDescripcionProducto();
-	  
 	     this.precioProducto = productoForm.getPrecioProducto();
 	       
 	 }
@@ -110,10 +109,8 @@ public class Producto {
      public String getWebsafeKey(){
     	 return Key.create(categoriaKey, Producto.class,idProducto).getString();
 		 
-	 }
-     
-     
-     
+	 }  
+    
 	 public String getCategoriaPropietaria() {
 	        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
 	       Categoria organizer = ofy().load().key(getKeyCategoria()).now();

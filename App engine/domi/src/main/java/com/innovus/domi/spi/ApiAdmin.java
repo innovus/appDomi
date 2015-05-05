@@ -19,8 +19,11 @@ import com.googlecode.objectify.cmd.Query;
 import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Cliente;
+import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.domain.Grupo;
 import com.innovus.domi.domain.Producto;
+import com.innovus.domi.domain.Sucursal;
+import com.innovus.domi.domain.Usuario;
 import com.innovus.domi.form.ClienteForm;
 
 @Api(
@@ -134,9 +137,33 @@ public class ApiAdmin {
 	  //consulta todos los clientes
 	  @ApiMethod(name = "consultaClientes", path = "clientes", httpMethod = HttpMethod.GET)
 	  public List<Cliente> consultaCliente() {
-		  Query query = ofy().load().type(Cliente.class).order("nomCliente");
+		  Query query = ofy().load().type(Cliente.class).order("nombresCliente");
 		  return query.list();//me retorns en una lista	
 	  }
+	  
+	  @ApiMethod(name = "consultaEmpresas", path = "consultaEmpresas", httpMethod = HttpMethod.GET)
+		public List<Empresa> consultaEmpresas() {
+			Query query = ofy().load().type(Empresa.class).order("nombreEmpresa");
+			return query.list();// me retorns en una lista
+		}
+
+		@ApiMethod(name = "consultaProductos", path = "consultaProductos", httpMethod = HttpMethod.GET)
+		public List<Producto> consultaProductos() {
+			Query query = ofy().load().type(Producto.class).order("nombreProducto");
+			return query.list();// me retorns en una lista
+		}
+		@ApiMethod(name = "consultaSucursales", path = "consultaSucursales", httpMethod = HttpMethod.GET)
+		public List<Sucursal> consultaSucursales() {
+			Query query = ofy().load().type(Sucursal.class);
+			return query.list();// me retorns en una lista
+		}
+
+		@ApiMethod(name = "consultaUsuarios", path = "consultaUsuarios", httpMethod = HttpMethod.GET)
+		public List<Usuario> consultaUsuario() {
+			Query query = ofy().load().type(Usuario.class);
+			return query.list();// me retorns en una lista
+		}
+	
 	  
 	  
 	  

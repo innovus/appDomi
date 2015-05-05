@@ -4,11 +4,11 @@ public class ProductoForm {
 	
 	private String nombreProducto;
 	private String descripcionProducto;
-	private int precioProducto;
+	private float precioProducto;
 	
 	public ProductoForm(){}
 	
-	public ProductoForm(String nombreProducto,String descripcionProducto,int precioProducto){
+	public ProductoForm(String nombreProducto,String descripcionProducto,float precioProducto){
 		
 		this.nombreProducto =nombreProducto;
 		this.descripcionProducto =descripcionProducto;
@@ -24,7 +24,7 @@ public class ProductoForm {
 		return descripcionProducto;
 	}
 	
-	public int getPrecioProducto(){
+	public float getPrecioProducto(){
 		return precioProducto;
 	}
 	

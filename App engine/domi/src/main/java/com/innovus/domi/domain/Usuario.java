@@ -32,6 +32,9 @@ public class Usuario {
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<User> keyUser;
+	 
+	// @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	// private long idUser;
 
 	private Usuario(){
 
@@ -59,6 +62,8 @@ public class Usuario {
 		
 		final Key<User> userKey=factory().allocateId(User.class);
 		  final long userId=userKey.getId();
+		  //this.idUser = userId;
+		  this.keyUser = userKey;
 		  User user =ofy().transact(new Work<User>(){
 			  @Override
 	          public User run(){
@@ -117,8 +122,14 @@ public class Usuario {
 		 return Key.create(keyUser, Empresa.class,idUsuario).getString();
 	 }
 	 */
+	public String getWebsafekeyUsuario(){
+		 return Key.create(keyUser, Usuario.class,idUsuario).getString();
+				
+	}
+	public String getCorreoUser(){   
+		User user = ofy().load().key(getKeyUser()).now();
+		return user.getEmail().getEmail();	
+	}
 	
-	
-
 	
 }

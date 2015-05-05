@@ -1,49 +1,57 @@
 package com.innovus.domi.form;
 
-public class CarritoForm {
+import java.util.Date;
 
-	 private float total;
-	 private String observacion;
-	 private String usuario;
-     private String ubicacion;
-     private String formaDePago;
-     private String costoDomicilio;
-     private String fecha,hora;
-     
-     private CarritoForm(){}
-     
-     private CarritoForm(float total,String observacion,String usuario,String ubicacion,String formaDePago,String costoDomicilio,String fecha,String hora){
-    	 this.total=total;
-    	 this.observacion=observacion;
-    	 this.usuario=usuario;
-    	 this.ubicacion=ubicacion;
-    	 this.formaDePago=formaDePago;
-    	 this.costoDomicilio=costoDomicilio;
-    	 this.fecha=fecha;
-     }
-     
-     public float getTotal(){
-    	 return total;
-     }
-     public String getObservacion(){
-    	 return observacion;
-     }
-     public String getUsuario(){
-    	 return usuario;
-     }
-     public String getUbicacion(){
-    	 return ubicacion;
-     }
-     public String getFormaDePago(){
-    	 return formaDePago;
-     }
-     public String getCostoDomicilio(){
-    	 return costoDomicilio;
-     }
-     public String getFecha(){
-    	 return fecha;
-     }
-     public String getHora(){
-    	 return hora;
-     }
+import com.google.appengine.api.datastore.GeoPt;
+
+public class CarritoForm {
+	private String websafeKeyUsuario;
+	private float total;
+	private String observacion;
+	private float latitud;
+	private float longitud;
+	private String formaDePago;
+
+	private CarritoForm() {
+	}
+
+	private CarritoForm(String websafeKeyUsuario,float latitud, float longitud, String observacion,
+			String formaDePago, float total) {
+		this.websafeKeyUsuario = websafeKeyUsuario;
+		this.total = total;
+		this.observacion = observacion;
+		this.latitud = latitud;
+		this.longitud = longitud;
+
+		this.formaDePago = formaDePago;
+
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public GeoPt obtenerUbicacion() {
+		return new GeoPt(latitud, longitud);
+	}
+
+	public String getFormaDePago() {
+		return formaDePago;
+	}
+
+	public float getLatitud() {
+		return latitud;
+	}
+
+	public float getLongitud() {
+		return longitud;
+	}
+	public  String getWebsafeKeyUsuario(){
+		return websafeKeyUsuario;
+	}
+
 }

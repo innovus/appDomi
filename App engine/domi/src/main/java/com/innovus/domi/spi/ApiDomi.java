@@ -185,17 +185,7 @@ public class ApiDomi {
 	 * return categoria; } }); return categoria; }
 	 */
 
-	@ApiMethod(name = "consultaEmpresas", path = "consultaEmpresas", httpMethod = HttpMethod.GET)
-	public List<Empresa> consultaEmpresas() {
-		Query query = ofy().load().type(Empresa.class).order("nombreEmpresa");
-		return query.list();// me retorns en una lista
-	}
-
-	@ApiMethod(name = "consultaProductos", path = "consultaProductos", httpMethod = HttpMethod.GET)
-	public List<Producto> consultaProductos() {
-		Query query = ofy().load().type(Producto.class).order("nombreProducto");
-		return query.list();// me retorns en una lista
-	}
+	
 
 	@ApiMethod(name = "consultaCategorias", path = "consultaCategorias", httpMethod = HttpMethod.GET)
 	public List<Categoria> consultaCategorias() {

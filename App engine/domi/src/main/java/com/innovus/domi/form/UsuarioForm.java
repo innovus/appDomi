@@ -38,7 +38,7 @@ public class UsuarioForm {
 	}
 	
 	//trae el email pero en cadena
-	public String getCorreoUsuarioString(){
+	public String obtenerCorreoUsuarioString(){
 		return correoUsuario.getEmail();
 	}
 

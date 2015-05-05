@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
 import com.google.appengine.api.datastore.GeoPt;
-
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -162,6 +161,12 @@ public class Sucursal {
 
 	public void setIdEmpresa(long idEmpresa) {
 		this.idEmpresa = idEmpresa;
+	}
+	
+	public String getWebsafekeySucursal(){
+		 return Key.create(empresaKey, Sucursal.class,idSucursal).getString();
+			
+		
 	}
 	 //agrega grupos a la empresa
 	public void addProductoKeysPertenece(String productoKey){

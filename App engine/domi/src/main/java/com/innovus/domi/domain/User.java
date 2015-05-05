@@ -18,7 +18,6 @@ public class User {
 	private Boolean is_user=true;
 	private Boolean is_cliente=true;
 
-
 	protected User(){}
 	
 	protected User(long idUser, Email email,String password, Boolean is_user, Boolean is_cliente){

@@ -17,20 +17,25 @@ import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.ForbiddenException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
-import com.google.appengine.api.users.User;
+import com.google.appengine.api.datastore.Email;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
 import com.googlecode.objectify.cmd.Query;
 import com.innovus.domi.Constants;
+import com.innovus.domi.domain.Carrito;
 import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Cliente;
 import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.domain.Grupo;
 import com.innovus.domi.domain.Producto;
+import com.innovus.domi.domain.ReputacionUsuario;
 import com.innovus.domi.domain.Sucursal;
+import com.innovus.domi.domain.User;
+import com.innovus.domi.domain.Usuario;
 import com.innovus.domi.form.ClienteForm;
 import com.innovus.domi.form.EmpresaForm;
 import com.innovus.domi.form.ProductoForm;
+import com.innovus.domi.form.ReputacionUsuarioForm;
 import com.innovus.domi.form.SucursalForm;
 
 @Api(name = "doomiClientes", version = "v1", scopes = { Constants.EMAIL_SCOPE }, clientIds = {
@@ -472,9 +477,9 @@ public class ApiClientes {
 
 	}
 	
-	public WrappedBoolean addProductosForSucursal(
+	public WrappedBoolean addProductoForSucursal(
 			@Named("websafeSucursalKey") final String websafeSucursalKey,
-			final List<String> listaWebsafeEmpresaKey
+			@Named("websafeProductoKey") final String websafeProductoKey
 			)
 			throws NotFoundException,
 			ForbiddenException, ConflictException {
@@ -488,21 +493,18 @@ public class ApiClientes {
 		WrappedBoolean result = ofy().transact(new Work<WrappedBoolean>() {
 			@Override
 			public WrappedBoolean run() {
+				
 				try {
-					for (String websafeProductoKey : listaWebsafeEmpresaKey) {
-						String cadena = "";
-						Boolean bandera ;
-						Key<Producto> productoKey = Key.create(websafeProductoKey);
-					
+						
+						Key<Producto> productoKey = Key.create(websafeProductoKey);					
 
 					// Get the Grupo entity from the datastore
 						Producto producto = ofy().load().key(productoKey).now();
 
 					// 404 when there is no Grupo with the given grupoId.
 						if (producto == null) {
-							cadena = "No Producto found with key: " + websafeProductoKey;
-							bandera =false;
-							//return new WrappedBoolean(false,"No Producto found with key: " + websafeProductoKey);
+							
+							return new WrappedBoolean(false,"No Producto found with key: " + websafeProductoKey);
 						}
 						Key<Sucursal> keySucursal = Key.create(websafeSucursalKey);
 						Sucursal sucursal = ofy().load().key(keySucursal).now();
@@ -519,7 +521,8 @@ public class ApiClientes {
 						if (sucursal.getProductosKeysPertenece().contains(
 								websafeProductoKey)) {
 							
-								return new WrappedBoolean(false, "Already registered");
+							return new WrappedBoolean(false,"No Producto ya registrado key:  " + websafeProductoKey);
+							
 
 						} else {
 
@@ -529,8 +532,9 @@ public class ApiClientes {
 							ofy().save().entities(producto, sucursal).now();
 							// We are booked!
 							return new WrappedBoolean(true);
+		
 						}
-					}
+			
 
 				} catch (Exception e) {
 						return new WrappedBoolean(false, "Unknown exception");
@@ -551,5 +555,111 @@ public class ApiClientes {
 		}
 		return result;
 	}
+	
+	@ApiMethod(name = "deleteProductosFromSucursal", path = "sucursales/{websafeSucursalKey}/{websafeProductoKey}/delete", httpMethod = HttpMethod.DELETE)
+	public WrappedBoolean deleteProductosFromSucursal(
+			@Named("websafeSucursalKey") final String websafeSucursalKey,
+			@Named("websafeProductoKey") final String websafeProductoKey)
+			throws NotFoundException, ForbiddenException, ConflictException {
+		// If not signed in, throw a 401 error.
+		// validar que este registrado
+
+		WrappedBoolean result = ofy().transact(new Work<WrappedBoolean>() {
+			@Override
+			public WrappedBoolean run() {
+				Key<Producto> productoKey = Key.create(websafeProductoKey);
+				Producto producto = ofy().load().key(productoKey).now();
+				// validar si esta logeado
+
+				// 404 when there is no Grupo with the given grupoId.
+				if (producto == null) {
+					return new WrappedBoolean(false,
+							"No Producto found with key: " + websafeProductoKey);
+				}
+
+				// Un-registering from the Grupo.
+				Key<Sucursal> keySucursal = Key.create(websafeSucursalKey);
+				Sucursal sucursal = ofy().load().key(keySucursal).now();
+				// 404 when there is no Grupo with the given grupoId.
+				if (sucursal == null) {
+					return new WrappedBoolean(false,
+							"No Sucursal found with key: " + websafeSucursalKey);
+				}
+
+				if (sucursal.getProductosKeysPertenece().contains(websafeProductoKey)) {
+					sucursal.deleteProductoOfSucursal(websafeProductoKey);
+
+					ofy().save().entities(sucursal, producto).now();
+					return new WrappedBoolean(true);
+				} else {
+					return new WrappedBoolean(false,
+							"It Producto have not this Sucursal");
+				}
+			}
+		});
+		// if result is false
+		if (!result.getResult()) {
+			if (result.getReason().contains("No Producto found with key")) {
+				throw new NotFoundException(result.getReason());
+			} else {
+				throw new ForbiddenException(result.getReason());
+			}
+		}
+		// NotFoundException is actually thrown here.
+		return new WrappedBoolean(result.getResult());
+	}
+	
+	@ApiMethod(name = "getCarritosXSucursales", path = "carritos/{websafeKeySucursal}", httpMethod = HttpMethod.GET)
+	public List<Carrito> getCarritosXSucursales(
+			@Named("websafeKeySucursal") final String websafeKeySucursal) {
+
+		return ofy().load().type(Carrito.class)
+				.ancestor(Key.create(websafeKeySucursal)).list();
+
+	}
+	
+	@ApiMethod(name = "agregarReputacion", path = "agregarReputacion", httpMethod = HttpMethod.POST)
+	public ReputacionUsuario agregarReputacion(
+			final ReputacionUsuarioForm reputacionUsuarioForm)// me devuelva un producto
+	{
+		Key<Usuario> keyUsuario = Key.create(reputacionUsuarioForm.getWebsafeKeyUsuario());
+		final Key<ReputacionUsuario> reputacionUsuarioKey = factory().allocateId(keyUsuario,
+				ReputacionUsuario.class);
+		final long reputacionUsuarioId = reputacionUsuarioKey.getId();
+
+		ReputacionUsuario reputacionUsuario = ofy().transact(new Work<ReputacionUsuario>() {
+			@Override
+			public ReputacionUsuario run() {// inicia comit
+				// Fetch user's Profile.
+				// Profile profile = getProfileFromUser(user, userId);
+				ReputacionUsuario ReputacionUsuario = new ReputacionUsuario(reputacionUsuarioId, reputacionUsuarioForm);
+				// Save Conference and Profile.
+				ofy().save().entities(ReputacionUsuario).now();
+
+				return ReputacionUsuario;
+			}
+		});
+		return reputacionUsuario;
+	}
+	@ApiMethod(name = "getReputacionesCorreoUsuario", path = "reputacionCorreoUsuarios/{correoUser}/", httpMethod = HttpMethod.GET)
+	public List<ReputacionUsuario> getReputacionesCorreoUsuarios(
+			@Named("correoUser") final String correoUser) {
+		//Aguilizar ahi muchas consultas
+		User user = ofy().load().type(User.class).filter("email",correoUser).first().now();
+		List<Usuario> usuarios = ofy().load().type(Usuario.class).ancestor(user).list();
+		Usuario usuario = usuarios.get(0);
+		
+		return ofy().load().type(ReputacionUsuario.class)
+				.ancestor(usuario).list();
+	}
+	
+	@ApiMethod(name = "getUser", path = "user/{correoUser}/", httpMethod = HttpMethod.GET)
+	public User  getUser(
+			@Named("correoUser") final String correoUser) {
+		//Aguilizar ahi muchas consultas
+		return ofy().load().type(User.class).filter("email",correoUser).first().now();
+		
+	}	
+	
 
 }

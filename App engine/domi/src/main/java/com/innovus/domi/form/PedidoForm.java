@@ -1,25 +1,30 @@
 package com.innovus.domi.form;
 
+import static com.innovus.domi.service.OfyService.ofy;
+
+import com.innovus.domi.domain.Categoria;
+
 public class PedidoForm {
+	private String websafeKeyProducto;
 	private int cantidadProducto;
-	private String keyProducto;
-	private String descripcionPedido;
+	private String observacionPedido;
 	
-	private PedidoForm(){}
-	private PedidoForm(int cantidadProducto,String keyProducto,String descripcionPedido){
+	public PedidoForm(){}
+	private PedidoForm(String websafeKeyProducto ,int cantidadProducto,String observacionPedido){
 		this.cantidadProducto=cantidadProducto;
-		this.keyProducto=keyProducto;
-		this.descripcionPedido=descripcionPedido;
+		this.observacionPedido=observacionPedido;
+		this.websafeKeyProducto=websafeKeyProducto;
 	}
 	public int getCantidadProducto(){
 		return cantidadProducto;
 	}
-	public String getKeyProducto(){
-		return keyProducto;
+	
+	public String getObservacionPedido(){
+		return observacionPedido;
 	}
-	public String getDescripcionPedido(){
-		return descripcionPedido;
+	public String getWebsafeKeyProducto(){
+		return websafeKeyProducto;
 	}
 	
-
+	 
 }
