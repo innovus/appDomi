@@ -97,10 +97,12 @@
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="guava-14.0.1" level="project" />
     <orderEntry type="library" exported="" name="floatingactionbutton-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="cardview-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="doomiTodos-v1-1.20.0-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="circleimageview-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="google-api-client-1.17.0-rc" level="project" />
+    <orderEntry type="library" exported="" name="cardview-v7-22.1.1" level="project" />
+    <orderEntry type="library" exported="" name="doomiUsuarios-v1-1.20.0-SNAPSHOT" level="project" />
   </component>
 </module>

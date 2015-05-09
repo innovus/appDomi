@@ -13,10 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.appspot.domi_app.doomiUsuarios.model.Sucursal;
 import com.innovus.doomi.Consumir.HttpRequestTask;
 
 import com.innovus.doomi.R;
-import com.appspot.domi_app.domi.model.Empresa;
+
 import com.innovus.doomi.adapters.EmpresasAdapter;
 
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class EmpresaFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        ArrayList <Empresa> pusheenArrayList = new ArrayList<Empresa>();
+        ArrayList <Sucursal> pusheenArrayList = new ArrayList<Sucursal>();
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
         //crea adaptador

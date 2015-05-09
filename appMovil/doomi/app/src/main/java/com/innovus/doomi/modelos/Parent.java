@@ -1,6 +1,7 @@
 package com.innovus.doomi.modelos;
 
-import com.appspot.domi_app.domi.model.Producto;
+
+import com.appspot.domi_app.doomiTodos.model.Producto;
 
 import java.util.ArrayList;
 

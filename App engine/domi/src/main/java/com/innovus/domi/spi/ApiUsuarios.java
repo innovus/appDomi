@@ -19,6 +19,7 @@ import com.google.api.server.spi.response.NotFoundException;
 import com.google.appengine.repackaged.com.google.protobuf.Internal.ListAdapter;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
+import com.googlecode.objectify.cmd.Query;
 import com.innovus.domi.Constants;
 import com.innovus.domi.domain.Carrito;
 import com.innovus.domi.domain.Cliente;
@@ -294,6 +295,20 @@ public class ApiUsuarios {
 				.ancestor(usuario).list();
 	}
 	
+	//trae las sucursales pero que tengan productos agregados
+	@ApiMethod(name = "consultaSucursales", path = "consultaSucursales", httpMethod = HttpMethod.GET)
+	public List<Sucursal> consultaSucursales() {
+		//
+		List<Sucursal> sucursalesAux = ofy().load().type(Sucursal.class).list();
+		List<Sucursal> sucursales = new ArrayList<>();
+		for (Sucursal sucursal : sucursalesAux) {
+			if(sucursal.CantidadProductos() > 0)
+				sucursales.add(sucursal);
+		}
+		return sucursales;
+			
+			
+	}
 	
 
 }

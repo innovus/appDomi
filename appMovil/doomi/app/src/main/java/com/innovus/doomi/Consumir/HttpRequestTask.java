@@ -8,10 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
+import com.appspot.domi_app.doomiUsuarios.DoomiUsuarios;
+import com.appspot.domi_app.doomiUsuarios.model.Sucursal;
+import com.appspot.domi_app.doomiUsuarios.model.SucursalCollection;
 
-import com.appspot.domi_app.domi.Domi;
-import com.appspot.domi_app.domi.model.Empresa;
-import com.appspot.domi_app.domi.model.EmpresaCollection;
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.EmpresasAdapter;
 
@@ -22,9 +22,9 @@ import java.util.List;
 /**
  * Created by Janeth Arcos on 19/02/2015.
  */
-public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
+public class HttpRequestTask extends AsyncTask<Void, Void, List<Sucursal>> {
    // private static com.appspot.domi_app.domi.Domi myApiService = null;
-   private com.appspot.domi_app.domi.Domi myApiService = null;
+   private com.appspot.domi_app.doomiUsuarios.DoomiUsuarios myApiService = null;
 
 
     private Activity activity;
@@ -39,23 +39,24 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
     }
 
     @Override
-    protected List<Empresa> doInBackground(Void... params) {
+    protected List<Sucursal> doInBackground(Void... params) {
         if (myApiService == null) { // Only do this once
-            myApiService = AppConstants.buildServiceHandler();
+            myApiService = AppConstants.buildServiceHandlerUsuarios();
         }
         // Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
 
         try {
-            Domi.ConsultaEmpresas queryEmpresas = myApiService.consultaEmpresas();
+            DoomiUsuarios.ConsultaSucursales querySucursales = myApiService.consultaSucursales();
 
-            EmpresaCollection empresaCollection = queryEmpresas.execute();
-            if (empresaCollection != null && empresaCollection.getItems() != null) {
-                List<Empresa> empresas = empresaCollection.getItems();
+            SucursalCollection sucursalCollection = querySucursales.execute();
+            if (sucursalCollection != null && sucursalCollection.getItems() != null) {
+                List<Sucursal> sucursales = sucursalCollection.getItems();
 
-                return empresas;
+                return sucursales;
             }
             //return Collections.EMPTY_LIST;
-            return myApiService.consultaEmpresas().execute().getItems();
+            return myApiService.consultaSucursales().execute().getItems();
+
 
         } catch (IOException e) {
             Log.e("Erroroooooooor", e.getMessage());
@@ -65,7 +66,7 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Empresa>> {
     }
 
     @Override
-    protected void onPostExecute(List<Empresa> result) {
+    protected void onPostExecute(List<Sucursal> result) {
 
           RecyclerView recyclerView = (RecyclerView)  activity.findViewById(R.id.my_recycler_view);
             recyclerView.setHasFixedSize(true);//que todo lo optimize

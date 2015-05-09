@@ -40,8 +40,7 @@ public class Categoria {
 		 this.nombreCategoria = nombreCategoria;
 		
 		 this.empresaKey=Key.create(websafeKeyEmpresa);//para qe empresa sea el padre de categoria
-		 this.idEmpresa = idEmpresa;
-		 
+		 this.idEmpresa = ofy().load().key(empresaKey).now().getidEmpresa();	
 		 
 	 }
 	 
@@ -52,8 +51,6 @@ public class Categoria {
 	 public String getNombreCategoria(){
 		 return nombreCategoria;
 	 }
-	 
-	
 	 
 	 
 	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)

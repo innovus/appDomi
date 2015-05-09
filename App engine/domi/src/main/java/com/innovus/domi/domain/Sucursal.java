@@ -195,5 +195,32 @@ public class Sucursal {
 	    }
 				
 	}	
+	
+	public String getNombreEmpresa() {
+        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
+        Empresa organizer = ofy().load().key(getEmpresaKey()).now();
+        if (organizer == null) {
+            return "";
+        } else {
+            return organizer.getNombreEmpresa();
+        }
+    }
+	public String getDescripcionEmpresa() {
+        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
+        Empresa organizer = ofy().load().key(getEmpresaKey()).now();
+        if (organizer == null) {
+            return "";
+        } else {
+            return organizer.getDescripcion();
+        }
+    }
+	public int CantidadProductos(){
+		int dev = 0;
+		for (String keyString : productosKeysPertenece) {
+			dev ++;
+	    }
+		return dev;
+		
+	}
 
 }

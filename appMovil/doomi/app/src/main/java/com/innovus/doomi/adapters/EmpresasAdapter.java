@@ -7,13 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.appspot.domi_app.domi.model.Empresa;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.common.collect.Constraints;
+
+import com.appspot.domi_app.doomiUsuarios.model.Sucursal;
 import com.innovus.doomi.Activities.Productos;
-import com.innovus.doomi.Principal;
 import com.innovus.doomi.R;
 
 
@@ -25,26 +22,26 @@ import java.util.List;
  */
 public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHolder> {
     public static Activity activity;
-  /*  public List<Empresa> empresas;//dataset
+  /*  public List<Empresa> sucursales;//dataset
     public int itemLayout;//es la vista que va a cargar la row_empresas.xml
 */
     //prueba de busqueda
   //private List<Empresa> visibleObjects;
 
     //todos los objetos
-  private List<Empresa> allObjects;
+  private List<Sucursal> allObjects;
 
-    ///los objetos visibles
-  private List<Empresa> empresas;
+    ///los objetos visibles en la busqueda
+  private List<Sucursal> sucursales;
 
     private int itemLayout;
 
 
 
-    public EmpresasAdapter(List<Empresa> data,int itemLayout,Activity activity){
+    public EmpresasAdapter(List<Sucursal> data,int itemLayout,Activity activity){
         super();
         this.itemLayout = itemLayout;
-        //this.empresas = data;
+        //this.sucursales = data;
         //inicaializo todos los objetos
         this.allObjects = data;
         this.activity = activity;
@@ -54,19 +51,19 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
 
     //iniicializa para que sean visibles todos los objetos
     public void flushFilter(){
-        empresas=new ArrayList<>();
-        empresas.addAll(allObjects);
+        sucursales =new ArrayList<>();
+        sucursales.addAll(allObjects);
         notifyDataSetChanged();
     }
 
 
 
     public void setFilter(String queryText) {
-        empresas = new ArrayList<>();
+        sucursales = new ArrayList<>();
         // constraint = constraint.toString().toLowerCase();
-        for (Empresa item: allObjects) {
-            if (item.getNombre().toLowerCase().contains(queryText))
-                empresas.add(item);
+        for (Sucursal item: allObjects) {
+            if (item.getNombreEmpresa().toLowerCase().contains(queryText))
+                sucursales.add(item);
         }
         notifyDataSetChanged();
     }
@@ -85,25 +82,25 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
     public void onBindViewHolder(EmpresasAdapter.ViewHolder holder, int position) {
 
         //lcargo el view con los valores
-        Empresa empresa = empresas.get(position);
+        Sucursal sucursal = sucursales.get(position);
 
-        holder.nombreEmpresa.setText(empresa.getNombre());
-        holder.descripcionEmpresa.setText(empresa.getDescripcion());
-        holder.minimosEmpresa.setText(empresa.getTiempoMinimo()+ " Min - $" + empresa.getValorMinimoPedido() + " minimo");
-        holder.itemView.setTag(empresa);
-        holder.propiedades = empresa;//paso la empresa aqui para pque en el onclick me reconosca q es esta empresa donde doy click
+        holder.nombreEmpresa.setText(sucursal.getNombreEmpresa() );
+        holder.descripcionEmpresa.setText(sucursal.getDescripcionEmpresa());
+        holder.minimosEmpresa.setText(sucursal.getTiempoMinimo()+ " Min - $" + sucursal.getPedidoMinimo() + " minimo");
+        holder.itemView.setTag(sucursal);
+        holder.propiedades = sucursal;//paso la empresa aqui para pque en el onclick me reconosca q es esta empresa donde doy click
     }
 
     @Override
     public int getItemCount() {
-        return empresas.size();
+        return sucursales.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView nombreEmpresa;
         public TextView descripcionEmpresa;
         public TextView minimosEmpresa;
-        public Empresa propiedades;
+        public Sucursal propiedades;
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -117,8 +114,8 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
                 public void onClick(View view) {
                    // Intent i = new Inten
                     Intent i = new Intent (activity, Productos.class);
-                    i.putExtra("llave", propiedades.getWebsafeKey());
-                    i.putExtra("nombre", propiedades.getNombre());
+                    i.putExtra("llave", propiedades.getWebsafekeySucursal());
+                    i.putExtra("nombre", propiedades.getNombreEmpresa());
                     activity.startActivity(i);
 
 

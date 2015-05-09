@@ -214,14 +214,7 @@ public class ApiDomi {
 	 * @throws UnauthorizedException
 	 *             when the user is not signed in.
 	 */
-	@ApiMethod(name = "getCategoriasXEmpresa", path = "getCategoriasXEmpresa", httpMethod = HttpMethod.POST)
-	public List<Categoria> getCategoriasXEmpresa(
-			@Named("webSafeEmpresaKey") final String webSafeEmpresaKey) {
-
-		return ofy().load().type(Categoria.class)
-				.ancestor(Key.create(webSafeEmpresaKey)).list();
-
-	}
+	
 
 	@ApiMethod(name = "getProductosXEmpresa", path = "getProductosXEmpresa", httpMethod = HttpMethod.POST)
 	public List<Producto> getProductosXEmpresa(

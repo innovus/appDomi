@@ -3,7 +3,8 @@ package com.innovus.doomi.Consumir;
 import android.app.Activity;
 import android.app.Dialog;
 
-import com.appspot.domi_app.domi.Domi;
+import com.appspot.domi_app.doomiTodos.DoomiTodos;
+import com.appspot.domi_app.doomiUsuarios.DoomiUsuarios;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -40,10 +41,20 @@ public class AppConstants {
             }
         });
     }
-    public static Domi buildServiceHandler() {
+    public static DoomiUsuarios buildServiceHandlerUsuarios() {
 
-        Domi.Builder builder
-                = new Domi.Builder(
+        DoomiUsuarios.Builder builder
+                = new DoomiUsuarios.Builder(
+                AppConstants.HTTP_TRANSPORT,
+                AppConstants.JSON_FACTORY, null);
+
+        //builder.setApplicationName("domi-app");
+        return builder.build();
+    }
+    public static DoomiTodos buildServiceHandlerTodos() {
+
+        DoomiTodos.Builder builder
+                = new DoomiTodos.Builder(
                 AppConstants.HTTP_TRANSPORT,
                 AppConstants.JSON_FACTORY, null);
 

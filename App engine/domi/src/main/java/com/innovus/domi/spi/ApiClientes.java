@@ -661,5 +661,14 @@ public class ApiClientes {
 		
 	}	
 	
+	@ApiMethod(name = "consultaSucursales", path = "consultaSucursales", httpMethod = HttpMethod.GET)
+	public List<Sucursal> consultaSucursales() {
+		//
+		
+		
+		Query query = ofy().load().type(Sucursal.class);
+		return query.list();// me retorns en una lista
+	}
+	
 
 }

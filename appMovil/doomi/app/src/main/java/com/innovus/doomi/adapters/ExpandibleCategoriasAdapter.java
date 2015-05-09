@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import com.appspot.domi_app.domi.model.Producto;
+import com.appspot.domi_app.doomiTodos.model.Producto;
 import com.innovus.doomi.Activities.ProductoPedidos;
 import com.innovus.doomi.modelos.Parent;
 import java.util.ArrayList;
@@ -51,6 +51,8 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter  {
     @Override
     public Producto getChild(int i, int i2) {
         return mParent.get(i).getArrayChildren().get(i2);
+
+
     }
 
     @Override

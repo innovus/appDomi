@@ -11,9 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.appspot.domi_app.domi.Domi;
-import com.appspot.domi_app.domi.model.Empresa;
-import com.appspot.domi_app.domi.model.EmpresaCollection;
+
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.CarritoAdapter;
 import com.innovus.doomi.adapters.EmpresasAdapter;

@@ -12,11 +12,11 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.appspot.domi_app.domi.Domi;
 
-import com.appspot.domi_app.domi.model.Empresa;
-import com.appspot.domi_app.domi.model.Producto;
-import com.appspot.domi_app.domi.model.ProductoCollection;
+import com.appspot.domi_app.doomiTodos.DoomiTodos;
+import com.appspot.domi_app.doomiTodos.model.Producto;
+import com.appspot.domi_app.doomiTodos.model.ProductoCollection;
+import com.appspot.domi_app.doomiUsuarios.DoomiUsuarios;
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.EmpresasAdapter;
 import com.innovus.doomi.adapters.ExpandibleCategoriasAdapter;
@@ -34,7 +34,7 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
 
 
     // private static com.appspot.domi_app.domi.Domi myApiService = null;
-    private com.appspot.domi_app.domi.Domi myApiService = null;
+    private com.appspot.domi_app.doomiTodos.DoomiTodos myApiService = null;
     public String mostrar="";
 
     private Activity activity;
@@ -51,18 +51,17 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
     }
 
 
-
-
     @Override
     protected List<Producto> doInBackground(String... strings) {
 
         if (myApiService == null) { // Only do this once
-                myApiService = AppConstants.buildServiceHandler();
+                myApiService = AppConstants.buildServiceHandlerTodos();
             }
             // Domi.ConsultaEmpresa queryEmpresas = myApiService.consultaEmpresa();
 
             try {
-                Domi.GetProductosXEmpresa queryProductos = myApiService.getProductosXEmpresa(strings[0]);
+
+                DoomiTodos.GetProductosXSucursal queryProductos = myApiService.getProductosXSucursal(strings[0]);
 
                 ProductoCollection productoCollection = queryProductos.execute();
                 if (productoCollection != null && productoCollection.getItems() != null) {
