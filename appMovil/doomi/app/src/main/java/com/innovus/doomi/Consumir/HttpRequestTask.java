@@ -25,6 +25,7 @@ import java.util.List;
 public class HttpRequestTask extends AsyncTask<Void, Void, List<Sucursal>> {
    // private static com.appspot.domi_app.domi.Domi myApiService = null;
    private com.appspot.domi_app.doomiUsuarios.DoomiUsuarios myApiService = null;
+    private Exception exception;
 
 
     private Activity activity;
@@ -60,6 +61,7 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Sucursal>> {
 
         } catch (IOException e) {
             Log.e("Erroroooooooor", e.getMessage());
+
             //  Log.e("Error",e);
             return Collections.EMPTY_LIST;
         }

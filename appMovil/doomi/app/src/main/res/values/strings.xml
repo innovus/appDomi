@@ -33,7 +33,7 @@
     <string name="email">Correo Electronico</string>
 
     <string name="password">Contraseña</string>
-    <string name="login">Login</string>
+    <string name="login">Iniciar sesion</string>
     <string name="signup">Registrate</string>
     <string name="nuevoen">Nuevo en Doomi?  Registrate > </string>
     <string name="nombres">Nombres</string>
@@ -58,5 +58,6 @@
     <string name="title_activity_direcciones">Direcciones</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="logout">Cerrar sesion</string>
 
 </resources>

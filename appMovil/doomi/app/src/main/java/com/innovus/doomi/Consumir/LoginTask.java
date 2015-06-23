@@ -24,6 +24,7 @@ public class LoginTask extends AsyncTask<Void, Void, Login> {
     private String email;
     private String password;
     SessionManager session;
+    private IOException exceptionToBeThrown;
 
 
     private Activity activity;
@@ -56,44 +57,38 @@ public class LoginTask extends AsyncTask<Void, Void, Login> {
 
         } catch (IOException e) {
             Log.e("Erroroooooooor", e.getMessage());
+            //exceptionToBeThrown = e;
+            //cancel(true);
             //  Log.e("Error",e);
-            return new Login();
+           // return new Login();
+            return null;
         }
+
     }
 
     @Override
     protected void onPostExecute(Login result) {
-        if(result.getEstado().equals(false))
-            Toast.makeText(this.activity, "Usuario o Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
-        else{
-            session.createLoginSession(result.getUser().getWebsafeKey(), result.getUser().getEmail().getEmail());
+        if (result ==null) {
+            Toast.makeText(activity, "error conexion intenta mas tarde", Toast.LENGTH_SHORT);
 
-            Toast.makeText(this.activity, "Logeado", Toast.LENGTH_SHORT).show();
+        }else {
+            if (result.getEstado().equals(false))
+                Toast.makeText(this.activity, "Usuario o Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
+            else {
+                session.createLoginSession(result.getUser().getWebsafeKey(), result.getUser().getEmail().getEmail());
 
-            // Staring MainActivity
-           // Intent i = new Intent(this.activity, Login.class);
-           // this.activity.startActivity(i);
+                Toast.makeText(this.activity, "Logeado", Toast.LENGTH_SHORT).show();
+                this.activity.finish();
 
-            /*Toast.makeText(this.activity,result.getUser().getEmail().getEmail(), Toast.LENGTH_SHORT).show();
-            SharedPreferences prefs =
-                    this.activity.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("email", "modificado@email.com");
-            editor.putString("nombre", "Prueba");
-            editor.commit();*/
-            /*
-            Toast.makeT
-            Intent i = new Intent (this.activity, com.innovus.doomi.Activities.Login.class);
-
-            this.activity.startActivity(i);
-            */
-
+            }
         }
 
-
-
-
+    }
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        // Perform error post processing here...
     }
 
 }

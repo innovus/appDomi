@@ -59,7 +59,7 @@
                 android:layout_height="45dp"
                 android:inputType="textPassword"
                 android:ems="12"
-                android:id="@+id/etPaswword"
+                android:id="@+id/etPassword"
                 android:hint="@string/password"
                 android:background="#fff"
                 android:layout_marginTop="5dp"
@@ -72,7 +72,7 @@
                 android:layout_height="45dp"
                 android:inputType="textPassword"
                 android:ems="12"
-                android:id="@+id/etPaswword2"
+                android:id="@+id/etPassword2"
                 android:hint="@string/password"
                 android:background="#fff"
                 android:layout_marginTop="5dp"
@@ -116,7 +116,10 @@
                 android:layout_marginBottom="5dp"
                 android:textStyle="italic"
                 android:paddingLeft="10dp"
+                android:inputType="phone"
                 />
+
+
 
 
             <Button

@@ -2,6 +2,7 @@ package com.innovus.doomi;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -16,7 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.innovus.doomi.Activities.LoginActivity;
 import com.innovus.doomi.Consumir.HttpRequestTask;
+import com.innovus.doomi.Consumir.SessionManager;
 import com.innovus.doomi.adapters.MenuSliderAdapter;
 import com.innovus.doomi.db.DbProductos;
 import com.innovus.doomi.fragments.CirculoFragment;
@@ -28,11 +32,9 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     //private EmpresaFragment fragments= new EmpresaFragment();
     private EmpresaFragment fragments = new EmpresaFragment();
     private CirculoFragment circulo = new CirculoFragment() ;
-
+    SessionManager sessionManager;
 
     private static final String LOG_TAG = "MainActivity";
-
-
     private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
 
 
@@ -40,6 +42,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        sessionManager = new SessionManager(getApplicationContext());
 
         //agregmos el toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
@@ -118,12 +121,84 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        if(sessionManager.isLoggedIn()){
+            getMenuInflater().inflate(R.menu.menu_principal, menu);
+
+        }
+        else{
+            getMenuInflater().inflate(R.menu.menu_principal_login,menu);
+
+        }
+
         MenuItem searchItem = menu.findItem(R.id.buscar_principal);
         mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setOnQueryTextListener(this);
 
         return true;
+    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        menu.clear();
+        if(sessionManager.isLoggedIn()){
+            getMenuInflater().inflate(R.menu.menu_principal, menu);
+
+
+        }
+        else{
+            getMenuInflater().inflate(R.menu.menu_principal_login,menu);
+
+
+        }
+
+        MenuItem searchItem = menu.findItem(R.id.buscar_principal);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchView.setOnQueryTextListener(this);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //si esta logeado aparece(cerrar sesion) si no esta logeado aparece  aparece iniciarsion
+        if(sessionManager.isLoggedIn()){
+            switch (id){
+                case R.id.action_settings:
+                    return true;
+
+                case R.id.action_logout:
+                    sessionManager.logoutUser();
+                    Toast.makeText(this, "Cerraste sesion", Toast.LENGTH_SHORT).show();
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+
+            }
+
+        }else {
+            switch (id) {
+                case R.id.action_settings:
+                    return true;
+
+                case R.id.action_login:
+
+                    sessionManager.checkLogin();
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+
+            }
+        }
+
+
     }
 
     /*
@@ -139,6 +214,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     */
     @Override
     public void onPause(){
+
         super.onPause();
         DbProductos admin = new DbProductos(this,"administracion", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
@@ -181,4 +257,5 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     public void onBusqueda(String cadena) {
         this.onQueryTextChange(cadena);
     }
+
 }

@@ -58,7 +58,7 @@ public class LoginActivity extends ActionBarActivity {
 
 
         new LoginTask(this,etEmail.getText().toString(),etPassword.getText().toString()).execute();
-        finish();
+        //finish();
 
     }
     public void onClickRegistrarse(View v){

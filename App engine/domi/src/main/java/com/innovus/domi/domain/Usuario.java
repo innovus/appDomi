@@ -126,10 +126,11 @@ public class Usuario {
 		this.keyUser = keyUser;
 	}
 	
-	/* public String getWebsafeKey(){
-		 return Key.create(keyUser, Empresa.class,idUsuario).getString();
+	 public String getWebsafeKey(){
+		 User user = ofy().load().key(getKeyUser()).now();
+			return user.getWebsafeKey();
 	 }
-	 */
+	 
 	public String getWebsafekeyUsuario(){
 		 return Key.create(keyUser, Usuario.class,idUsuario).getString();
 				
