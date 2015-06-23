@@ -86,7 +86,7 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
 
         holder.nombreEmpresa.setText(sucursal.getNombreEmpresa() );
         holder.descripcionEmpresa.setText(sucursal.getDescripcionEmpresa());
-        holder.minimosEmpresa.setText(sucursal.getTiempoMinimo()+ " Min - $" + sucursal.getPedidoMinimo() + " minimo");
+        holder.minimosEmpresa.setText(sucursal.getTiempoMinimo()+ " Min - $" + com.innovus.doomi.Consumir.AppConstants.fmt(sucursal.getPedidoMinimo() )+ " minimo");
         holder.itemView.setTag(sucursal);
         holder.propiedades = sucursal;//paso la empresa aqui para pque en el onclick me reconosca q es esta empresa donde doy click
     }

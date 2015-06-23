@@ -36,7 +36,9 @@ public class Empresa {
 	
 	 private String descripcion;
 	 
-	 
+	 private String urlLogo;
+	 private String urlPortada;
+	 	 
 	 private List<String> gruposKeysPertenece = new ArrayList<>(0);
 	 
 	    
@@ -48,7 +50,23 @@ public class Empresa {
 	 private Boolean is_active;
 	 
 	 
-	 //falta el logo
+	 public String getUrlLogo() {
+		return urlLogo;
+	}
+
+	public void setUrlLogo(String urlLogo) {
+		this.urlLogo = urlLogo;
+	}
+
+	public String getUrlPortada() {
+		return urlPortada;
+	}
+
+	public void setUrlPortada(String urlPortada) {
+		this.urlPortada = urlPortada;
+	}
+
+	//falta el logo
 	 private Empresa (){}
 	    
 	 public Empresa(final long idEmpresa,final String websafeKeyCliente, final EmpresaForm empresaForm) {
@@ -124,6 +142,8 @@ public class Empresa {
 	 public void actualizaConEmpresaForm(EmpresaForm empresaForm) {
 	     this.nombreEmpresa = empresaForm.getNombre();
 	     this.descripcion = empresaForm.getDescripcion();
+	     this.urlLogo = empresaForm.getUrlLogo();
+	     this.urlPortada = empresaForm.getUrlPortada();
 	     
 	         // The initial number of seatsAvailable is the same as maxAttendees.
 	         // However, if there are already some seats allocated, we should subtract that numbers.

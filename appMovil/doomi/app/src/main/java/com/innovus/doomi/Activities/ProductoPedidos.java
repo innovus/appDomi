@@ -24,13 +24,14 @@ public class ProductoPedidos extends ActionBarActivity {
     EditText etCantidad;
     EditText etObservacion;
 
-    String websafeKey;
+    String websafeKeyProducto;
     String nombreProducto ;
     String descripcionProducto ;
     String precioProducto;
     String cantidad ;
     String observacion;
     String nomResta;
+    String llaveSucursal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,11 @@ public class ProductoPedidos extends ActionBarActivity {
 
         //traigo los valores de el otro intent
 
-        websafeKey = getIntent().getStringExtra("websafeKey");
+        websafeKeyProducto = getIntent().getStringExtra("websafeKeyProducto");
         nombreProducto = getIntent().getStringExtra("nombre");
         descripcionProducto = getIntent().getStringExtra("descripcion");
         precioProducto = getIntent().getStringExtra("precio");
+        llaveSucursal = getIntent().getStringExtra("llaveSucursal");
 
 
         //casteo los valores
@@ -100,7 +102,7 @@ public class ProductoPedidos extends ActionBarActivity {
 
 
         ContentValues registro = new ContentValues();  //es una clase para guardar datos
-        registro.put("websafeKey", websafeKey);
+        registro.put("websafeKey", websafeKeyProducto);
         registro.put("nombreProducto", nombreProducto);
         registro.put("descripcionProducto", descripcionProducto);
         registro.put("precioProducto", precioProducto);

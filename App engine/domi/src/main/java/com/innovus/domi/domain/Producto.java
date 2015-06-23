@@ -44,6 +44,8 @@ public class Producto {
 	 
 	 private Boolean is_active;
 	 
+	 private String urlImageProducto;
+	 
 	 
 	 public Producto(){}
 	 
@@ -93,6 +95,7 @@ public class Producto {
 	     this.nombreProducto = productoForm.getNombreProducto();
 	     this.descripcionProducto = productoForm.getDescripcionProducto();
 	     this.precioProducto = productoForm.getPrecioProducto();
+	     this.urlImageProducto = productoForm.getUrlImageProducto();
 	       
 	 }
      
@@ -119,7 +122,5 @@ public class Producto {
 	        } else {
 	            return organizer.getNombreCategoria();
 	        }
-	    }
-	 
-
+	    }	 
 }

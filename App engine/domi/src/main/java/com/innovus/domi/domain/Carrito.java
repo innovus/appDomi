@@ -201,5 +201,16 @@ public class Carrito {
 			
 	    }
 	}
+	public List<Pedido> getPedidos(){
+		List<Pedido> listaPedidos = new ArrayList<>(0);	
+		
+		 for (String keyString : this.listaPedidosKey) {
+			 Key<Pedido> key=Key.create(keyString);
+			 Pedido pedido = ofy().load().key(key).now();
+			 listaPedidos.add(pedido);
+			 }
+		 return listaPedidos;
+	}
+		 
 	
 }

@@ -32,9 +32,14 @@ public class Cliente  {
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<User> keyUser;
+	 
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private long idUser;
 	
 	private String pais;
 	private String ciudad;
+	
+	
 	private Cliente(){
 
 	}
@@ -99,8 +104,15 @@ public class Cliente  {
 				 return user;
 			  }  
 		  });
+		  this.keyUser = Key.create(user.getWebsafeKey());
+		  User user2 = ofy().load().key(keyUser).now();
+		  this.idUser = user2.getIdUser();
 		  
 	}
 	
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public long getIdUser(){
+		 return idUser;
+	 }
 	
 }

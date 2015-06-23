@@ -27,11 +27,21 @@
     <string name="title_activity_carrito">Carrito</string>
     <string name="title_activity_editar_pedido">EditarPedido</string>
     <string name="btn_editar_pedido">Guardar Pedido</string>
-    <string name="btn_confirmar">Confirmar com</string>
+    <string name="btn_confirmar">Confirmar compra</string>
     <string name="drawer_open">Abrir navigation drawer</string>
     <string name="drawer_close">Cerrar navigation drawer</string>
+    <string name="email">Correo Electronico</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <string name="password">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="signup">Registrate</string>
+    <string name="nuevoen">Nuevo en Doomi?  Registrate > </string>
+    <string name="nombres">Nombres</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="celular">Numero Celular</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Nav Drawer Menu Items -->
@@ -46,5 +56,7 @@
     <string name="title_activity_prueba_slider">pruebaSlider</string>
     <string name="title_activity_add_direcciones">AddDirecciones</string>
     <string name="title_activity_direcciones">Direcciones</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
 
 </resources>

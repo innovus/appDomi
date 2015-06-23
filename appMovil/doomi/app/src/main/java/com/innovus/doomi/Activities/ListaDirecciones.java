@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 public class ListaDirecciones extends ActionBarActivity {
 
+    boolean is_select;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,9 @@ public class ListaDirecciones extends ActionBarActivity {
 
         toolbar.setTitle("Direcciones");
         setSupportActionBar(toolbar);
+        is_select = getIntent().getBooleanExtra("is_select",false);
         this.ActualizarDirecciones();
+
     }
 
 
@@ -95,11 +99,11 @@ public class ListaDirecciones extends ActionBarActivity {
 
         RecyclerView recyclerView = (RecyclerView) this.findViewById(R.id.recycler_view_direcciones);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new DireccionesAdapter(this.llenarDirecciones(),R.layout.row_direcciones,this));
+        recyclerView.setAdapter(new DireccionesAdapter(this.llenarDirecciones(),R.layout.row_direcciones,this,this.is_select));
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        new DireccionesTask(this).execute();
+        new DireccionesTask(this,is_select).execute();
 
     }
     @Override

@@ -90,6 +90,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
         fragmentTransaccion.show(fragments);
 
+
         fragmentTransaccion.add(R.id.main_principal,circulo).hide(circulo);
         fragmentTransaccion.show(circulo).commit();//muestre el elemento cero  y muestre los cambios q se han hecho
        /* for(Fragment fragment: fragments){//por cada elemento de fragment obten ese fragment

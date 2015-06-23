@@ -27,6 +27,7 @@ import com.innovus.domi.domain.Categoria;
 import com.innovus.domi.domain.Cliente;
 import com.innovus.domi.domain.Empresa;
 import com.innovus.domi.domain.Grupo;
+import com.innovus.domi.domain.Pedido;
 import com.innovus.domi.domain.Producto;
 import com.innovus.domi.domain.ReputacionUsuario;
 import com.innovus.domi.domain.Sucursal;
@@ -443,6 +444,7 @@ public class ApiClientes {
 		});
 		return producto;
 	}
+
 	@ApiMethod(name = "crearSucursal", path = "sucursales", httpMethod = HttpMethod.POST)
 	public Sucursal crearSucursal(
 			@Named("websafeKeyEmpresa") final String websafeKeyEmpresa,
@@ -458,7 +460,8 @@ public class ApiClientes {
 			public Sucursal run() {// inicia comit
 				// Fetch user's Profile.
 				// Profile profile = getProfileFromUser(user, userId);
-				Sucursal sucursal = new Sucursal(sucursalId, sucursalForm, websafeKeyEmpresa);
+				Sucursal sucursal = new Sucursal(sucursalId, sucursalForm,
+						websafeKeyEmpresa);
 				// Save Conference and Profile.
 				ofy().save().entities(sucursal).now();
 
@@ -467,7 +470,7 @@ public class ApiClientes {
 		});
 		return sucursal;
 	}
-	
+
 	@ApiMethod(name = "getSucursalesXEmpresa", path = "empresa/{websafeKeyEmpresa}/sucursales", httpMethod = HttpMethod.GET)
 	public List<Sucursal> getSucursalesXEmpresa(
 			@Named("websafeKeyEmpresa") final String websafeKeyEmpresa) {
@@ -476,13 +479,11 @@ public class ApiClientes {
 				.ancestor(Key.create(websafeKeyEmpresa)).list();
 
 	}
-	
+
 	public WrappedBoolean addProductoForSucursal(
 			@Named("websafeSucursalKey") final String websafeSucursalKey,
-			@Named("websafeProductoKey") final String websafeProductoKey
-			)
-			throws NotFoundException,
-			ForbiddenException, ConflictException {
+			@Named("websafeProductoKey") final String websafeProductoKey)
+			throws NotFoundException, ForbiddenException, ConflictException {
 		/*
 		 * // If not signed in, throw a 401 error. if (user == null) { throw new
 		 * UnauthorizedException("Authorization required"); }
@@ -493,57 +494,60 @@ public class ApiClientes {
 		WrappedBoolean result = ofy().transact(new Work<WrappedBoolean>() {
 			@Override
 			public WrappedBoolean run() {
-				
+
 				try {
-						
-						Key<Producto> productoKey = Key.create(websafeProductoKey);					
+
+					Key<Producto> productoKey = Key.create(websafeProductoKey);
 
 					// Get the Grupo entity from the datastore
-						Producto producto = ofy().load().key(productoKey).now();
+					Producto producto = ofy().load().key(productoKey).now();
 
 					// 404 when there is no Grupo with the given grupoId.
-						if (producto == null) {
-							
-							return new WrappedBoolean(false,"No Producto found with key: " + websafeProductoKey);
-						}
-						Key<Sucursal> keySucursal = Key.create(websafeSucursalKey);
-						Sucursal sucursal = ofy().load().key(keySucursal).now();
+					if (producto == null) {
 
-						// Has the Grupo already registered in this empresa?
+						return new WrappedBoolean(false,
+								"No Producto found with key: "
+										+ websafeProductoKey);
+					}
+					Key<Sucursal> keySucursal = Key.create(websafeSucursalKey);
+					Sucursal sucursal = ofy().load().key(keySucursal).now();
 
-						List<String> keyStringsToAttend = sucursal.getProductosKeysPertenece();
+					// Has the Grupo already registered in this empresa?
+
+					List<String> keyStringsToAttend = sucursal
+							.getProductosKeysPertenece();
 					// List<Key<Grupo>> keysToAttend = new ArrayList<>();
 					/*
 					 * for (String keyString : keyStringsToAttend) { LOG
 					 * keysToAttend.add(Key.<Conference>create(keyString)); }
 					 * return ofy().load().keys(keysToAttend).values();
 					 */
-						if (sucursal.getProductosKeysPertenece().contains(
-								websafeProductoKey)) {
-							
-							return new WrappedBoolean(false,"No Producto ya registrado key:  " + websafeProductoKey);
-							
+					if (sucursal.getProductosKeysPertenece().contains(
+							websafeProductoKey)) {
 
-						} else {
+						return new WrappedBoolean(false,
+								"No Producto ya registrado key:  "
+										+ websafeProductoKey);
 
-							sucursal.addProductoKeysPertenece(websafeProductoKey);
+					} else {
 
-							// Save the Conference and Profile entities
-							ofy().save().entities(producto, sucursal).now();
-							// We are booked!
-							return new WrappedBoolean(true);
-		
-						}
-			
+						sucursal.addProductoKeysPertenece(websafeProductoKey);
+
+						// Save the Conference and Profile entities
+						ofy().save().entities(producto, sucursal).now();
+						// We are booked!
+						return new WrappedBoolean(true);
+
+					}
 
 				} catch (Exception e) {
-						return new WrappedBoolean(false, "Unknown exception");
+					return new WrappedBoolean(false, "Unknown exception");
 
 				}
 			}
-			});
-		
-			// if result is false
+		});
+
+		// if result is false
 		if (!result.getResult()) {
 			if (result.getReason() == "Already registered") {
 				throw new ConflictException("You have already registered");
@@ -555,7 +559,7 @@ public class ApiClientes {
 		}
 		return result;
 	}
-	
+
 	@ApiMethod(name = "deleteProductosFromSucursal", path = "sucursales/{websafeSucursalKey}/{websafeProductoKey}/delete", httpMethod = HttpMethod.DELETE)
 	public WrappedBoolean deleteProductosFromSucursal(
 			@Named("websafeSucursalKey") final String websafeSucursalKey,
@@ -586,7 +590,8 @@ public class ApiClientes {
 							"No Sucursal found with key: " + websafeSucursalKey);
 				}
 
-				if (sucursal.getProductosKeysPertenece().contains(websafeProductoKey)) {
+				if (sucursal.getProductosKeysPertenece().contains(
+						websafeProductoKey)) {
 					sucursal.deleteProductoOfSucursal(websafeProductoKey);
 
 					ofy().save().entities(sucursal, producto).now();
@@ -608,7 +613,7 @@ public class ApiClientes {
 		// NotFoundException is actually thrown here.
 		return new WrappedBoolean(result.getResult());
 	}
-	
+
 	@ApiMethod(name = "getCarritosXSucursales", path = "carritos/{websafeKeySucursal}", httpMethod = HttpMethod.GET)
 	public List<Carrito> getCarritosXSucursales(
 			@Named("websafeKeySucursal") final String websafeKeySucursal) {
@@ -617,58 +622,83 @@ public class ApiClientes {
 				.ancestor(Key.create(websafeKeySucursal)).list();
 
 	}
-	
+
 	@ApiMethod(name = "agregarReputacion", path = "agregarReputacion", httpMethod = HttpMethod.POST)
 	public ReputacionUsuario agregarReputacion(
-			final ReputacionUsuarioForm reputacionUsuarioForm)// me devuelva un producto
+			final ReputacionUsuarioForm reputacionUsuarioForm)// me devuelva un
+																// producto
 	{
-		Key<Usuario> keyUsuario = Key.create(reputacionUsuarioForm.getWebsafeKeyUsuario());
-		final Key<ReputacionUsuario> reputacionUsuarioKey = factory().allocateId(keyUsuario,
-				ReputacionUsuario.class);
+		Key<Usuario> keyUsuario = Key.create(reputacionUsuarioForm
+				.getWebsafeKeyUsuario());
+		final Key<ReputacionUsuario> reputacionUsuarioKey = factory()
+				.allocateId(keyUsuario, ReputacionUsuario.class);
 		final long reputacionUsuarioId = reputacionUsuarioKey.getId();
 
-		ReputacionUsuario reputacionUsuario = ofy().transact(new Work<ReputacionUsuario>() {
-			@Override
-			public ReputacionUsuario run() {// inicia comit
-				// Fetch user's Profile.
-				// Profile profile = getProfileFromUser(user, userId);
-				ReputacionUsuario ReputacionUsuario = new ReputacionUsuario(reputacionUsuarioId, reputacionUsuarioForm);
-				// Save Conference and Profile.
-				ofy().save().entities(ReputacionUsuario).now();
+		ReputacionUsuario reputacionUsuario = ofy().transact(
+				new Work<ReputacionUsuario>() {
+					@Override
+					public ReputacionUsuario run() {// inicia comit
+						// Fetch user's Profile.
+						// Profile profile = getProfileFromUser(user, userId);
+						ReputacionUsuario ReputacionUsuario = new ReputacionUsuario(
+								reputacionUsuarioId, reputacionUsuarioForm);
+						// Save Conference and Profile.
+						ofy().save().entities(ReputacionUsuario).now();
 
-				return ReputacionUsuario;
-			}
-		});
+						return ReputacionUsuario;
+					}
+				});
 		return reputacionUsuario;
 	}
+
 	@ApiMethod(name = "getReputacionesCorreoUsuario", path = "reputacionCorreoUsuarios/{correoUser}/", httpMethod = HttpMethod.GET)
 	public List<ReputacionUsuario> getReputacionesCorreoUsuarios(
 			@Named("correoUser") final String correoUser) {
-		//Aguilizar ahi muchas consultas
-		User user = ofy().load().type(User.class).filter("email",correoUser).first().now();
-		List<Usuario> usuarios = ofy().load().type(Usuario.class).ancestor(user).list();
+		// Aguilizar ahi muchas consultas
+		User user = ofy().load().type(User.class).filter("email", correoUser)
+				.first().now();
+		List<Usuario> usuarios = ofy().load().type(Usuario.class)
+				.ancestor(user).list();
 		Usuario usuario = usuarios.get(0);
-		
-		return ofy().load().type(ReputacionUsuario.class)
-				.ancestor(usuario).list();
+
+		return ofy().load().type(ReputacionUsuario.class).ancestor(usuario)
+				.list();
 	}
-	
+
 	@ApiMethod(name = "getUser", path = "user/{correoUser}/", httpMethod = HttpMethod.GET)
-	public User  getUser(
-			@Named("correoUser") final String correoUser) {
-		//Aguilizar ahi muchas consultas
-		return ofy().load().type(User.class).filter("email",correoUser).first().now();
-		
-	}	
-	
+	public User getUser(@Named("correoUser") final String correoUser) {
+		// Aguilizar ahi muchas consultas
+		return ofy().load().type(User.class).filter("email", correoUser)
+				.first().now();
+
+	}
+
 	@ApiMethod(name = "consultaSucursales", path = "consultaSucursales", httpMethod = HttpMethod.GET)
 	public List<Sucursal> consultaSucursales() {
 		//
-		
-		
+
 		Query query = ofy().load().type(Sucursal.class);
 		return query.list();// me retorns en una lista
 	}
+
+	@ApiMethod(name = "getClienteXUser", path = "user/{keyUser}/ClientexUser", httpMethod = HttpMethod.GET)
+	public List<Cliente> getClienteXUser(@Named("keyUser") final String keyUser) {
+		return ofy().load().type(Cliente.class).ancestor(Key.create(keyUser))
+				.list();
+
+	}
 	
+	@ApiMethod(name = "getProductosxKey", path = "productos/{keyProducto}", httpMethod = HttpMethod.GET)
+	public Producto getProductosxKey(@Named("keyProducto") final String keyProducto){
+		Key<Producto> key=Key.create(keyProducto);
+		 Producto producto = ofy().load().key(key).now();
+		 return producto;
+	}
+	@ApiMethod(name = "getPedidosxKey", path = "pedidos/{keyPedido}", httpMethod = HttpMethod.GET)
+	public Pedido getPedidosxKey(@Named("keyPedido") final String keyPedido){
+		 Key<Pedido> key=Key.create(keyPedido);
+		 Pedido pedido = ofy().load().key(key).now();
+		 return pedido;
+	}
 
 }

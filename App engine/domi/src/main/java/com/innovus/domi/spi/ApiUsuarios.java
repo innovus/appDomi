@@ -21,6 +21,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Work;
 import com.googlecode.objectify.cmd.Query;
 import com.innovus.domi.Constants;
+import com.innovus.domi.domain.AdminSucursal;
 import com.innovus.domi.domain.Carrito;
 import com.innovus.domi.domain.Cliente;
 import com.innovus.domi.domain.Empresa;
@@ -309,6 +310,32 @@ public class ApiUsuarios {
 			
 			
 	}
+	
+	@ApiMethod(name = "getUsuarioXUser", path = "user/{keyUser}/UsuarioxUser", httpMethod = HttpMethod.GET)
+	public List<Usuario> getClienteXUser(@Named("keyUser") final String keyUser) {
+		return ofy().load().type(Usuario.class).ancestor(Key.create(keyUser))
+				.list();
+
+	}
+	
+	@ApiMethod(name = "crearAdminSucursal", path = "crearAdminSucursal", httpMethod = HttpMethod.POST)
+	public AdminSucursal crearAdminSucursal(
+			@Named("keyGCM") final String keyGCM,
+			@Named("nombre") final String nombre) {
+
+		final Key<AdminSucursal> adminSucursalKey = factory().allocateId(AdminSucursal.class);
+		final long adminSucursalId = adminSucursalKey.getId();
+		AdminSucursal adminSucursal = ofy().transact(new Work<AdminSucursal>() {
+			@Override
+			public AdminSucursal run() {
+				AdminSucursal adminSucursal = new AdminSucursal(adminSucursalId, nombre, keyGCM);
+				ofy().save().entities(adminSucursal).now();
+				return adminSucursal;
+			}
+		});
+		return adminSucursal;
+	}
+	
 	
 
 }

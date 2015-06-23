@@ -23,6 +23,8 @@ import com.innovus.doomi.db.DbProductos;
 
 public class Productos extends ActionBarActivity {
     private String nomResta;
+    private String llaveSucursal;
+
 
 
     Button  btnPedidos;
@@ -34,6 +36,7 @@ public class Productos extends ActionBarActivity {
         setContentView(R.layout.activity_productos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
         nomResta = getIntent().getStringExtra("nombre");
+        llaveSucursal = getIntent().getStringExtra("llave");
         toolbar.setTitle(nomResta);
 
         setSupportActionBar(toolbar);
@@ -113,6 +116,7 @@ public class Productos extends ActionBarActivity {
         //pasar variables a la otra actividad
 
          i.putExtra("nombre", nomResta);
+        i.putExtra("llaveSucursal",llaveSucursal);
         v.getContext().startActivity(i);
 
     }

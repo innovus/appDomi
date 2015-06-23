@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark"
+    tools:context="com.innovus.doomi.Activities.LoginActivity">
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="@dimen/padding_toolbar"
+        android:layout_alignParentRight="false">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Iniciar Sesión"
+            android:textSize="40dp"
+            android:textStyle="normal"
+
+            />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:id="@+id/imageView2"
+            android:layout_below="@+id/include"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="11dp"
+            android:src="@mipmap/ic_launcher" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textEmailAddress"
+                android:ems="12"
+                android:id="@+id/etEmail"
+                android:hint="@string/email"
+                android:background="#fff"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="italic"
+
+                android:paddingLeft="10dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textPassword"
+                android:ems="12"
+                android:id="@+id/etPaswword"
+                android:hint="@string/password"
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/accent"
+                android:text="@string/login"
+                android:id="@+id/button"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="onClickLogin"
+                android:layout_marginTop="10dp"
+                android:textColor="#fff"/>
+
+
+¡
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nuevoen"
+                    android:id="@+id/textView8"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:paddingTop = "30dp"
+                    android:onClick="onClickRegistrarse"
+                    android:clickable="true"
+
+
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

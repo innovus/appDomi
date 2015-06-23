@@ -4,15 +4,17 @@ public class ProductoForm {
 	
 	private String nombreProducto;
 	private String descripcionProducto;
+	private String urlImageProducto;
 	private float precioProducto;
 	
 	public ProductoForm(){}
 	
-	public ProductoForm(String nombreProducto,String descripcionProducto,float precioProducto){
+	public ProductoForm(String nombreProducto,String descripcionProducto,float precioProducto, String urlImageProducto){
 		
 		this.nombreProducto =nombreProducto;
 		this.descripcionProducto =descripcionProducto;
-		this.precioProducto =precioProducto;	
+		this.precioProducto =precioProducto;
+		this.urlImageProducto = urlImageProducto;
 		
 	}
 	
@@ -27,5 +29,15 @@ public class ProductoForm {
 	public float getPrecioProducto(){
 		return precioProducto;
 	}
+
+	public String getUrlImageProducto() {
+		return urlImageProducto;
+	}
+
+	public void setUrlImageProducto(String urlImageProducto) {
+		this.urlImageProducto = urlImageProducto;
+	}
+	
+	
 	
 }

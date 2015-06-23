@@ -82,7 +82,7 @@ public class MenuSliderAdapter extends RecyclerView.Adapter<MenuSliderAdapter.Vi
                 view.getContext().startActivity(i);
             }else  if (getPosition()==3){
                 Intent i = new Intent (view.getContext(), ListaDirecciones.class);
-                i.putExtra("bandera",false);
+               // i.putExtra("is_select",true);
 
 
 

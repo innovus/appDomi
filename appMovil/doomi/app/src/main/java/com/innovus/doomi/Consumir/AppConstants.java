@@ -61,4 +61,12 @@ public class AppConstants {
         //builder.setApplicationName("domi-app");
         return builder.build();
     }
+    public static String fmt(float d)
+    {
+        if(d == (long) d)
+            return String.format("%d",(long)d);
+        else
+            return String.format("%s",d);
+    }
+
 }

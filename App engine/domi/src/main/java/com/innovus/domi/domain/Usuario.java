@@ -32,11 +32,16 @@ public class Usuario {
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<User> keyUser;
+
+	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 private long idUser;
 	 
 	// @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	// private long idUser;
 
 	private Usuario(){
+		
+		
 
 	}
 	
@@ -73,6 +78,9 @@ public class Usuario {
 				 return user;
 			  }  
 		  });
+		  this.keyUser = Key.create(user.getWebsafeKey());
+		  User user2 = ofy().load().key(keyUser).now();
+		  this.idUser = user2.getIdUser();
 		  
 	}
 	
@@ -130,6 +138,12 @@ public class Usuario {
 		User user = ofy().load().key(getKeyUser()).now();
 		return user.getEmail().getEmail();	
 	}
+	
+	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	 public long getIdUser(){
+		 return idUser;
+	 }
+	 
 	
 	
 }

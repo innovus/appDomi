@@ -112,25 +112,30 @@ public class ApiTodos {
 	public Login loginEstado(@Named("email") final String email,
 			@Named("password") final String password) {
 
-		User user = ofy().load().type(User.class).filter("email",/*
-																 * loginForm.
-																 * gEmailString
-																 * ()
-																 */email)
+		User user = ofy().load().type(User.class).filter("email",email)
 				.first().now();
 		// si no ahi usuarios con este email agregelo
-		Login login = new Login();
+		
 
 		if (user == null) {
+			Login login = new Login();
+			LOG.info("aqui user null");
+			
 
 			return login;
-		} else if (user.getPassword().equals(password)) {
+		} else if (user.traerPassword().equals(password)) {
+			Login login = new Login(user);
+			LOG.info("aqui trae el usuario " + user.getIs_cliente());
+			
+			
 			login.loegearlo();
 
 			return login;
 
 		} else {
-
+			Login login = new Login();
+			LOG.info("aqui contraseña mal");
+			
 			return login;
 		}
 

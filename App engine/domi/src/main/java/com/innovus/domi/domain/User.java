@@ -1,6 +1,7 @@
 package com.innovus.domi.domain;
 
 import com.google.appengine.api.datastore.Email;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -43,7 +44,7 @@ public class User {
 	}
 
 
-	public String getPassword() {
+	public String traerPassword() {
 		return password;
 	}
 
@@ -77,5 +78,9 @@ public class User {
 	public void setIs_cliente(Boolean is_cliente) {
 		this.is_cliente = is_cliente;
 	}
+	
+	 public String getWebsafeKey(){
+		 return Key.create(User.class,idUser).getString();
+	 }
 
 }

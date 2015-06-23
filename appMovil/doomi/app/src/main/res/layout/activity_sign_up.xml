@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark"
+    tools:context="com.innovus.doomi.Activities.SignUpActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="@dimen/padding_toolbar"
+        android:layout_alignParentRight="false">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/linearLayout">
+
+
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="Bienvenido"
+                android:textSize="40dp"
+                android:textStyle="normal"
+                android:layout_marginBottom="5dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textEmailAddress"
+                android:ems="12"
+                android:id="@+id/etEmail"
+                android:hint="@string/email"
+                android:background="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="italic"
+
+                android:paddingLeft="10dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textPassword"
+                android:ems="12"
+                android:id="@+id/etPaswword"
+                android:hint="@string/password"
+                android:background="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textPassword"
+                android:ems="12"
+                android:id="@+id/etPaswword2"
+                android:hint="@string/password"
+                android:background="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:ems="12"
+                android:id="@+id/etNombres"
+                android:hint="@string/nombres"
+                android:background="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:ems="12"
+                android:id="@+id/etApellidos"
+                android:hint="@string/apellidos"
+                android:background="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:ems="12"
+                android:id="@+id/etPhoneNumber"
+                android:hint="@string/celular"
+                android:background="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                />
+
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/accent"
+                android:text="@string/signup"
+                android:id="@+id/button"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="onClickRegistrar"
+                android:layout_marginTop="10dp"
+                android:textColor="#fff"/>
+
+        </LinearLayout>
+        </RelativeLayout>
+
+</RelativeLayout>

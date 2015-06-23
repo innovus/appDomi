@@ -35,7 +35,7 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
 
     // private static com.appspot.domi_app.domi.Domi myApiService = null;
     private com.appspot.domi_app.doomiTodos.DoomiTodos myApiService = null;
-    public String mostrar="";
+
 
     private Activity activity;
 
@@ -62,6 +62,7 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
             try {
 
                 DoomiTodos.GetProductosXSucursal queryProductos = myApiService.getProductosXSucursal(strings[0]);
+
 
                 ProductoCollection productoCollection = queryProductos.execute();
                 if (productoCollection != null && productoCollection.getItems() != null) {

@@ -40,15 +40,7 @@ public class Pedido {
 		this.websafeKeyProducto = pedidoForm.getWebsafeKeyProducto();
 	}
 	
-	public String getNombreProducto() {
-        // Profile organizer = ofy().load().key(Key.create(Profile.class, organizerUserId)).now();
-       Producto producto = ofy().load().key(getProductoKey()).now();
-        if (producto == null) {
-            return "";
-        } else {
-            return producto.getNombreProducto();
-        }
-    }
+	
 
 	public long getIdPedido() {
 		return idPedido;
@@ -87,5 +79,9 @@ public class Pedido {
 	public String getWebsafeKey(){
 		 return Key.create(Pedido.class,idPedido).getString();
 	 }
+	public Producto getProducto(){
+		return ofy().load().key(productoKey).now();
+		
+	}
 	
 }

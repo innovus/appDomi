@@ -2,6 +2,7 @@ package com.innovus.doomi.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.provider.SyncStateContract;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,13 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter  {
     private int itemLayouPadre;
     private int itemLayoutHijo;
 
+
     public ExpandibleCategoriasAdapter(Activity context, ArrayList<Parent> parent, int itemLayoutPadre, int itemLayoutHijo){
         mParent = parent;
         inflater = LayoutInflater.from(context);
         this.itemLayoutHijo = itemLayoutHijo;
         this.itemLayouPadre = itemLayoutPadre;
+
     }
     @Override
     public int getGroupCount() {
@@ -108,8 +111,10 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter  {
         TextView descripcion = (TextView) view.findViewById(R.id.descProducto);
         descripcion.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition).getDescripcionProducto());
         TextView precio = (TextView) view.findViewById(R.id.txtPrecio);
-       // if ( mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto().)
-        precio.setText(" $ " + mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto());
+
+       //fmt formatea para q no halllan ceros despues de un punto en un numero float
+
+        precio.setText(" $ " + com.innovus.doomi.Consumir.AppConstants.fmt(mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto()));
         //textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +127,8 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter  {
                 i.putExtra("nombre",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getNombreProducto() );
                 i.putExtra("descripcion",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getDescripcionProducto() );
                 i.putExtra("precio", mParent.get(groupPosition).getArrayChildren().get(childPosition).getPrecioProducto().toString() );
-                i.putExtra("websafeKey",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() );
+                i.putExtra("websafeKeyProducto",  mParent.get(groupPosition).getArrayChildren().get(childPosition).getWebsafeKey() );
+
 
 
                 // i.putExtra("nombre", propiedades.getNombre());
@@ -151,5 +157,8 @@ public class ExpandibleCategoriasAdapter extends BaseExpandableListAdapter  {
         int childPosition;
          int groupPosition;
     }
+
+    //formatea decimales y borra los ceros despues de un puntp ejemplo 12000.0 = 12000
+
 
 }

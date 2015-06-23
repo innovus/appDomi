@@ -24,12 +24,14 @@ public class DireccionesAdapter extends RecyclerView.Adapter<DireccionesAdapter.
 
     private List<Direcciones> direcciones;
     private int itemLayout;
+    private static boolean is_select;
 
-    public DireccionesAdapter(List<Direcciones> data,int itemLayout,Activity activity){
+    public DireccionesAdapter(List<Direcciones> data,int itemLayout,Activity activity,boolean is_select){
         super();
         this.itemLayout = itemLayout;
         this.direcciones = data;
         this.activity = activity;
+        this.is_select = is_select;
 
     }
 
@@ -78,17 +80,27 @@ public class DireccionesAdapter extends RecyclerView.Adapter<DireccionesAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Intent i = new Inten
-                    Intent i = new Intent (activity, AddDirecciones.class);
+                    if(is_select==true){
 
-                    i.putExtra("bandera",true);
-                    i.putExtra("nombreDireccion", propiedades.getNombreDireccion());
-                    i.putExtra("direccion", propiedades.getDireccion());
-                    i.putExtra("barrio", propiedades.getBarrio());
-                    i.putExtra("referencia", propiedades.getReferencia());
-                    i.putExtra("id",propiedades.getId());
 
-                    activity.startActivity(i);
+                    }
+                    else{
+                        // Intent i = new Inten
+                        Intent i = new Intent (activity, AddDirecciones.class);
+
+                        i.putExtra("bandera",true);
+                        i.putExtra("nombreDireccion", propiedades.getNombreDireccion());
+                        i.putExtra("direccion", propiedades.getDireccion());
+                        i.putExtra("barrio", propiedades.getBarrio());
+                        i.putExtra("referencia", propiedades.getReferencia());
+                        i.putExtra("id",propiedades.getId());
+
+                        activity.startActivity(i);
+
+                    }
+
+
+
 
                     // Toast.makeText(view.getContext(),"llave de consulta: "+ propiedades.getWebsafeKey(),Toast.LENGTH_SHORT).show();
                 }

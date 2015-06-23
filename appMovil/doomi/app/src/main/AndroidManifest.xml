@@ -4,6 +4,16 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:name="com.innovus.doomi.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.innovus.doomi.permission.C2D_MESSAGE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,7 +36,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.innovus.doomi.Principal" />
         </activity>
-
         <activity
             android:name=".Activities.ProductoPedidos"
             android:label="@string/title_activity_producto_pedidos" >
@@ -39,7 +48,6 @@
             android:name=".Activities.EditarPedido"
             android:label="@string/title_activity_editar_pedido" >
         </activity>
-
         <activity
             android:name=".Activities.AddDirecciones"
             android:label="@string/title_activity_add_direcciones" >
@@ -48,6 +56,15 @@
             android:name=".Activities.ListaDirecciones"
             android:label="@string/title_activity_direcciones" >
         </activity>
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".Activities.SignUpActivity"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
+
     </application>
 
 </manifest>

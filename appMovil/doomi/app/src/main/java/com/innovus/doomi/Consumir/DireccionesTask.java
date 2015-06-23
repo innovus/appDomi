@@ -24,14 +24,16 @@ import java.util.ArrayList;
  */
 public class DireccionesTask extends AsyncTask<Void, Void, ArrayList<Direcciones>> {
     private Activity activity;
+    private boolean b;
 
     public static void build(Context context) {
         //myApiService = buildServiceHandler(context);
     }
 
-    public DireccionesTask(Activity activity) {
+    public DireccionesTask(Activity activity,boolean b) {
         super();
         this.activity = activity;
+        this.b = b;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class DireccionesTask extends AsyncTask<Void, Void, ArrayList<Direcciones
 
         RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.recycler_view_direcciones);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new DireccionesAdapter(result, R.layout.row_direcciones, activity));
+        recyclerView.setAdapter(new DireccionesAdapter(result, R.layout.row_direcciones, activity,b));
         recyclerView.setLayoutManager(new GridLayoutManager(activity,2));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
