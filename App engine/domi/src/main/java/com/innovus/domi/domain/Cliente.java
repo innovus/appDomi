@@ -28,14 +28,11 @@ public class Cliente  {
 	private String apellidosCliente;	
 	private PhoneNumber telefonoCliente;
 	//private String passwordCliente;
-	
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<User> keyUser;
-	 
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
-	 private long idUser;
-	
+	 private long idUser;	
 	private String pais;
 	private String ciudad;
 	

@@ -22,6 +22,11 @@ public class Pedido {
 	private String observacion;
 	@ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	private Key<Producto> productoKey;
+	private String nombreProducto; 
+	private float precioProducto;
+	private String detalleProducto;
+	@ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	private int index;
 	
 	private Pedido(){}
 	
@@ -31,13 +36,18 @@ public class Pedido {
 		
 		this.productoKey = Key.create(websafeKeyProducto);
 		Producto producto = ofy().load().key(productoKey).now();
-			
+		this.nombreProducto = producto.getNombreProducto();
+		this.precioProducto = producto.getPrecioProducto();
+		this.detalleProducto = producto.getDetalles().get(index);
+		
 	}
 	
 	void ActualizarPedidoForm(PedidoForm pedidoForm){
 		this.cantidad=pedidoForm.getCantidadProducto();
 		this.observacion=pedidoForm.getObservacionPedido();
 		this.websafeKeyProducto = pedidoForm.getWebsafeKeyProducto();
+		this.index = pedidoForm.getIndexDetalle(); 
+		
 	}
 	
 	
@@ -71,7 +81,7 @@ public class Pedido {
 	public Key<Producto> getProductoKey() {
 		return productoKey;
 	}
-
+	
 	public void setProductoKey(Key<Producto> productoKey) {
 		this.productoKey = productoKey;
 	}
@@ -79,9 +89,23 @@ public class Pedido {
 	public String getWebsafeKey(){
 		 return Key.create(Pedido.class,idPedido).getString();
 	 }
+	/*
 	public Producto getProducto(){
 		return ofy().load().key(productoKey).now();
 		
+	}*/
+	public float getPrecioProducto(){
+	return this.precioProducto;
+	}
+	public String getNombreProducto(){
+		return this.nombreProducto;
+	}
+	
+	public void setPrecioProducto(float precioProducto){
+		this.precioProducto = precioProducto;
+	}
+	public void setNombreProducto(String nombreProducto){
+		this.nombreProducto = nombreProducto;
 	}
 	
 }

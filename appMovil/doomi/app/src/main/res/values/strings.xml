@@ -59,5 +59,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="logout">Cerrar sesion</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_activity_maps">ActivityMaps</string>
 
 </resources>

@@ -1,6 +1,9 @@
 package com.innovus.domi.domain;
 import static com.innovus.domi.service.OfyService.ofy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
 import com.google.common.base.Preconditions;
@@ -45,6 +48,8 @@ public class Producto {
 	 private Boolean is_active;
 	 
 	 private String urlImageProducto;
+	 
+	 private List<String> detalles = new ArrayList<>(0);
 	 
 	 
 	 public Producto(){}
@@ -96,6 +101,7 @@ public class Producto {
 	     this.descripcionProducto = productoForm.getDescripcionProducto();
 	     this.precioProducto = productoForm.getPrecioProducto();
 	     this.urlImageProducto = productoForm.getUrlImageProducto();
+	     this.detalles = productoForm.getDetalles();
 	       
 	 }
      
@@ -123,4 +129,15 @@ public class Producto {
 	            return organizer.getNombreCategoria();
 	        }
 	    }	 
+	 public List<String> getDetalles(){
+		 return this.detalles;
+	 }
+	 
+	 public void addDetalle(String detalle){
+		 this.detalles.add(detalle);
+	 }
+	 public void deleteDetalle(int i){
+		 this.detalles.remove(i);
+	 }
+	 
 }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.innovus.doomi.Activities.LoginActivity;
 import com.innovus.doomi.Consumir.HttpRequestTask;
 import com.innovus.doomi.Consumir.SessionManager;
+import com.innovus.doomi.Google.ActivityMaps;
 import com.innovus.doomi.adapters.MenuSliderAdapter;
 import com.innovus.doomi.db.DbProductos;
 import com.innovus.doomi.fragments.CirculoFragment;
@@ -227,8 +228,12 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     //hace click en el fragmento y haga esto
     @Override
     public void onButtonClick() {
+
         if (fragments != null) {
-            new HttpRequestTask(this).execute();
+            /*
+            new HttpRequestTask(this).execute();*/
+            Intent i = new Intent (this, ActivityMaps.class);
+            this.startActivity(i);
 
         }
 

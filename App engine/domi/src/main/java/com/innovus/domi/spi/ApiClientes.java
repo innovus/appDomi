@@ -411,13 +411,7 @@ public class ApiClientes {
 		return categoria;
 	}
 
-	@ApiMethod(name = "getEmpresaXCliente", path = "cliente/{keyCliente}/empresaxCliente", httpMethod = HttpMethod.GET)
-	public List<Empresa> getEmpresaXCliente(
-			@Named("keyCliente") final long keyCliente) {
-		Cliente parent = ofy().load()
-				.key(Key.create(Cliente.class, keyCliente)).now();
-		return ofy().load().type(Empresa.class).ancestor(parent).list();
-	}
+	
 
 	@ApiMethod(name = "crearProductos", path = "productos", httpMethod = HttpMethod.POST)
 	public Producto crearProductos(
@@ -475,8 +469,7 @@ public class ApiClientes {
 	public List<Sucursal> getSucursalesXEmpresa(
 			@Named("websafeKeyEmpresa") final String websafeKeyEmpresa) {
 
-		return ofy().load().type(Sucursal.class)
-				.ancestor(Key.create(websafeKeyEmpresa)).list();
+		return ofy().load().type(Sucursal.class).ancestor(Key.create(websafeKeyEmpresa)).list();
 
 	}
 
@@ -688,17 +681,31 @@ public class ApiClientes {
 
 	}
 	
-	@ApiMethod(name = "getProductosxKey", path = "productos/{keyProducto}", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getProductoxKey", path = "producto/{keyProducto}", httpMethod = HttpMethod.GET)
 	public Producto getProductosxKey(@Named("keyProducto") final String keyProducto){
 		Key<Producto> key=Key.create(keyProducto);
 		 Producto producto = ofy().load().key(key).now();
 		 return producto;
 	}
-	@ApiMethod(name = "getPedidosxKey", path = "pedidos/{keyPedido}", httpMethod = HttpMethod.GET)
-	public Pedido getPedidosxKey(@Named("keyPedido") final String keyPedido){
+	@ApiMethod(name = "getPedidoxKey", path = "pedido/{keyPedido}", httpMethod = HttpMethod.GET)
+	public Pedido getPedidoxKey(@Named("keyPedido") final String keyPedido){
 		 Key<Pedido> key=Key.create(keyPedido);
 		 Pedido pedido = ofy().load().key(key).now();
 		 return pedido;
+	}
+	@ApiMethod(name="getCarritoXKey", path = "carrito/{keyCarrito}", httpMethod = HttpMethod.GET)
+	public Carrito  getCarritoXKey(@Named("keyCarrito") final String keyCarrito){
+		Key<Carrito> key=Key.create(keyCarrito);
+		Carrito carrito = ofy().load().key(key).now();
+		 return carrito;
+		
+	}
+	@ApiMethod(name = "getEmpresaXCliente", path = "cliente/{keyCliente}/empresaxCliente", httpMethod = HttpMethod.GET)
+	public Empresa getEmpresaXCliente(
+			@Named("keyCliente") final String keyCliente) {
+		return ofy().load().type(Empresa.class).ancestor(Key.create(keyCliente))
+				.first().now();
+	
 	}
 
 }

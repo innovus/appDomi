@@ -164,10 +164,4 @@ public class ApiAdmin {
 			return query.list();// me retorns en una lista
 		}
 	
-	  
-	  
-	  
-	  
-	  	  
-
 }

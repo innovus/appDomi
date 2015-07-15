@@ -77,6 +77,7 @@ public class Empresa {
 	   	 
 	   	 //creamos llaves padres
 	   	 this.clienteKey=Key.create(websafeKeyCliente);	
+	   	 
 	  
 	   	 //creamos padres cn las llaves padres
 		 Cliente cliente = ofy().load().key(clienteKey).now();	 
@@ -125,8 +126,11 @@ public class Empresa {
 		 return Key.create(clienteKey, Empresa.class,idEmpresa).getString();
 	 }
 	 
-	 public String getClienteNombreCliente() {
-	        Cliente Cliente = ofy().load().key(Key.create(Cliente.class, idCliente)).now();
+	 public String getNombreCliente() {
+		   
+			Cliente Cliente= ofy().load().key(clienteKey).now();
+			
+	        //Cliente Cliente = ofy().load().key(Key.create(Cliente.class, idCliente)).now();
 	        if (Cliente == null) {
 	            return String.valueOf( idCliente);
 	        } else {

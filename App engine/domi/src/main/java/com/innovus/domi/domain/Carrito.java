@@ -32,8 +32,10 @@ public class Carrito {
 	 private String observacion;
 	 private GeoPt ubicacion;
      private String formaDePago;
-     private Boolean estado;    
+     private int estado;    
      private Date fechaHora;
+     private String direccion;     
+  
      private float total;
      
      private Carrito(){}
@@ -41,21 +43,17 @@ public class Carrito {
     
      public Carrito(long idCarrito,CarritoForm carritoForm,String websafeKeySucursal) {
 		
-		this.idCarrito = idCarrito;
-		
-		ActualizarCarrito(carritoForm);
-	   	 
+		this.idCarrito = idCarrito;		
+		ActualizarCarrito(carritoForm);   	 
 	   	 //creamos llaves padres
-	   	 this.sucursalKey=Key.create(websafeKeySucursal);	
-	  
+	   	 this.sucursalKey=Key.create(websafeKeySucursal);	 
 	   	 //creamos padres cn las llaves padres
 		 Sucursal sucursal = ofy().load().key(this.sucursalKey).now();	 
-		 //obtenemos ids padres
-		 
+		 //obtenemos ids padres	 
 		 this.idSucursal = sucursal.getIdSucursal();	 
-		 this.estado = true;
+		 this.estado = 0;
 		 this.fechaHora = new Date();
-	
+		 this.total = getTotalCarrito();
 	}
 
      @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
@@ -129,44 +127,28 @@ public class Carrito {
 		this.formaDePago = formaDePago;
 	}
 
-
-
-	public Boolean getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-
-
-	public void setEstado(Boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-
-
 
 	public Date getFechaHora() {
 		return fechaHora;
 	}
 
-
-
 	public void setFechaHora(Date fechaHora) {
 		this.fechaHora = fechaHora;
 	}
-
-
-
 	public float getTotal() {
 		return total;
 	}
-
-
-
 	public void setTotal(float total) {
 		this.total = total;
 	}
-	
-	 
-	 
+		 
 	 @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	 public Key<Sucursal> getSucursalKey(){
 		 return sucursalKey;
@@ -178,12 +160,12 @@ public class Carrito {
 	 }
 
 	public void ActualizarCarrito(CarritoForm carritoForm){
-    	 this.total=carritoForm.getTotal();
+    	 this.direccion = carritoForm.getDireccion();
     	 this.observacion=carritoForm.getObservacion();
     	 this.ubicacion = carritoForm.obtenerUbicacion();
     	 this.formaDePago=carritoForm.getFormaDePago();
-    	 this.websafeKeyUsuario = carritoForm.getWebsafeKeyUsuario();
-    	
+    	 this.websafeKeyUsuario = carritoForm.getWebsafeKeyUsuario(); 
+    	 this.direccion = carritoForm.getDireccion();
      }
 	
 	public void addPedidoKeys(String pedidoKey){
@@ -196,21 +178,42 @@ public class Carrito {
 	    }
 	}*/
 	public void addPedidosKeys(List<Pedido> listaKeysPedidos){
+		
 		for (Pedido keyString : listaKeysPedidos) {
 			this.listaPedidosKey.add(keyString.getWebsafeKey());
 			
 	    }
 	}
+	
 	public List<Pedido> getPedidos(){
-		List<Pedido> listaPedidos = new ArrayList<>(0);	
-		
+		List<Pedido> listaPedidos = new ArrayList<>(0);		
 		 for (String keyString : this.listaPedidosKey) {
 			 Key<Pedido> key=Key.create(keyString);
 			 Pedido pedido = ofy().load().key(key).now();
 			 listaPedidos.add(pedido);
 			 }
 		 return listaPedidos;
-	}
-		 
+	}	
 	
+	public float getTotalCarrito(){
+		List<Pedido> listaPedidos = new ArrayList<>(0);	
+		float total = 0;
+		 for (String keyString : this.listaPedidosKey) {
+			 Key<Pedido> key=Key.create(keyString);
+			 Pedido pedido = ofy().load().key(key).now();
+			 int cantidad = pedido.getCantidad();
+			 float precio = pedido.getPrecioProducto();
+			 total += (cantidad*precio);
+			 }
+		 
+		 return total;
+		
+		
+	}
+	public String getDireccion(){
+		return this.direccion;
+	}
+	public void setDireccion(String direccion){
+		this.direccion = direccion;	
+	}
 }

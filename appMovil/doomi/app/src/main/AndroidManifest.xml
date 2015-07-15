@@ -3,23 +3,36 @@
     package="com.innovus.doomi" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="com.innovus.doomi.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="com.innovus.doomi.permission.C2D_MESSAGE" />
 
+    <permission
+        android:name="com.innovus.doomi.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.innovus.doomi.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!--
+ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
+         <activity
             android:name=".Principal"
             android:label="@string/app_name" >
             <intent-filter>
@@ -64,6 +77,22 @@
             android:name=".Activities.SignUpActivity"
             android:label="@string/title_activity_sign_up" >
         </activity>
+
+
+
+        <activity
+            android:name=".Google.MapsActivity"
+            android:label="@string/title_activity_maps" >
+        </activity>
+        <activity android:name="com.innovus.doomi.Google.ActivityMaps"
+            android:label="@string/title_activity_activity_maps"
+            >
+        </activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDJ1iMMQH5nVF42-0NEnVnsp-G9AMDWbdE"/>
 
     </application>
 
