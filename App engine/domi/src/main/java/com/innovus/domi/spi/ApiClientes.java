@@ -707,5 +707,30 @@ public class ApiClientes {
 				.first().now();
 	
 	}
+	@ApiMethod(name = "confirmarCarrito", path = "confirmarCarrito", httpMethod = HttpMethod.POST)
+	public WrappedBoolean confirmarCarrito(@Named("websafekeyCarrito") final String websafekeyCarrito
+			)// me devuelva un producto
+	{
+		
+		Key<Carrito> keyCarrito = Key.create(websafekeyCarrito);
+		
+		final long carritoId = keyCarrito.getId();
+		Carrito carrito = ofy().load().key(keyCarrito).now();
+		if (carrito == null) {
+			return new WrappedBoolean(false,
+					"No Carrito found with key: " + websafekeyCarrito);
+		}else{
+			carrito.setEstado(1);
+			ofy().save().entity(carrito).now();
+			return new WrappedBoolean(true,"Confirmado");
+			
+		}
+		
+		
+
+		
+			
+		
+	}
 
 }

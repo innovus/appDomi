@@ -56,13 +56,14 @@ public class HttpRequestTask extends AsyncTask<Void, Void, List<Sucursal>> {
                 return sucursales;
             }
             //return Collections.EMPTY_LIST;
+            Log.e("entra","si" );
             return myApiService.consultaSucursales().execute().getItems();
 
 
         } catch (IOException e) {
-            Log.e("Erroroooooooor", e.getMessage());
+            Log.e("Errorooooooooroeee", e.getMessage());
 
-            //  Log.e("Error",e);
+
             return Collections.EMPTY_LIST;
         }
     }

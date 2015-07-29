@@ -4,13 +4,14 @@
     android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
+    <!--
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="150dp"
         android:id="@+id/my_recycler_carrito"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:scrollbars="vertical"
-        android:paddingTop="@dimen/padding_toolbar"/>
+        android:paddingTop="@dimen/padding_toolbar"/> -->
        <!-- android:scrollbarSize="200dp"-->
 
 

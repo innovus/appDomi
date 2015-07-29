@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +14,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationListener;
 import com.innovus.doomi.Activities.LoginActivity;
 import com.innovus.doomi.Consumir.HttpRequestTask;
 import com.innovus.doomi.Consumir.SessionManager;
@@ -28,7 +35,7 @@ import com.innovus.doomi.fragments.CirculoFragment;
 import com.innovus.doomi.fragments.EmpresaFragment;
 import com.innovus.doomi.Consumir.AppConstants;
 
-public class Principal extends ActionBarActivity implements CirculoFragment.ToolbarListener, SearchView.OnQueryTextListener, EmpresaFragment.OnBusquedaListener /* extends Activity implements ActionBar.TabListener */
+public class Principal extends ActionBarActivity implements CirculoFragment.ToolbarListener, SearchView.OnQueryTextListener, EmpresaFragment.OnBusquedaListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener /* extends Activity implements ActionBar.TabListener */
 {
     //private EmpresaFragment fragments= new EmpresaFragment();
     private EmpresaFragment fragments = new EmpresaFragment();
@@ -37,6 +44,10 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
     private static final String LOG_TAG = "MainActivity";
     private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
+
+    // location
+    private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
 
 
     @Override
@@ -49,6 +60,12 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
         toolbar.setTitle("Doomi");
         setSupportActionBar(toolbar);
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
 
 
         //aqui creamos el recyclerview para el cajon de menu
@@ -230,10 +247,12 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     public void onButtonClick() {
 
         if (fragments != null) {
-            /*
-            new HttpRequestTask(this).execute();*/
+
+            //new HttpRequestTask(this).execute();
+
             Intent i = new Intent (this, ActivityMaps.class);
             this.startActivity(i);
+
 
         }
 
@@ -263,4 +282,43 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         this.onQueryTextChange(cadena);
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+         locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(1000);//update location every second
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(LOG_TAG,"Conexion fue suspendida");
+
+    }
+    @Override
+    protected  void  onStart(){
+        super.onStart();
+        googleApiClient.connect();
+    }
+    @Override
+
+    protected  void  onStop(){
+        if(googleApiClient.isConnected())
+        googleApiClient.disconnect();
+        super.onStop();
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.i(LOG_TAG,"Conexion fallo");
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.i(LOG_TAG,location.toString());
+
+    }
 }

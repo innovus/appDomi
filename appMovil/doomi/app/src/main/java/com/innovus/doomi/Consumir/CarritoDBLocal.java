@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.innovus.doomi.Others.DividerItemDecoration;
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.CarritoAdapter;
 import com.innovus.doomi.adapters.EmpresasAdapter;
@@ -28,14 +29,18 @@ import java.util.List;
  */
 public class CarritoDBLocal   extends AsyncTask<Void, Void, ArrayList<ProductoDB>> {
     private Activity activity;
+    private float total;
+    private float domicilio;
 
     public static void build(Context context) {
         //myApiService = buildServiceHandler(context);
     }
 
-    public CarritoDBLocal(Activity activity) {
+    public CarritoDBLocal(Activity activity, float domicilio, float total) {
         super();
         this.activity = activity;
+        this.total = total;
+        this.domicilio = domicilio;
     }
 
     @Override
@@ -70,11 +75,13 @@ public class CarritoDBLocal   extends AsyncTask<Void, Void, ArrayList<ProductoDB
     @Override
     protected void onPostExecute(ArrayList<ProductoDB> result) {
 
-        RecyclerView recyclerView = (RecyclerView)  activity.findViewById(R.id.my_recycler_carrito);
+        RecyclerView recyclerView = (RecyclerView)  activity.findViewById(R.id.my_recycler_pedidos);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new CarritoAdapter(result, R.layout.row_pedido_carrito,activity));
+        recyclerView.setAdapter(new CarritoAdapter(result, R.layout.row_pedido_carrito, activity, domicilio, total));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(activity, LinearLayoutManager.VERTICAL));
+
     }
 
 }

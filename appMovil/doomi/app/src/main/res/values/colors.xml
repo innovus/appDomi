@@ -10,4 +10,17 @@
     <color name="texto">#424242</color>
     <color name="fondo">#fff</color>
     <color name="fondo2">#ffdddddd</color>
+    <color name="text_primary">#D9000000</color>
+    <color name="text_secundary">#8c000000</color>
+    <color name="text_terceary">#40000000</color>
+
+
+    <color name="pendientecarrito">#F44336</color>
+    <color name="pendientecarrito2">#FC4445</color>
+
+    <color name="confirmadocarrito">#139043</color>
+    <color name="confirmadocarrito2">#1AC63B</color>
+
+    <color name="neutrocarrito">#FDB029</color>
+
 </resources>

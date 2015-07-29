@@ -84,26 +84,26 @@ public class CarritoProductosFragment extends Fragment {
     public void ActualizarFragemento(){
         ArrayList <ProductoDB> pusheenArrayList = new ArrayList<ProductoDB>();
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_carrito);
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_pedidos);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new CarritoAdapter(this.llenarCarrito(),R.layout.row_pedido_carrito,getActivity()));
+        recyclerView.setAdapter(new CarritoAdapter(this.llenarCarrito(),R.layout.row_pedido_carrito,getActivity(),5000,2000));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        new CarritoDBLocal(getActivity()).execute();
+      //  new CarritoDBLocal(getActivity()).execute();
 
     }
     public void ActualizarFragementoBusqueda(){
         ArrayList <ProductoDB> pusheenArrayList = new ArrayList<ProductoDB>();
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_carrito);
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_pedidos);
         recyclerView.setHasFixedSize(true);//que todo lo optimize
-        recyclerView.setAdapter(new CarritoAdapter(this.llenarCarrito(),R.layout.row_pedido_carrito,getActivity()));
+        recyclerView.setAdapter(new CarritoAdapter(this.llenarCarrito(),R.layout.row_pedido_carrito,getActivity(),5000,2000));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//linear x q es lienas o si no tambn grillas
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        new CarritoDBLocal(getActivity()).execute();
+      //  new CarritoDBLocal(getActivity()).execute();
 
     }
 

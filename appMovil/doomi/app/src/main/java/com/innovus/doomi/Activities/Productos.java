@@ -24,6 +24,7 @@ import com.innovus.doomi.db.DbProductos;
 public class Productos extends ActionBarActivity {
     private String nomResta;
     private String llaveSucursal;
+    private float domicilio;
 
 
 
@@ -37,6 +38,7 @@ public class Productos extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
         nomResta = getIntent().getStringExtra("nombre");
         llaveSucursal = getIntent().getStringExtra("llave");
+        domicilio = getIntent().getFloatExtra("domicilio",0);
         toolbar.setTitle(nomResta);
 
         setSupportActionBar(toolbar);
@@ -84,30 +86,9 @@ public class Productos extends ActionBarActivity {
 
     public void ActualizarBoton(){
         btnPedidos = (Button) this.findViewById(R.id.btnPedido);
-
-        //consulta a la base de datos
-        int total = 0;
-        DbProductos admin = new DbProductos(this,"administracion", null, 1);
-        SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
-        //String dni = et1.getText().toString();
-        Cursor fila = bd.rawQuery(  //devuelve 0 o 1 fila //es una consulta
-                "select cantidad,precioProducto from productos ", null);
-
-        //recorre la base de datos
-        if (fila.moveToFirst()) {
-            //Recorremos el cursor hasta que no haya más registros
-            do {
-
-                total = total + (fila.getInt(0) * fila.getInt(1));
-            } while(fila.moveToNext());
+        btnPedidos.setText("Total pedido = $" +this.getTotal());
 
 
-        } else
-            Toast.makeText(this, "No has pedido nada" ,
-                    Toast.LENGTH_SHORT).show();
-        bd.close();
-        //
-        btnPedidos.setText("Total Pedido = $" +total);
     }
     public void OnclickCarrito(View v) {
 
@@ -117,6 +98,8 @@ public class Productos extends ActionBarActivity {
 
          i.putExtra("nombre", nomResta);
         i.putExtra("llaveSucursal",llaveSucursal);
+        i.putExtra("domicilio", domicilio);
+        i.putExtra("total",this.getTotal());
         v.getContext().startActivity(i);
 
     }
@@ -148,5 +131,33 @@ public class Productos extends ActionBarActivity {
         }
 // para las demas cosas, se reenvia el evento al listener habitual
         return super.onKeyDown(keyCode, event);
+    }
+    public float getTotal(){
+        float total = 0;
+        DbProductos admin = new DbProductos(this,"administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
+        //String dni = et1.getText().toString();
+        Cursor fila = bd.rawQuery(  //devuelve 0 o 1 fila //es una consulta
+                "select cantidad,precioProducto from productos ", null);
+
+        //recorre la base de datos
+        if (fila.moveToFirst()) {
+            //Recorremos el cursor hasta que no haya más registros
+            do {
+
+                total = total + (fila.getInt(0) * fila.getInt(1));
+            } while(fila.moveToNext());
+
+
+        }
+        bd.close();
+        if(total == 0){
+            return total;
+
+        }else{
+            return total + domicilio;
+
+        }
+
     }
 }

@@ -65,12 +65,15 @@ public class CarritoTask extends AsyncTask<String, Void, Carrito> {
             carritoForm.setLongitud(Float.parseFloat("24.3434"));*/
             carritoForm.setLongitud(new Float(23.3344));
             carritoForm.setLatitud(new Float(23.3344));
+            carritoForm.setDireccion(strings[2]);
             carritoForm.setObservacion("prueba de android");
-            carritoForm.setTotal(this.getTotal());
+
+            //carritoForm.set.setTotal(this.getTotal());
             //obtenemos la llave de la sesion que tenemos iniciada en sessionmanager
          //   String key = session.getKeyUser();
             key = strings[1];
             carritoForm.setWebsafeKeyUsuario(strings[1]);
+
 
             //llenamos listado pedido formis
            // ListaPedidosForms listaPedidosForms =
@@ -140,28 +143,6 @@ public class CarritoTask extends AsyncTask<String, Void, Carrito> {
 
 
     }*/
-    private float getTotal() {
-        float total = 0;
-
-
-        DbProductos admin = new DbProductos(activity, "administracion", null, 1);
-        SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
-        //String dni = et1.getText().toString();
-        Cursor fila = bd.rawQuery(  //devuelve 0 o 1 fila //es una consulta
-                "select precioProducto, cantidad from productos ", null);
-
-        //recorre la base de datos
-        if (fila.moveToFirst()) {
-            //Recorremos el cursor hasta que no haya más registros
-            do {
-                total += (Float.parseFloat(fila.getString(0))) * fila.getInt(1);
-
-            } while (fila.moveToNext());
-        }
-        bd.close();
-        return total;
-
-    }
 
     private List<PedidoForm> getPedidoForms() {
         ArrayList<PedidoForm> ListadoPedidoForm = new ArrayList<PedidoForm>();
@@ -181,6 +162,7 @@ public class CarritoTask extends AsyncTask<String, Void, Carrito> {
                 auxPedidoForm.setCantidadProducto(fila.getInt(1));
                 auxPedidoForm.setObservacionPedido(fila.getString(2));
                 auxPedidoForm.setWebsafeKeyProducto(fila.getString(0));
+
                 ListadoPedidoForm.add(auxPedidoForm);
                 //total = total + (fila.getInt(0) * fila.getInt(1));
             } while (fila.moveToNext());

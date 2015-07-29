@@ -250,7 +250,7 @@ public class ApiUsuarios {
 				Carrito carrito = new Carrito(carritoId, carritoConPedidosForm.getCarritoForm(),
 						websafeKeySucursal);
 				carrito.addPedidosKeys(listPedidos);
-				carrito.setTotal(carrito.getTotalCarrito());
+				carrito.setTotal(carrito.getTotalCarrito(sucursal.getCostoDomicilio()));
 			    	    
 				ofy().save().entities(sucursal, carrito).now();
 				return carrito;

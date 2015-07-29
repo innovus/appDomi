@@ -34,7 +34,10 @@ public class Carrito {
      private String formaDePago;
      private int estado;    
      private Date fechaHora;
-     private String direccion;     
+     private String direccion; 
+     private String barrio;
+     
+     private float costoDomicilio;
   
      private float total;
      
@@ -53,39 +56,41 @@ public class Carrito {
 		 this.idSucursal = sucursal.getIdSucursal();	 
 		 this.estado = 0;
 		 this.fechaHora = new Date();
-		 this.total = getTotalCarrito();
+		 this.costoDomicilio = sucursal.getCostoDomicilio();
+		 this.total = getTotalCarrito(costoDomicilio);
 	}
 
-     @ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+     public float getCostoDomicilio() {
+		return costoDomicilio;
+	}
+
+
+	public void setCostoDomicilio(float costoDomicilio) {
+		this.costoDomicilio = costoDomicilio;
+	}
+
+
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	public long getIdCarrito() {
 		return idCarrito;
 	}
-
 
 
 	public void setIdCarrito(long idCarrito) {
 		this.idCarrito = idCarrito;
 	}
 
-
-
 	public String getWebsafeKeyUsuario() {
 		return websafeKeyUsuario;
 	}
-
-
 
 	public void setWebsafeKeyUsuario(String websafeKeyUsuario) {
 		this.websafeKeyUsuario = websafeKeyUsuario;
 	}
 
-
-
 	public List<String> getListaPedidosKey() {
 		return listaPedidosKey;
 	}
-
-
 
 	public void setListaPedidosKey(List<String> listaPedidosKey) {
 		this.listaPedidosKey = listaPedidosKey;
@@ -158,6 +163,10 @@ public class Carrito {
 	 public String getWebsafeKey(){
 		 return Key.create(sucursalKey, Carrito.class,idCarrito).getString();
 	 }
+	 /*
+	 public String getCostoDomicilio(){
+		 return Key.create(sucursalKey, Carrito.class,idCarrito).getString();
+	 }*/
 
 	public void ActualizarCarrito(CarritoForm carritoForm){
     	 this.direccion = carritoForm.getDireccion();
@@ -166,8 +175,19 @@ public class Carrito {
     	 this.formaDePago=carritoForm.getFormaDePago();
     	 this.websafeKeyUsuario = carritoForm.getWebsafeKeyUsuario(); 
     	 this.direccion = carritoForm.getDireccion();
+    	 this.barrio = carritoForm.getBarrio();
      }
 	
+	public String getBarrio() {
+		return barrio;
+	}
+
+
+	public void setBarrio(String barrio) {
+		this.barrio = barrio;
+	}
+
+
 	public void addPedidoKeys(String pedidoKey){
 		listaPedidosKey.add(pedidoKey);
 //				
@@ -193,9 +213,8 @@ public class Carrito {
 			 listaPedidos.add(pedido);
 			 }
 		 return listaPedidos;
-	}	
-	
-	public float getTotalCarrito(){
+	}		
+	public float getTotalCarrito(float domi ){
 		List<Pedido> listaPedidos = new ArrayList<>(0);	
 		float total = 0;
 		 for (String keyString : this.listaPedidosKey) {
@@ -205,9 +224,7 @@ public class Carrito {
 			 float precio = pedido.getPrecioProducto();
 			 total += (cantidad*precio);
 			 }
-		 
-		 return total;
-		
+		 return total + domi;		
 		
 	}
 	public String getDireccion(){

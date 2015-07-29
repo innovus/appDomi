@@ -11,6 +11,7 @@ public class CarritoForm {
 	private float longitud;
 	private String formaDePago;
 	private String direccion;
+	private String barrio;
 	
 	
 
@@ -18,7 +19,7 @@ public class CarritoForm {
 	}
 
 	private CarritoForm(String websafeKeyUsuario,float latitud, float longitud, String observacion,
-			String formaDePago,String direccion ) {
+			String formaDePago,String direccion,String barrio ) {
 		this.websafeKeyUsuario = websafeKeyUsuario;
 		
 		this.observacion = observacion;
@@ -27,7 +28,13 @@ public class CarritoForm {
 
 		this.formaDePago = formaDePago;
 		this.direccion = direccion;
+		this.barrio = barrio;
+		
 
+	}
+
+	public String getBarrio() {
+		return barrio;
 	}
 
 	public String getDireccion(){

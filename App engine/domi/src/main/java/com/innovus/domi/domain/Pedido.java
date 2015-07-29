@@ -2,6 +2,8 @@ package com.innovus.domi.domain;
 
 import static com.innovus.domi.service.OfyService.ofy;
 
+import org.hamcrest.core.IsNull;
+
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
 import com.googlecode.objectify.Key;
@@ -38,7 +40,20 @@ public class Pedido {
 		Producto producto = ofy().load().key(productoKey).now();
 		this.nombreProducto = producto.getNombreProducto();
 		this.precioProducto = producto.getPrecioProducto();
-		this.detalleProducto = producto.getDetalles().get(index);
+	
+		Integer i =index ;
+		if(i == null)
+		{
+			this.detalleProducto = "0";
+			
+		}
+		else{
+			this.detalleProducto = "prueba";
+			//this.detalleProducto = producto.getDetalles().get(index);
+			
+		}
+		
+		
 		
 	}
 	
@@ -46,6 +61,7 @@ public class Pedido {
 		this.cantidad=pedidoForm.getCantidadProducto();
 		this.observacion=pedidoForm.getObservacionPedido();
 		this.websafeKeyProducto = pedidoForm.getWebsafeKeyProducto();
+		
 		this.index = pedidoForm.getIndexDetalle(); 
 		
 	}

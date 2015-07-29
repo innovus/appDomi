@@ -139,5 +139,8 @@ public class Producto {
 	 public void deleteDetalle(int i){
 		 this.detalles.remove(i);
 	 }
+	 public String getUrlImageProducto(){
+		 return this.urlImageProducto;
+	 }
 	 
 }

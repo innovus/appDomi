@@ -114,6 +114,7 @@ public class EmpresasAdapter extends RecyclerView.Adapter<EmpresasAdapter.ViewHo
                 public void onClick(View view) {
                    // Intent i = new Inten
                     Intent i = new Intent (activity, Productos.class);
+                    i.putExtra("domicilio",propiedades.getCostoDomicilio());
                     i.putExtra("llave", propiedades.getWebsafekeySucursal());
                     i.putExtra("nombre", propiedades.getNombreEmpresa());
                     activity.startActivity(i);
