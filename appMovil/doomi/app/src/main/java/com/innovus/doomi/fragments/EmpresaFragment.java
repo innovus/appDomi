@@ -80,6 +80,7 @@ public class EmpresaFragment extends Fragment {
 
     public void ponerBusqueda(String busqueda){
         this.busqueda = busqueda;
+
         ((EmpresasAdapter) recyclerView.getAdapter()).setFilter(busqueda);
         //Toast.makeText(getActivity(), busqueda, Toast.LENGTH_LONG).show();
     }

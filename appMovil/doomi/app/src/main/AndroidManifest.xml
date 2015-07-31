@@ -99,6 +99,39 @@
           <meta-data android:name="com.google.android.maps.v2.API_KEY"
               android:value="AIzaSyDJ1iMMQH5nVF42-0NEnVnsp-G9AMDWbdE"/>
 
+          <!-- [START gcm_receiver] -->
+          <receiver
+              android:name="com.google.android.gms.gcm.GcmReceiver"
+              android:exported="true"
+              android:permission="com.google.android.c2dm.permission.SEND" >
+              <intent-filter>
+                  <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                  <category android:name="gcm.play.android.samples.com.gcmquickstart" />
+              </intent-filter>
+          </receiver>
+          <!-- [END gcm_receiver] -->
+          <!-- [START gcm_listener] -->
+          <service
+              android:name="com.innovus.doomi.GcmServices.MyGcmListenerService"
+              android:exported="false" >
+              <intent-filter>
+                  <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+              </intent-filter>
+          </service>
+          <!-- [END gcm_listener] -->
+          <!-- [START instanceId_listener] -->
+          <service
+              android:name="com.innovus.doomi.GcmServices.MyInstanceIDListenerService"
+              android:exported="false">
+              <intent-filter>
+                  <action android:name="com.google.android.gms.iid.InstanceID"/>
+              </intent-filter>
+          </service>
+          <!-- [END instanceId_listener] -->
+          <service
+              android:name="com.innovus.doomi.GcmServices.RegistrationIntentService"
+              android:exported="false">
+          </service>
 
       </application>
 

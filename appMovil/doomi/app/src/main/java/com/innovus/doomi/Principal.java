@@ -2,10 +2,16 @@ package com.innovus.doomi;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +27,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -28,6 +35,8 @@ import com.google.android.gms.location.LocationListener;
 import com.innovus.doomi.Activities.LoginActivity;
 import com.innovus.doomi.Consumir.HttpRequestTask;
 import com.innovus.doomi.Consumir.SessionManager;
+import com.innovus.doomi.GcmServices.QuickstartPreferences;
+import com.innovus.doomi.GcmServices.RegistrationIntentService;
 import com.innovus.doomi.Google.ActivityMaps;
 import com.innovus.doomi.adapters.MenuSliderAdapter;
 import com.innovus.doomi.db.DbProductos;
@@ -48,6 +57,11 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     // location
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "Principal";
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
 
     @Override
@@ -125,10 +139,46 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
         bd.execSQL("DELETE FROM productos ");
         admin.close();
-        new HttpRequestTask(this).execute();
+
 
         //prueba search
 
+
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+
+
+                if (sentToken) {
+
+                    Log.e(LOG_TAG,"enviado al servidor");
+
+
+                    Toast toast = Toast.makeText(context, "Enviado al servidor", Toast.LENGTH_SHORT);
+                    toast.show();
+
+
+                } else {
+
+                    Log.e(LOG_TAG,"no enviado ");
+                     Toast toast = Toast.makeText(context, "ah ocurrido un error mientras se obtenia la InstanceID", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }
+            }
+        };
+        if (checkPlayServices()) {
+
+            Log.e(LOG_TAG,"chekea play services");
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+        new HttpRequestTask(this).execute();
 
     }
 
@@ -232,6 +282,8 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     */
     @Override
     public void onPause(){
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+
 
         super.onPause();
         DbProductos admin = new DbProductos(this,"administracion", null, 1);
@@ -241,6 +293,14 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
         admin.close();
         //Nuestro código a ejecutar en este momento
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+    }
+
 
     //hace click en el fragmento y haga esto
     @Override
@@ -293,7 +353,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i(LOG_TAG,"Conexion fue suspendida");
+        Log.i(LOG_TAG, "Conexion fue suspendida");
 
     }
     @Override
@@ -312,7 +372,7 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.i(LOG_TAG,"Conexion fallo");
+        Log.i(LOG_TAG, "Conexion fallo");
 
     }
 
@@ -320,5 +380,20 @@ public class Principal extends ActionBarActivity implements CirculoFragment.Tool
     public void onLocationChanged(Location location) {
         Log.i(LOG_TAG,location.toString());
 
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 }

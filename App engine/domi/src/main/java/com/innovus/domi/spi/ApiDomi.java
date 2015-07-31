@@ -5,6 +5,8 @@ import static com.innovus.domi.service.OfyService.ofy;
 
 import javax.inject.Named;
 
+import org.json.JSONException;
+
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -27,6 +29,8 @@ import com.innovus.domi.form.EmpresaForm;
 //import com.innovus.domi.form.PedidoForm;
 import com.innovus.domi.form.ProductoForm;
 //import com.innovus.domi.form.UsuarioForm;
+
+import com.innovus.domi.gcm.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -249,5 +253,19 @@ public class ApiDomi {
 				.ancestor(Key.create(webSafeCategoriaKey)).list();
 
 	}
+	@ApiMethod(name = "sendNotification", path = "sendNotification", httpMethod = HttpMethod.POST)
+	public Notification sendNotification(
+			@Named("mensaje") final String mensaje) throws JSONException {
+		/*
+
+		return ofy().load().type(Producto.class)
+				.ancestor(Key.create(webSafeCategoriaKey)).list();
+				*/
+		Notification noti = new Notification(mensaje);
+		noti.sendNotification();
+		return noti;
+
+	}
+	
 
 }

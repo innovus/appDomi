@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.innovus.doomi.Consumir.CarritoDBLocal;
 import com.innovus.doomi.Consumir.CarritoTask;
 import com.innovus.doomi.Consumir.SessionManager;
@@ -25,7 +24,6 @@ import com.innovus.doomi.adapters.CarritoAdapter;
 import com.innovus.doomi.db.DbProductos;
 import com.innovus.doomi.fragments.CarritoProductosFragment;
 import com.innovus.doomi.modelos.ProductoDB;
-
 import java.util.ArrayList;
 
 public class Carrito extends ActionBarActivity  {
@@ -51,8 +49,6 @@ public class Carrito extends ActionBarActivity  {
         setSupportActionBar(toolbar);
         session = new SessionManager(this.getApplicationContext());
         txtDireccion = (TextView) this.findViewById(R.id.etdireccioncarrito);
-
-
         this.ActualizarFragemento();
         /*
         // CarritoProductosFragment fragments =(CarritoProductosFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentPedidos);
@@ -62,10 +58,7 @@ public class Carrito extends ActionBarActivity  {
         fragmentTransaccion.add(R.id.main_principal_carrito,fragments).hide(fragments);//por cada fragmento que tenga lo añado a la vista. hide()pa que no los muestre todos a lavez entnces mientras ocultalo
         fragmentTransaccion.show(fragments).commit();
         */
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,8 +90,6 @@ public class Carrito extends ActionBarActivity  {
         if(session.isLoggedIn()==false){
             Intent i = new Intent (v.getContext(), LoginActivity.class);
             v.getContext().startActivity(i);
-
-
         }else{
             //
 
@@ -112,14 +103,10 @@ public class Carrito extends ActionBarActivity  {
 
 */
         }
-
-
     }
 
     public ArrayList<ProductoDB> llenarCarrito(){
         ArrayList<ProductoDB> ListadoProductosDB = new ArrayList<ProductoDB>();
-
-
         DbProductos admin = new DbProductos (this,"administracion", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
         //String dni = et1.getText().toString();

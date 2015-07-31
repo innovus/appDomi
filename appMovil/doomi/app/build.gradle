@@ -25,6 +25,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    /*
     compile('com.google.api-client:google-api-client:1.17.0-rc') {
         // Exclude artifacts that the Android SDK/Runtime provides.
         exclude(group: 'xpp3', module: 'xpp3')
@@ -33,20 +34,25 @@ dependencies {
         exclude(group: 'com.google.android', module: 'android')
 
     }
-    compile('com.google.api-client:google-api-client-android:1.17.0-rc') {
+    */
+    compile('com.google.api-client:google-api-client-android:1.17.0-rc')
+            //{
         // Exclude play services, since we're not using this yet.
-        exclude(group: 'com.google.android.google-play-services', module: 'google-play-services')
-    }
+      //  exclude(group: 'com.google.android.google-play-services', module: 'google-play-services')
+   // }
     // Android extensions for Google HTTP Client.
+
+    /*
     compile('com.google.http-client:google-http-client-android:1.17.0-rc') {
         exclude(group: 'com.google.android', module: 'android')
     }
+    */
     compile files('libs/doomiTodos-v1-1.20.0-SNAPSHOT.jar')
     compile files('libs/doomiUsuarios-v1-1.20.0-SNAPSHOT.jar')
     compile 'com.android.support:appcompat-v7:22.2.0'
 
-    //compile 'com.google.android.gms:play-services:6.5.+'
-    compile 'com.google.guava:guava:14.0.+'
+   // compile 'com.google.android.gms:play-services:6.5.+'
+  //  compile 'com.google.guava:guava:14.0.+'
     compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.getbase:floatingactionbutton:1.2.1'
