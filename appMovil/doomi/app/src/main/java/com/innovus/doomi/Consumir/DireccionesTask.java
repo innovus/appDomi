@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class DireccionesTask extends AsyncTask<Void, Void, ArrayList<Direcciones>> {
     private Activity activity;
     private boolean b;
-
     public static void build(Context context) {
         //myApiService = buildServiceHandler(context);
     }

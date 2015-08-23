@@ -59,5 +59,9 @@ public class Direcciones {
         this.id = id;
     }
 
+    public String toString(){
+        return nombreDireccion;
+    }
+
 
 }

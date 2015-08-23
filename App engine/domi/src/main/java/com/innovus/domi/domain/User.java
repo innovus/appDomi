@@ -16,8 +16,14 @@ public class User {
 	
 	@Index
 	private Email email;
+	@Index
 	private Boolean is_user=true;
+	@Index
 	private Boolean is_cliente=true;
+	@Index 
+	private String idDevice;
+
+	
 
 	protected User(){}
 	
@@ -82,5 +88,12 @@ public class User {
 	 public String getWebsafeKey(){
 		 return Key.create(User.class,idUser).getString();
 	 }
+	 public String getIdDevice() {
+			return idDevice;
+		}
+	 
+	public void setIdDevice(String idDevice) {
+		this.idDevice = idDevice;
+	}
 
 }

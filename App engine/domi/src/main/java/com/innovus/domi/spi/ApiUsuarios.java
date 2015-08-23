@@ -309,6 +309,19 @@ public class ApiUsuarios {
 			
 			
 	}
+	@ApiMethod(name = "consultaSucursalesGeolocalizacion", path = "consultaSucursalesGeolocalizacion/{latitud}/{longitud}/", httpMethod = HttpMethod.GET)
+	public List<Sucursal> consultaSucursalesGeolocalizacion(@Named("latitud") final float latitud,@Named("longitud") final float longitud ) {
+		//
+		List<Sucursal> sucursalesAux = ofy().load().type(Sucursal.class).list();
+		List<Sucursal> sucursales = new ArrayList<>();
+		for (Sucursal sucursal : sucursalesAux) {
+			if(sucursal.CantidadProductos() > 0)
+				sucursales.add(sucursal);
+		}
+		return sucursales;
+			
+			
+	}
 	
 	@ApiMethod(name = "getUsuarioXUser", path = "user/{keyUser}/UsuarioxUser", httpMethod = HttpMethod.GET)
 	public List<Usuario> getClienteXUser(@Named("keyUser") final String keyUser) {

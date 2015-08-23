@@ -3,22 +3,12 @@ package com.innovus.doomi.Consumir;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
-
-
 import com.appspot.domi_app.doomiTodos.DoomiTodos;
 import com.appspot.domi_app.doomiTodos.model.Producto;
 import com.appspot.domi_app.doomiTodos.model.ProductoCollection;
-import com.appspot.domi_app.doomiUsuarios.DoomiUsuarios;
 import com.innovus.doomi.R;
-import com.innovus.doomi.adapters.EmpresasAdapter;
 import com.innovus.doomi.adapters.ExpandibleCategoriasAdapter;
 import com.innovus.doomi.modelos.Parent;
 
@@ -62,8 +52,6 @@ public class ProductosTask extends AsyncTask<String, Void, List<Producto>> {
             try {
 
                 DoomiTodos.GetProductosXSucursal queryProductos = myApiService.getProductosXSucursal(strings[0]);
-
-
                 ProductoCollection productoCollection = queryProductos.execute();
                 if (productoCollection != null && productoCollection.getItems() != null) {
                     List<Producto> productos = productoCollection.getItems();

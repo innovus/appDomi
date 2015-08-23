@@ -25,6 +25,7 @@ public class Cliente  {
 	private String cedulaCliente;
 	@Index
 	private String nombresCliente;
+	@Index
 	private String apellidosCliente;	
 	private PhoneNumber telefonoCliente;
 	//private String passwordCliente;

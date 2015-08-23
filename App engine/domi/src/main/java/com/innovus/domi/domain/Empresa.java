@@ -173,5 +173,24 @@ public class Empresa {
 			throw new IllegalArgumentException("El Grupo No Existe: "+ grupoKey);
 		}
 	}
+	 public void  updateEmpresa(EmpresaForm empresaForm) {
+		 if(empresaForm.getNombre() != null){
+			 this.nombreEmpresa = empresaForm.getNombre();
+			 
+		 }
+		
+		 if(empresaForm.getDescripcion() != null){
+			 this.descripcion = empresaForm.getDescripcion();
+			 
+		 }
+		 if(empresaForm.getUrlLogo() != null){
+			 this.urlLogo = empresaForm.getUrlLogo();
+			 
+		 }
+		 if(empresaForm.getUrlPortada() != null){
+			 this.urlPortada = empresaForm.getUrlPortada();
+			 
+		 }
+	 }
 	 
 }

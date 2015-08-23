@@ -1,5 +1,6 @@
 package com.innovus.domi.spi;
 
+
 import static com.innovus.domi.service.OfyService.factory;
 import static com.innovus.domi.service.OfyService.ofy;
 
@@ -143,7 +144,9 @@ public class ApiAdmin {
 	  
 	  @ApiMethod(name = "consultaEmpresas", path = "consultaEmpresas", httpMethod = HttpMethod.GET)
 		public List<Empresa> consultaEmpresas() {
-			Query query = ofy().load().type(Empresa.class).order("nombreEmpresa");
+		 // ofy().clear();
+			Query query = ofy().load().type(Empresa.class)
+					.order("nombreEmpresa");
 			return query.list();// me retorns en una lista
 		}
 

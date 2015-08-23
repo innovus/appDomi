@@ -25,6 +25,7 @@ public class Usuario {
 	
 	@Index
 	private String nombresUsuario;
+	@Index
 	private String apellidosUsuario;	
 	private PhoneNumber telefonoUsuario;
 	//private String passwordCliente;
@@ -33,6 +34,7 @@ public class Usuario {
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<User> keyUser;
 
+	 @Index
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private long idUser;
 	 

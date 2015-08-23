@@ -1,7 +1,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
 
 
@@ -14,18 +14,19 @@
          />
 
     <ExpandableListView
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/expandableListView"
         android:cacheColorHint="@color/accent"
         android:background="@color/fondo"
         android:paddingTop="@dimen/padding_toolbar"
+        android:layout_marginTop="?attr/actionBarSize"
+
 
         android:transcriptMode="alwaysScroll"
-
-
-        android:listSelector="@android:color/transparent"/>
+        android:listSelector="@android:color/transparent"
+        android:layout_above="@+id/btnPedido"
+        android:layout_alignParentTop="true" />
 
     <Button
         android:layout_width="fill_parent"
@@ -35,9 +36,10 @@
         android:background="@color/accent"
         android:textColor="@color/abc_primary_text_disable_only_material_dark"
         android:onClick="OnclickCarrito"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

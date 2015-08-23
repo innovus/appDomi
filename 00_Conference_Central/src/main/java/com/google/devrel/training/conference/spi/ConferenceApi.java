@@ -284,7 +284,9 @@ public List<Conference> getConferencesCreated(final User user)
 
         Key userKey = Key.create(Profile.class, userId);
        
+       
     Query query = ofy().load().type(Conference.class).ancestor(userKey).order("name");
+    
     return query.list();
 }
 

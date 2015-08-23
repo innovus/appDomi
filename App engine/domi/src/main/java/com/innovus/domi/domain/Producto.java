@@ -45,6 +45,7 @@ public class Producto {
 	 
 	 private float precioProducto;
 	 
+	 @Index
 	 private Boolean is_active;
 	 
 	 private String urlImageProducto;
@@ -141,6 +142,40 @@ public class Producto {
 	 }
 	 public String getUrlImageProducto(){
 		 return this.urlImageProducto;
+	 }
+	 //actualiza el producto con el formulario delproducto
+     public void updateProducto(ProductoForm productoForm) {
+    	 
+    	 if(productoForm.getNombreProducto() != null){
+    		 this.nombreProducto = productoForm.getNombreProducto();
+    		 
+    	 }
+    	 if(productoForm.getDescripcionProducto() != null){
+    		 this.descripcionProducto = productoForm.getDescripcionProducto();
+    		 
+    	 }
+    	
+    	 
+    	 if(productoForm.getPrecioProducto() != 0.0){
+    		 this.precioProducto = productoForm.getPrecioProducto();
+    		 
+    	 }
+    	 if(productoForm.getUrlImageProducto() != null){
+    		 this.urlImageProducto = productoForm.getUrlImageProducto();
+    		 
+    	 }
+    	 if(productoForm.getDetalles() != null){
+    		 this.detalles = productoForm.getDetalles();
+    		 
+    	 }
+    	 
+    	 
+	     
+	     
+	     
+	    
+	     
+	       
 	 }
 	 
 }

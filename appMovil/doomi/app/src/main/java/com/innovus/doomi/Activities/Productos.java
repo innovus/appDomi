@@ -7,15 +7,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import com.innovus.doomi.Consumir.ProductosTask;
 import com.innovus.doomi.R;
 import com.innovus.doomi.db.DbProductos;
@@ -40,10 +37,7 @@ public class Productos extends ActionBarActivity {
         llaveSucursal = getIntent().getStringExtra("llave");
         domicilio = getIntent().getFloatExtra("domicilio",0);
         toolbar.setTitle(nomResta);
-
         setSupportActionBar(toolbar);
-
-
         this.ActualizarBoton();
         new ProductosTask(this).execute( getIntent().getStringExtra("llave"));
 
@@ -52,8 +46,6 @@ public class Productos extends ActionBarActivity {
         new ProductosTask(this).execute( getIntent().getStringExtra("llave"));
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,7 +60,6 @@ public class Productos extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -87,16 +78,13 @@ public class Productos extends ActionBarActivity {
     public void ActualizarBoton(){
         btnPedidos = (Button) this.findViewById(R.id.btnPedido);
         btnPedidos.setText("Total pedido = $" +this.getTotal());
-
-
     }
     public void OnclickCarrito(View v) {
-
         Intent i = new Intent (v.getContext(), Carrito.class);
 
         //pasar variables a la otra actividad
 
-         i.putExtra("nombre", nomResta);
+        i.putExtra("nombre", nomResta);
         i.putExtra("llaveSucursal",llaveSucursal);
         i.putExtra("domicilio", domicilio);
         i.putExtra("total",this.getTotal());

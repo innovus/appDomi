@@ -20,6 +20,7 @@ import com.innovus.domi.form.CarritoForm;
 public class Carrito {
 	@Id
 	private long idCarrito;
+	
 	 @Parent
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Sucursal> sucursalKey;	 
@@ -28,17 +29,28 @@ public class Carrito {
 	 private long idSucursal;
 	 @Index 
      private String websafeKeyUsuario;
-	 private List<String> listaPedidosKey = new ArrayList<>(0);	 
+	 private List<String> listaPedidosKey = new ArrayList<>(0);
+	 
 	 private String observacion;
+	 @Index 
 	 private GeoPt ubicacion;
+	 
      private String formaDePago;
-     private int estado;    
+     
+     @Index
+     private int estado; 
+     
+     @Index
      private Date fechaHora;
+     
+     
      private String direccion; 
      private String barrio;
+     private String referencia;
      
      private float costoDomicilio;
   
+     @Index 
      private float total;
      
      private Carrito(){}

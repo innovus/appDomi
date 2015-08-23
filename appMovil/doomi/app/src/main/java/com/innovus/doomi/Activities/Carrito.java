@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.innovus.doomi.Consumir.CarritoDBLocal;
@@ -21,8 +23,10 @@ import com.innovus.doomi.Consumir.SessionManager;
 import com.innovus.doomi.Others.DividerItemDecoration;
 import com.innovus.doomi.R;
 import com.innovus.doomi.adapters.CarritoAdapter;
+import com.innovus.doomi.db.DbDirecciones;
 import com.innovus.doomi.db.DbProductos;
 import com.innovus.doomi.fragments.CarritoProductosFragment;
+import com.innovus.doomi.modelos.Direcciones;
 import com.innovus.doomi.modelos.ProductoDB;
 import java.util.ArrayList;
 
@@ -33,6 +37,7 @@ public class Carrito extends ActionBarActivity  {
     private float total;
     SessionManager session;
     TextView txtDireccion;
+    Spinner sp;
 
     private CarritoProductosFragment fragments = new CarritoProductosFragment();
 
@@ -41,6 +46,42 @@ public class Carrito extends ActionBarActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
+        sp = (Spinner)findViewById(R.id.spinnerDirecciones);
+        ArrayList<Direcciones> ListadoDirecciones  = new ArrayList<Direcciones>();
+        try{
+
+
+            DbDirecciones admin = new DbDirecciones(this, "administracionn", null, 1);
+            SQLiteDatabase bd = admin.getWritableDatabase(); //Create and/or open a database that will be used for reading and writing.
+            //String dni = et1.getText().toString();
+            Cursor fila = bd.rawQuery(  //devuelve 0 o 1 fila //es una consulta
+                    "select id, nombreDireccion , direccion , barrio, referencia  from direcciones ", null);
+
+            //recorre la base de datos
+            if (fila.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    Direcciones auxDirecciones = new Direcciones(fila.getString(0),fila.getString(1),fila.getString(2),fila.getString(3),fila.getString(4));
+
+                    ListadoDirecciones.add(auxDirecciones);
+                    //total = total + (fila.getInt(0) * fila.getInt(1));
+                } while(fila.moveToNext());
+
+
+            }
+            bd.close();
+
+
+
+
+        }catch (Exception e){
+
+        }
+
+        ArrayAdapter<Direcciones> arrayAdapter = new ArrayAdapter<Direcciones>(this,android.R.layout.simple_spinner_item,ListadoDirecciones);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        sp.setAdapter(arrayAdapter);
         nomResta = getIntent().getStringExtra("nombre");
         llaveSucursal = getIntent().getStringExtra("llaveSucursal");
         domicilio = getIntent().getFloatExtra("domicilio", 0);
@@ -48,7 +89,7 @@ public class Carrito extends ActionBarActivity  {
         toolbar.setTitle(nomResta);
         setSupportActionBar(toolbar);
         session = new SessionManager(this.getApplicationContext());
-        txtDireccion = (TextView) this.findViewById(R.id.etdireccioncarrito);
+        //txtDireccion = (TextView) this.findViewById(R.id.etdireccioncarrito);
         this.ActualizarFragemento();
         /*
         // CarritoProductosFragment fragments =(CarritoProductosFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentPedidos);
@@ -94,7 +135,10 @@ public class Carrito extends ActionBarActivity  {
             //
 
             //
-           String direccion = txtDireccion.getText().toString();
+
+            Direcciones d = (Direcciones)sp.getItemAtPosition(sp.getSelectedItemPosition());
+            String direccion = d.getDireccion();
+
 
             new CarritoTask(this).execute(llaveSucursal,session.getKeyUser(),direccion);
             //Toast.makeText(this, String.valueOf(this.getTotal()), Toast.LENGTH_SHORT).show();

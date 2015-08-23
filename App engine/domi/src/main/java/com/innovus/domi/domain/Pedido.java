@@ -24,7 +24,10 @@ public class Pedido {
 	private String observacion;
 	@ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	private Key<Producto> productoKey;
+	
+	@Index
 	private String nombreProducto; 
+	@Index
 	private float precioProducto;
 	private String detalleProducto;
 	@ApiResourceProperty(ignored=AnnotationBoolean.TRUE)

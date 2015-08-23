@@ -6,6 +6,7 @@ public class Login {
 	Boolean estado;
 	User user;
 	
+	
 	public Login(){
 		this.estado=false;
 		user = null;
@@ -35,7 +36,23 @@ public class Login {
 	public void loegearlo(){
 		estado = true;
 	}
-	
+	public String getWebsafekeyClienteoUsuario(){
+		if(user != null){
+			if(user.getIs_cliente()){
+				 Cliente cliente = ofy().load().type(Cliente.class).ancestor(user).first().now();
+				 return cliente.getWebsafeKey();
+			}else{
+				Usuario usuario = ofy().load().type(Usuario.class).ancestor(user).first().now();
+				 return usuario.getWebsafeKey();
+				
+			}
+			
+		}else{
+			return null;
+		}
+		
+		
+	}
 	
 
 }

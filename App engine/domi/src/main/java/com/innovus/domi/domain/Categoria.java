@@ -10,6 +10,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
+import com.innovus.domi.form.ProductoForm;
 
 
 
@@ -25,10 +26,9 @@ public class Categoria {
 	 
 
 	 @Parent
-	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
 
-	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
+	 @Index 
 	 private long idEmpresa;
 
 	 public Categoria(){}
@@ -84,5 +84,14 @@ public class Categoria {
 	            return organizer.getNombreEmpresa();
 	        }
 	    }
+	    public void updateCategoria(String nombre) {
+	    	 
+	    	
+	    	 if(nombre != null){
+	    		 this.nombreCategoria = nombre;
+	    		 
+	    	 }
+	    }
+		     
 	 
 }

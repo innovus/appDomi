@@ -183,14 +183,15 @@ public class ApiTodos {
 
 	}
 	
-	@ApiMethod(name = "getProductosXSucursal", path = "getProductosXSucursal", httpMethod = HttpMethod.POST)
+	@ApiMethod(name = "getProductosXSucursal", path = "getProductosXSucursal", httpMethod = HttpMethod.GET)
 	public List<Producto> getProductosXSucursal(
 			@Named("websafeSucursalKey") final String websafeSucursalKey) {
 		
 		Key<Sucursal> sucursalKey = Key.create(websafeSucursalKey);
+		
 		Sucursal sucursal = ofy().load().key(sucursalKey).now();
 		List<String> keysProductos = sucursal.getProductosKeysPertenece();
-		List<Producto> productos = new ArrayList<>();
+		ArrayList<Producto> productos = new ArrayList<>();
 		for (String keyString : keysProductos) {
 			
 			Key<Producto> productoKey = Key.create(keyString);

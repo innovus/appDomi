@@ -379,7 +379,6 @@ public class ApiClientes {
 		// NotFoundException is actually thrown here.
 		return new WrappedBoolean(result.getResult());
 	}
-
 	@ApiMethod(name = "creaCategoria", path = "cliente/empresa/categoria", httpMethod = HttpMethod.POST)
 	public Categoria creaCate(
 			@Named("websafeEmpresaKey") final String websafeEmpresaKey,
@@ -541,6 +540,7 @@ public class ApiClientes {
 		});
 
 		// if result is false
+		/*
 		if (!result.getResult()) {
 			if (result.getReason() == "Already registered") {
 				throw new ConflictException("You have already registered");
@@ -550,6 +550,7 @@ public class ApiClientes {
 				throw new ForbiddenException("Unknown exception");
 			}
 		}
+		*/
 		return result;
 	}
 
@@ -726,11 +727,93 @@ public class ApiClientes {
 			
 		}
 		
+	}
+	@ApiMethod(name = "updateProducto", path = "updateproductos", httpMethod = HttpMethod.POST)
+	public Producto updateProducto(
+			@Named("websafeKeyProducto") final String websafeKeyProducto,
+			final ProductoForm productoForm) throws  NotFoundException// me devuelva un producto
+	{
+		Key<Producto> productoKey= Key.create(websafeKeyProducto);
 		
-
-		
+		Producto producto1 = ofy().load().key(productoKey).now();
+		if (producto1 != null){
+			producto1.updateProducto(productoForm);
+			ofy().save().entity(producto1).now();	
+			return producto1;
 			
+		}
+		else{
+			 throw new NotFoundException("Producto no existe.");
+		}
 		
 	}
+	@ApiMethod(name = "updateCategoria", path = "cliente/empresa/updatecategoria", httpMethod = HttpMethod.POST)
+	public Categoria updateCategoria(
+			@Named("websafeCategoriaKey") final String websafeCategoriaKey,
+			@Named("nombre") final String nombre) throws  NotFoundException// me devuelva una categoria
+	{	
 
+		final Key<Categoria> keyCaterogia = Key.create(websafeCategoriaKey);
+	
+			
+				Categoria categoria = ofy().load().key(keyCaterogia).now();
+			
+				if (categoria != null){
+					categoria.updateCategoria(nombre);
+					ofy().save().entity(categoria).now();	
+					return categoria;
+					
+				}
+				else{
+					 throw new NotFoundException("Producto no existe.");
+				}
+	}
+	@ApiMethod(name = "updateSucursal", path = "updatesucursal", httpMethod = HttpMethod.POST)
+	public Sucursal updateSucursal(
+			@Named("websafeKeySucursal") final String websafeKeySucursal,
+			final SucursalForm sucursalFrom) throws  NotFoundException// me devuelva un producto
+	{
+		Key<Sucursal> sucursalKey= Key.create(websafeKeySucursal);
+		
+		Sucursal sucursal = ofy().load().key(sucursalKey).now();
+		if (sucursal != null){
+			sucursal.updateSucursal(sucursalFrom);
+			ofy().save().entity(sucursal).now();	
+			return sucursal;
+			
+		}
+		else{
+			 throw new NotFoundException("Producto no existe.");
+		}
+		
+	}
+	@ApiMethod(name = "updateEmpresa", path = "updateempresa", httpMethod = HttpMethod.POST)
+	public Empresa updateEmpresa(
+			@Named("websafeKeyEmpresa") final String websafeKeyEmpresa,
+			final EmpresaForm empresaFrom) throws  NotFoundException// me devuelva un producto
+	{
+		Key<Empresa> empresaKey= Key.create(websafeKeyEmpresa);
+		
+		Empresa empresa = ofy().load().key(empresaKey).now();
+		if (empresa != null){
+			empresa.updateEmpresa(empresaFrom);
+			ofy().save().entity(empresa).now();	
+			return empresa;
+			
+		}
+		else{
+			 throw new NotFoundException("Producto no existe.");
+		}
+		
+	}
+	@ApiMethod(name = "getCarritosXCliente1sucursal", path = "carritosxcliente/{websafeKeyCliente}", httpMethod = HttpMethod.GET)
+	public List<Carrito> getCarritosXCliente1sucursal(
+			@Named("websafeKeyCliente") final String websafeKeyCliente) {
+		Sucursal sucursals = ofy().load().type(Sucursal.class)
+				.ancestor(Key.create(websafeKeyCliente)).first().now();
+
+		return ofy().load().type(Carrito.class)
+				.ancestor(Key.create(sucursals.getWebsafekeySucursal())).order("estado").order("- fechaHora").list();
+
+	}
 }

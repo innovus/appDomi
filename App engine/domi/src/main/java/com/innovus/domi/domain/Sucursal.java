@@ -35,12 +35,18 @@ public class Sucursal {
 	 private float costoDomicilio;
 	 private float pedidoMinimo;
 	 
+	 @Index
 	 private GeoPt Ubicacion;
+	 
+	 @Index
 	 private Boolean is_active;
+	 
+	 @Index
 	 private Boolean is_disponible;
 	 private List<String> productosKeysPertenece = new ArrayList<>(0);
 	 
 	 @Parent
+	 @Index
 	 @ApiResourceProperty(ignored=AnnotationBoolean.TRUE)
 	 private Key<Empresa> empresaKey;
 	 
@@ -138,7 +144,7 @@ public class Sucursal {
 	}
 
 	public List<String> getProductosKeysPertenece() {
-		return productosKeysPertenece;
+		return this.productosKeysPertenece;
 	}
 
 	public void setProductosKeysPertenece(List<String> productosKeysPertenece) {
@@ -222,5 +228,31 @@ public class Sucursal {
 		return dev;
 		
 	}
-
+	
+	public void updateSucursal(SucursalForm sucursalForm) {
+		if(sucursalForm.getNombreSucursal() != null){
+			this.nombreSucursal = sucursalForm.getNombreSucursal();
+			
+		}
+		if(sucursalForm.getCostoDomicilio() != 0.0){
+			this.costoDomicilio = sucursalForm.getCostoDomicilio();
+			
+		}
+		if(sucursalForm.getPedidoMinimo() != 0.0){
+			this.pedidoMinimo = sucursalForm.getPedidoMinimo();
+			
+		}
+		if(sucursalForm.getTiempoMinimo() != 0.0){
+			this.tiempoMinimo = sucursalForm.getTiempoMinimo();
+			
+		}
+		if(sucursalForm.getLatitud() != 0.0 && sucursalForm.getLongitud() != 0.0){
+			 this.Ubicacion = sucursalForm.obtUbicacion();
+			
+		}  
+	}
+	
+ 
+    	 
+    	
 }
